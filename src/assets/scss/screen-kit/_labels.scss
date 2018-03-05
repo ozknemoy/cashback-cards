@@ -1,0 +1,41 @@
+.label {
+    border-radius: $border-radius-huge;
+    padding: 5px 12px;
+    text-transform: uppercase;
+    font-size: 10px;
+
+    &.label-default{
+        background-color: $gray-light;
+    }
+    &.label-inline {
+		display: inline-block;
+		white-space: normal;
+		line-height: 1.4;
+    }
+    &.control-label-error {
+        background: $color-danger;
+    	text-transform: none;
+    	color: $white;
+        padding: 10px 5px;
+        text-align: left;
+        display: block;
+        position: relative;
+        margin-top: 3px;
+        font-size: .9em;
+        font-weight: 400;
+        @include border-radius(3px);
+        &:before {
+            background: $color-danger;
+            content: '';
+            position: absolute;
+            left: 12px;
+            width: 10px;
+            top: -6px;
+            height: 10px;
+            @include rotate(45);
+        }
+        .material-icons {
+            vertical-align: middle;
+        }
+    }
+}

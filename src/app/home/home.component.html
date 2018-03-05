@@ -1,0 +1,13 @@
+
+
+<button class="btn btn-success btn-round" loginModalButton>
+    Войти
+</button>
+
+<div *ngFor="let user of users; let $index = index">
+    {{$index}} / {{user.login}}
+</div>
+
+<!--<a routerLink="/registration" class="btn btn-primary btn-round">
+    Зарегистрироваться&nbsp;<i class="material-icons">assignment_ind</i>
+</a>-->

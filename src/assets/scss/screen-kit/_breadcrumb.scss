@@ -1,0 +1,28 @@
+.breadcrumb {
+    background-color: $breadcrumb-bg;
+    list-style: none;
+    border-radius: 0;
+    margin: 0;
+    &:after {
+        content: '';
+        clear: both;
+        display: block;
+    }
+    &-item {
+        float: left;
+        color: $breadcrumb-color;
+        &.active {
+            color: $breadcrumb-active-color;
+        }
+        a {
+            color: $breadcrumb-color;
+        }
+        + .breadcrumb-item::before {
+            
+            color: $breadcrumb-color;
+            content: "#{$breadcrumb-separator}";
+            padding-right: $breadcrumb-padding-horizontal;
+            padding-left: $breadcrumb-padding-horizontal;
+        }
+    }
+}

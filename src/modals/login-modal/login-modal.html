@@ -1,0 +1,66 @@
+
+<div class="tab-content">
+    <!-- Login Form -->
+    <div [hidden]="toggle">
+        <div class="modal-header">
+            <button type="button" class="close" (click)="hide()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="title">Войти</div>
+        </div>
+        <div class="modal-body">
+
+            <form id="login-form" #loginForm="ngForm">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
+                        <input  name="email" class="form-control" type="text" placeholder="E-mail"  required
+                                [autofocus]
+                                email
+                                (keyup.enter)="login(loginForm)"
+                                [ngModel]="email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                        <input  name="password" class="form-control" type="password" placeholder="Пароль" required
+                                (keyup.enter)="login(loginForm)"
+                                [ngModel]="password">
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <div class="modal-footer text-center">
+            <button type="submit" class="btn btn-success"
+                    (click)="login(loginForm)"
+                    [disabled]="loginForm.invalid">Войти</button>
+            <button class="btn btn-success btn-simple" aria-controls="reset"
+                (click)="toggle=!toggle">Забыли пароль?</button>
+        </div>
+    </div>
+    <!-- Login Form end -->
+
+    <!-- Lost Password Form -->
+    <div [hidden]="!toggle">
+        <div class="modal-header">
+            <button type="button" class="close" (click)="hide()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="title">Восстановления пароля</div>
+        </div>
+        <div class="modal-body">
+            <p>Для восстановления пароля, пожалуйста введите адрес электроной почты:</p>
+            <form #restoreForm="ngForm">
+                <div class="form-group">
+                    <input [ngModel]="email" name="email" class="form-control" type="text" placeholder="name@example.com" email required>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer text-center">
+            <button type="submit" class="btn btn-success"
+                    (click)="restore(restoreForm.value)"
+                    [disabled]="restoreForm.invalid || pend">Восстановить пароль</button>
+            <button class="btn btn-success btn-simple" aria-controls="login"
+               (click)="toggle=!toggle">Вернуться к форме авторизации</button>
+        </div>
+    </div>
+    <!-- Lost Password Form end -->
+</div>

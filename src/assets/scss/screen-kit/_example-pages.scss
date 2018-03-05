@@ -1,0 +1,251 @@
+
+.wlc {
+    background-image: url(../img/bg1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    &-line {
+        background: $white;
+        height: 1px;
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+    &:before {
+        // background: rgba(0,0,0,.5);
+        // background: linear-gradient(60deg, #1e130c, #9a8478);
+        background: #1e130c; /* fallback for old browsers */
+        background: -webkit-linear-gradient(to left, #b17b43, rgba(53, 88, 87, 0.96));
+        background: linear-gradient(to left, #b17b43, rgba(53, 88, 87, 0.96));
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        opacity: .5;
+    }
+}
+
+
+
+.separator {
+    max-width: 20em;
+    margin: 30px auto;
+    text-align: center;
+    &-black {
+        color: $black;
+        &:before, &:after {
+            border: 1px solid $black;
+        }
+    }
+    &-white {
+        color: $white;
+        &:before, &:after {
+            border: 1px solid $white;
+        }
+    }
+    &:before, &:after {
+        display: block;
+        width: 40%;
+        content: " ";
+        margin-top: 10px;
+    }
+    &:before {
+        float: left;
+    }
+    &:after {
+        float: right;
+    }
+}
+
+#slide1 {
+    // height: calc(100vh - 10px);
+    position: relative;
+}
+
+.icons {
+    // text-align: center;
+    // position: absolute;
+    // left: 15px;
+    // bottom: 90px;
+    // right: 15px;
+    padding: 8vh 0;
+    color: $black;
+    text-align: center;
+    &--item {
+        
+    }
+    &--img {
+        width: 92px;
+        height: 92px;
+        margin: 0 auto;
+        &.img1 {
+            @include background-image('icon1', $size: contain, $repeat: no-repeat, $position: center);
+        }
+        &.img2 {
+            @include background-image('icon2', $size: contain, $repeat: no-repeat, $position: center);
+        }
+        &.img3 {
+            @include background-image('icon3', $size: contain, $repeat: no-repeat, $position: center);
+        }
+        &.img4 {
+            @include background-image('icon4', $size: contain, $repeat: no-repeat, $position: center);
+        }
+
+        
+    }
+    .material-icons {
+        display: block;
+        font-size: 4em;
+        color: $color-warning;
+    }
+    &--heading {
+        font-size: 2em;
+        margin: .7em 0;
+
+    }
+    p {
+        color: $dark-gray;
+        font-size: 1em;
+        margin: 0;
+    }
+}
+
+#slide2 {
+    padding: 60px 0 0;
+    .text {
+        position: relative;
+        overflow: hidden;
+        p {
+            font-size: 24px;
+            line-height: 1.4;
+        }
+        img {
+            max-width: 100%;
+        }
+        &--img {
+            // display: inline-block;
+            // position: relative;
+            padding: 0 30px 30px 30px;
+            img {
+                @include shadow-big();
+                @include border-radius(15px);
+            }
+            
+        }
+    }
+}
+
+.wlc-wrap {
+    background: $white;
+    position: relative;
+    padding-bottom: 151px;
+}
+
+// inner pages
+.inner {
+    // header
+    &_top {
+        position: relative;
+        z-index: 1;
+        &:before, &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            height: 300px;
+        }
+        &:before {
+            // background: rgba(0,0,0,.5);
+            // background: linear-gradient(60deg, #1e130c, #9a8478);
+            background: #1e130c; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to left, #b17b43, rgba(53, 88, 87, 0.96));
+            background: linear-gradient(to left, #b17b43, rgba(53, 88, 87, 0.96));
+            opacity: .7;
+            z-index: 1;
+        }
+        &:after {
+            background-image: url(../img/bg2.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center 36%;
+        }
+    }
+
+    // content
+    &_content {
+        position: relative;
+        padding-bottom: 151px;
+        overflow: hidden;
+        z-index: 2;
+        @media screen and (max-width: 767px) {
+            padding-top: 65px;
+            padding-bottom: 121px;
+        }
+        &--wrap {
+            background: $mdb-card-body-background;
+            padding: 30px;
+            margin: 0 -30px;
+            position: relative;
+            @include border-radius(10px 10px 0 0);
+            @include shadow-2dp();
+
+        }
+    }
+}
+
+// table
+.table {
+    &-res {
+        margin-bottom: 5px;
+        thead {
+            @media screen and (max-width: 700px) {
+                display: none;
+            }
+        }
+        tr {
+            @media screen and (max-width: 700px) {
+                border-bottom: 1px solid $gray-color;
+                display: block;
+                &:first-child {
+                    border-top: 1px solid $gray-color;
+                }
+            }
+        }
+        td {
+            /*width: 1%;*/
+            @media screen and (max-width: 700px) {
+                background: none;
+                border-top: 0 !important;
+                display: block;
+                width: 100% !important;
+                text-align: left !important;
+                position: relative;
+                &:before {
+                    content: attr(data-text);
+                    display: inline-block;
+                    width: 50%;
+                }
+            }
+            @media screen and (max-width: 400px) {
+                &:before {
+                    width: 100%;
+                    display: block;
+                }
+            }
+            &.alert {
+                &:before {
+                    display: none;
+                }
+            }
+        }
+        
+    }
+}

@@ -1,0 +1,109 @@
+header {
+	// @include icon-gradient(#ffd89b, #19547b);
+    // background: -webkit-linear-gradient(to left, #b17b43, rgba(53, 88, 87, 0.96));
+    // background: linear-gradient(-120deg,#00c4cc 25%,$color-success 85%);
+	// background: $gray-light;
+    position: relative;
+    padding: 50px 0 30px;
+    z-index: 3;
+    @media screen and (max-width: 767px) {
+        padding: 0;
+    }
+    // &:after {
+    // 	background: $color-success;
+    // 	content: '';
+    // 	display: block;
+    // 	position: absolute;
+    // 	left: 0;
+    // 	right: 0;
+    // 	bottom: 0;
+    // 	height: 1px;
+    // }
+    .wlc & {
+    	background: none;
+    	&:after {
+    		display: none;
+    	}
+    }
+}
+
+.header-nav {
+    padding: 5px 0 0;
+    color: $white;
+    @media screen and (max-width: 767px) {
+        position: absolute;
+        top: 0px;
+        right: 20px;
+        font-size: 0;
+        width: auto;
+        .btn {
+            font-size: 0;
+            .material-icons {
+                font-size: 14px;
+            }
+        }
+    }
+    
+    .profile-photo {
+        color: $white;
+        font-size: 1.15em;
+        .material-icons {
+            font-size: 1.6em;
+        }
+    }
+    .notification {
+        background: $color-danger;
+        display: inline-block;
+        width: 1.6em;
+        height: 1.6em;
+        line-height: 1.6em;
+        vertical-align: top;
+        margin: -1px 0 -2px 0px;
+        text-align: center;
+        @include border-radius(30px); 
+        @media screen and (max-width: 767px) {
+            font-size: 12px;
+            margin: -3px 5px -3px -7px;
+        }
+    }
+}
+
+.logo {
+    // @include background-image('logo', $size: contain, $position: center, $repeat: no-repeat);
+    // width: 300px;
+    // height: 142px;
+    // @include background-image('logo_n', $size: contain, $position: center, $repeat: no-repeat);
+    @include background-image('logo_n-w', $size: contain, $position: center, $repeat: no-repeat);
+    width: 210px;
+    height: 60px;
+    float: left;
+    position: relative;
+    z-index: 1;
+    @media screen and (max-width: 767px) {
+        width: 130px;
+    }
+    @media screen and (max-width: 330px) {
+        width: 120px;
+    }
+    // .wlc & {
+    // 	@include background-image('logo_n-w', $size: contain, $position: center, $repeat: no-repeat);
+    // }
+    
+}
+.header-wrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    color: $white;
+    // margin: 12vh 0;
+    z-index: 1;
+    @include translate(0%, -50%);
+    h1 {
+        font-size: 2.7em;
+    }
+    p {
+        font-size: 1.5em;
+        margin: 1em 0;
+    }
+}

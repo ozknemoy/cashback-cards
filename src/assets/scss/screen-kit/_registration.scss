@@ -1,0 +1,67 @@
+
+#registration {
+  background-image: url('../img/bg2.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  color: $white;
+  &:before {
+    background: #1e130c; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #1e130c , #9a8478);
+    background: linear-gradient(to left, #1e130c , #9a8478);
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: .5;
+  }
+  p {
+    font-size: 1.8em;
+    line-height: 1.4;
+    text-align: center;
+  }
+  .counter {
+    text-align: center;
+    padding: 50px 0;
+    font-size: 26px;
+    &--num {
+      position: relative;
+      vertical-align: middle;
+      font-size: 1.4em;
+      margin: 0 0 5px;
+      .material-icons {
+        font-size: 1em;
+        vertical-align: middle;
+        margin: -4px 0 0;
+      }
+    }
+  }
+
+  > div > div {
+    padding: 45px 0 0;
+    margin-bottom: 160px;
+  }
+
+  .label {
+    white-space: inherit;
+  }
+
+  .has-success .form-control-feedback {
+    color: #276b13;
+  }
+
+  .form-control + .form-control-feedback {
+    margin-top: 4px;
+  }
+
+  .has-success .control-label, .has-error .control-label {
+    color: white;
+  }
+  a {
+    color: #2839e3;
+  }
+}

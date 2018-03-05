@@ -1,0 +1,245 @@
+.chat {
+    // layout
+    &_block {
+        margin: -30px;
+        @media screen and (max-width: 767px) {
+            background: #F5F4F2;
+            margin-left: -15px;
+            margin-right: -15px;
+            position: relative;
+            overflow: hidden;
+            margin-top: -95px
+        }
+        &--wrap {
+            position: relative;
+        }
+        &--wrapper {
+            position: relative;
+            overflow: hidden;
+            @media screen and (max-width: 767px) {
+                width: 200vw;
+                @include transition($fast-transition-time, $transition-linear);
+                &.open-message {
+                    @include transform-translate-x(-50%);
+                }
+                .row {
+                    margin: 0;
+                }
+                .col-xs-6.col-sm-4.col-md-3 {
+                    padding: 0;
+                }
+            }
+        }
+        
+        // list
+        &--ulist {
+            background: #F5F4F2;
+            position: relative;
+            overflow: hidden;
+            @include border-radius(3px);
+            @media screen and (max-width: 767px) {
+                @include border-radius(0);
+            }
+            &--wrap {
+                position: absolute;
+                overflow: auto;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+            }
+            &--item {
+                border-top: 1px solid darken(#F5F4F2, 5%);
+                padding: 15px 0;
+                position: relative;
+                cursor: pointer;
+                @extend .animation-transition-general;
+                &:first-child {
+                    border-color: transparent;
+                }
+                &:hover {
+                    background: lighten($color-primary, 40%);
+                }
+                &.unread {
+                    .chat_block--ulist--msg {
+                        background: lighten($color-primary, 40%);
+                    }
+                }
+                &.current {
+                    background: $color-success-200;
+                    .chat_block--ulist--user, .chat_block--ulist--date, .chat_block--ulist--msg {
+                        color: $white;
+                    }
+                }
+                .material-icons {
+                    position: absolute;
+                    left: 2px;
+                    top: 17px;
+                    font-size: 16px;
+                }
+
+            }
+            &--user {
+                font-weight: 500;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                color: lighten($black, 10%);
+                margin: 0 70px 0 20px;
+            }
+            &--date {
+                position: absolute;
+                right: 15px;
+                top: 15px;
+                color: lighten($black, 15%);
+                font-size: .8em;
+            }
+            &--msg {
+                color: lighten($black, 20%);
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                padding: 0 15px 0 20px;
+                margin-top: 5px;
+            }    
+        }
+    }
+
+    // list
+    &_dialog {
+        position: absolute;
+        overflow: hidden;
+        left: 0px;
+        top: 10px;
+        right: 23px;
+        bottom: 70px;
+        padding: 0 7px;
+        @media screen and (max-width: 767px) {
+            left: -15px;
+            right: -15px;
+            top: -2px;
+        }
+        &--content {
+            position: absolute;
+            overflow: auto;
+            left: 7px;
+            top: 0;
+            right: 7px;
+            bottom: 0;
+            @media screen and (max-width: 767px) {
+                top: 43px;
+                padding-top: 1px;
+            }
+        }
+        &--item {
+            padding: 5px 0;
+            margin: 0 8px; 
+            &:before, &:after {
+                content: '';
+                clear: both;
+                display: block;
+            }
+        }
+        &--post {
+            max-width: 75%;
+            padding: 15px;
+            position: relative;
+            color: $white;
+            @include border-radius(4px);
+            &:before {
+                width: 0;
+                height: 0;
+                border-style: solid;
+                position: absolute;
+                bottom: 0;
+                content: '';
+            }
+            .incoming & {
+                background: $color-success-200;
+                float: left;
+                &:before {
+                    border-width: 0 0 15px 15px;
+                    border-color: transparent transparent $color-success-200 transparent;
+                    left: -8px;
+                }
+            }
+            .outgoing & {
+                background: $color-info-200;
+                float: right;
+                &:before {
+                    border-width: 15px 0 0 15px;
+                    border-color: transparent transparent transparent $color-info-200;
+                    right: -8px;
+                }
+            }
+        }
+        &--time {
+            position: absolute;
+            top: 20px;
+            color: lighten($gray, 15%);
+            font-size: .8em;
+            line-height: 1.1;
+            width: 80px;
+            .incoming & {
+                left: 100%;
+                margin-left: 7px;
+            }
+            .outgoing & {
+                text-align: right;
+                right: 100%;
+                margin-right: 7px;
+            }
+        }
+
+        // message input
+        &--input {
+            position: absolute;
+            left: 0;
+            bottom: 10px;
+            right: 30px;
+            @media screen and (max-width: 767px) {
+                right: 0;
+            }
+            .form-control, .btn {
+                height: 60px;
+                resize: none;
+            }
+        }
+
+        // mobile header
+        &--header {
+            // background: #F5F4F2;
+            background: linear-gradient(60deg, $color-primary-400, $color-primary-700);
+            // border-bottom: 1px solid $light-gray;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 43px;
+            line-height: 43px;
+            z-index: 1;
+            .btn {
+                top: 5px;
+                left: 2px;
+                vertical-align: top;
+            }
+            &--user {
+                position: absolute;
+                left: 30px;
+                top: 0;
+                right: 30px;
+                text-align: center;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                color: $white;
+
+            }
+        }
+
+    }
+
+    
+
+
+}

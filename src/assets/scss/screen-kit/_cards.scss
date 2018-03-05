@@ -1,0 +1,290 @@
+.card {
+    border-radius: $border-radius-base;
+    // box-shadow: 0 1px 2px rgba(0,0,0,.05),0 0 0 1px rgba(63,63,68,.1);
+    background-color: #FFFFFF;
+    margin-bottom: 30px;
+    display: inline-block;
+    width: 100%;
+    &.card-no-m {
+        .content {
+            padding: 0;
+        }
+        .header {
+            margin: 0;
+        }
+    }
+    .card-height-indicator {
+        margin-top: 100%;
+    }
+    .card-content {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    border-radius: $border-radius-base;
+    color: $mdb-card-body-text;
+    background: $mdb-card-body-background;
+
+    @include shadow-2dp();
+
+    .card-image {
+        height: 60%;
+        position: relative;
+        overflow: hidden;
+        img {
+            width: 100%;
+            height: 100%;
+            border-top-left-radius: 2px;
+            border-top-right-radius: 2px;
+            pointer-events: none;
+        }
+        .card-image-headline {
+            position: absolute;
+            bottom: 16px;
+            left: 18px;
+            color: $mdb-card-image-headline;
+            font-size: 2em;
+        }
+        &-title {
+            @include icon-gradient(rgba(0,0,0,.0), $black); 
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            color: $white;
+            padding: 26% 10px 10px;
+        }
+        &.card-image-margin {
+            text-align: center;
+            padding: 15px;
+            img {
+                width: auto;
+                height: auto;
+                max-width: 90%;
+                max-height: 90%;
+            }
+        }
+    }
+
+    .footer{
+        padding: 0;
+        margin: 0 15px;
+        
+        .legend{
+            padding: 5px 0;
+        }
+        
+        hr{
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    }
+
+    .content{
+        padding: 15px;
+    }
+
+    .card-body {
+        height: 30%;
+        padding: 18px;
+    }
+
+    .card-footer {
+        height: 10%;
+        padding: 18px;
+        button, a {
+            margin: 0 !important;
+            position: relative;
+            bottom: 25px;
+            width: auto;
+            &:first-child {
+                left: -15px;
+            }
+        }
+    }
+
+    .header{
+        @include shadow-big();
+        margin: $margin-base;
+        border-radius: $border-radius-base;
+        padding: $padding-base 0;
+        background-color: $white-color;
+    }
+
+    .header-table{
+        // @include shadow-big();
+        margin: 0 0 $margin-base;
+        border-radius: $border-radius-base;
+        padding: $padding-base;
+        background-color: $white-color;
+    }
+
+    .header-primary{
+        background: $color-primary-400;// для говнобраузеров
+        background: linear-gradient(60deg, $color-primary-400, $color-primary-700);
+        .title {
+            color: $white;
+        }
+    }
+    .header-info{
+        background: linear-gradient(60deg, $color-info-400, $color-info-700);
+    }
+    .header-success{
+        background: linear-gradient(60deg, $color-success-400, $color-success-700);
+    }
+    .header-warning{
+        background: linear-gradient(60deg, $color-warning-600, $color-warning-700);
+    }
+    .header-danger{
+        background: linear-gradient(60deg, $color-danger-400, $color-danger-700);
+    }
+
+    [class*="header-"]{
+        color: #FFFFFF;
+    }
+    .avatar{
+        width: 30px;
+        height: 30px;
+        overflow: hidden;
+        border-radius: 50%;
+        margin-right: 5px;
+    }
+}
+
+.card-raised{
+    @include shadow-big();
+}
+
+.card-signup{
+    .header{
+        @include shadow-big();
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: -40px;
+        padding: 20px 0;
+    }
+    .text-divider{
+        margin-top: 30px;
+        margin-bottom: 0px;
+        text-align: center;
+    }
+    .content{
+        padding: 15px;
+    }
+
+    .checkbox{
+        margin-top: 20px;
+
+        label{
+            margin-left: 17px;
+        }
+        .checkbox-material{
+            padding-right: 12px;
+        }
+    }
+
+    .social-line{
+        margin-top: $margin-base;
+        text-align: center;
+
+        .btn{
+            color: $white-color;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+    }
+}
+
+.card-nav-tabs{
+    margin-top: 45px;
+
+    .header{
+        margin-top: -$margin-base * 2;
+    }
+    .nav-tabs{
+        background: transparent;
+    }
+}
+
+.card-plain{
+    background: transparent;
+    box-shadow: none;
+
+    .header{
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .content{
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+.card-user{
+    .image{
+        height: 110px;
+        background-size: cover;
+        background-position: center;
+        img {
+            width: 100%;
+        }
+    }
+    .image-plain{
+        height: 0;
+        margin-top: 110px;
+    }
+    .author{
+        text-align: center;
+        text-transform: none;
+        margin-top: -60px;
+        &.no-image {
+            margin-top: 0;
+        }
+    }
+    .avatar{
+        width: 100px;
+        height: 100px;
+        border: 3px solid #FFFFFF;
+        position: relative;
+        // margin-bottom: 15px;
+        
+        &.border-gray{
+            border-color: #EEEEEE;
+        }
+        &.border-blue{
+            border-color: $grey-200;
+        }
+    }
+    .title{
+        line-height: 24px;
+    }
+    .content{
+        min-height: 240px;
+    }
+    &-table {
+        .material-icons {
+            vertical-align: middle;
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        
+        a {
+            text-decoration: underline;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+}
+.card-user,
+.card-price{
+    .footer{
+        padding: 5px 15px 10px;
+    }
+    hr{
+        margin: 5px 15px;
+    }
+}

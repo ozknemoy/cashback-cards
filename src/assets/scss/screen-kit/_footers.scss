@@ -1,0 +1,49 @@
+.footer{
+    // background: $brand-primary;
+    // @include icon-gradient($color-primary, $color-primary-color-bottom);
+    // border-top: 3px solid $brand-info;
+    padding: $padding-base*2 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    @media screen and (max-width: 767px) {
+        padding: $padding-base 0;
+    }
+    &-color-dark {
+        background: rgba(30,30,30,1);
+        color: $gray-color;
+       // @include icon-gradient($black, $color-primary-color-bottom); 
+        hr {
+            border-color: $gray-color;
+        }
+    }
+
+    .social {
+        text-align: center;
+        a {
+            background: $white;
+            width: 2em;
+            height: 2em;
+            text-align: center;
+            line-height: 2em;
+            margin: 0 3px;
+            display: inline-block;
+            @include border-radius(2em);
+            color: $dark-gray;    
+        }
+    }
+}
+
+
+.copyright{
+    text-align: center;
+    font-size: 14px;
+    margin-top: 5px;
+}
+.footer-social {
+    display: inline-block;
+    vertical-align: top;
+    margin: 1px 0 0 0px; 
+}

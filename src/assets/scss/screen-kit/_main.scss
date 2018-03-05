@@ -1,0 +1,72 @@
+
+$lightGreen: rgba(157, 255, 157, 0.38);
+$lightOrange: rgba(251, 194, 11, 0.18);
+$lightPink: rgba(255, 191, 197, 0.24);
+
+.ib {
+  display: inline-block;
+}
+
+.dib {
+  display: inline-block;
+}
+
+.primary-color {
+  color: #28abe3
+}
+
+.w100 {
+  width: 100px;
+}
+
+.w150 {
+  width: 150px;
+}
+
+.pt10 {
+  padding-top: 10px;
+}
+.pt20 {
+  padding-top: 20px;
+}
+
+.w20p {
+  width: 20%;
+}
+
+.w10p {
+  width: 10%;
+}
+
+.vertical-top {
+  vertical-align: top;
+}
+
+.active-user {
+  background-color: $lightGreen;
+}
+.semi-active-user {
+  background-color: $lightOrange;
+}
+.not-active-user {
+  background-color: $lightPink;
+}
+.active-user-darken {
+  background-color: darken($lightGreen, 20%);
+}
+.semi-active-user-darken {
+  background-color: darken($lightOrange, 20%);
+}
+.not-active-user-darken {
+  background-color: darken($lightPink, 20%);
+}
+
+.square {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+
+.clear {
+  clear: both;
+}
