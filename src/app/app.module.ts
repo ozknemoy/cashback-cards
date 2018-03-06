@@ -29,12 +29,12 @@ import {UAService} from "../services/user-agent.service";
   imports: [
     vendorModules,
     BrowserModule.withServerTransition({appId: 'my-app'}),
-    RouterModule.forRoot([
+    RouterModule.forRoot(<any>[
       { path: '', component: HomeComponent, pathMatch: 'full'},
       { path: 'restore-password', component: RestorePasswordView, pathMatch: 'full'},
       { path: 'registration', component: RegistrationView, pathMatch: 'full'},
-      { path: 'lazy', loadChildren: './lazy/lazy.module#LazyModule'},
-      { path: 'lazy/nested', loadChildren: './lazy/lazy.module#LazyModule'}
+      { path: 'geo', loadChildren: './geo/geo.module#GeoModule'},
+      { path: 'geo/nested', loadChildren: './geo/geo.module#GeoModule'}
     ]),
     HttpClientModule,
     TransferHttpCacheModule,

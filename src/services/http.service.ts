@@ -27,6 +27,10 @@ export class HttpService {
         
     }
 
+    getGlobal(url) {
+        return this.http.get(url)
+    }
+
     get(url) {
         var headers = this.doWitAuth();
         return this.http.get(this.BASE_URL + url, {headers})
