@@ -16,15 +16,20 @@ import {DirectiveModule} from "./directive.modules";
 import {RestorePasswordView} from "./restore-password/restore-password-view";
 import {RegistrationView} from "./registration/registration-view";
 import {UAService} from "../services/user-agent.service";
+import {AuthGuard} from "../services/auth-guard.service";
+import {SuppliersView} from "./suppliers/suppliers.component";
+import {HttpClient} from "@angular/common/http";
+import {SupplierView} from "./supplier/supplier.component";
 
-//import './src/assets/scss/screen.scss';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RestorePasswordView,
-    RegistrationView
+    RegistrationView,
+    SuppliersView,
   ],
   imports: [
     vendorModules,
@@ -33,8 +38,11 @@ import {UAService} from "../services/user-agent.service";
       { path: '', component: HomeComponent, pathMatch: 'full'},
       { path: 'restore-password', component: RestorePasswordView, pathMatch: 'full'},
       { path: 'registration', component: RegistrationView, pathMatch: 'full'},
-      { path: 'geo', loadChildren: './geo/geo.module#GeoModule'},
-      { path: 'geo/nested', loadChildren: './geo/geo.module#GeoModule'}
+      { path: 'suppliers', component: SuppliersView, pathMatch: 'full'},
+      { path: 'supplier', component: SupplierView, pathMatch: 'full'},
+
+        // AuthGuard
+      { path: 'geo', loadChildren: './geo/geo.module#GeoModule', canActivate: [AuthGuard], canLoad: [AuthGuard]},
     ]),
     HttpClientModule,
     TransferHttpCacheModule,
@@ -46,6 +54,7 @@ import {UAService} from "../services/user-agent.service";
     LocalStorage,
     HttpService,
     UAService,
+    AuthGuard,
   ],
   bootstrap: [AppComponent]
 })

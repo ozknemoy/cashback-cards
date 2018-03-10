@@ -10,7 +10,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import {ToastsManager} from "ng2-toastr";
 import {SharedService} from "./shared.service";
-//import {FileUploader} from "ng2-file-upload";
 
 @Injectable()
 export class HttpService {
@@ -151,17 +150,4 @@ export class HttpService {
         return this.post(url,_d,text,toastLife)
     }
 
-   /* uploadFileWithAuth(maxFileSize, url, filename="file") {
-        return new FileUploader({
-            url: this.BASE_URL + url,
-            "itemAlias": filename,
-            autoUpload: true,
-            maxFileSize,
-            //withCredentials: false,
-            headers: [{
-                name: 'X-AUTH-TOKEN',
-                value: 'PiU ' + this.getToken()
-            }]
-        })
-    }*/
 }

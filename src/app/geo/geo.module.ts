@@ -1,4 +1,4 @@
-import {NgModule, Component, OnInit} from '@angular/core';
+import {NgModule, Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {HttpService} from '../../services/http.service';
 import {AgmCoreModule, LatLngBounds, LatLngLiteral} from '@agm/core';
@@ -32,13 +32,13 @@ interface IFreegeoIp {
 
 @Component({
     selector: 'geo-view',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     styles: [`
   agm-map {
     height: 500px;
   }
   `],
     template: `
-  <h3>{{orders?.need_bonus}}</h3>
   <agm-map [zoom]="11" [latitude]="lat || _lat" [longitude]="lng || _lng"
            (centerChange)="centerChange($event)"
            (boundsChange)="boundsChange($event)"
@@ -61,6 +61,13 @@ export class GeoComponent implements OnInit {
     _lng = 30;
 
     constructor(public http: HttpService) {}
+
+    dummi() {
+          console.log('dummi');
+    }
+    getN() {
+          return Math.random();
+    }
 
     centerChange(e: LatLngLiteral) {
           console.log('---', e);

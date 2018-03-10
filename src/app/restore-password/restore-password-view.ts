@@ -3,7 +3,7 @@
  */
 import {Component,Inject} from '@angular/core';
 import {AutoUnsubscribe} from "../../services/@AutoUnsubscribe.decorator";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ToastsManager} from "ng2-toastr";
 import {HttpService} from "../../services/http.service";
 
@@ -24,6 +24,7 @@ export class RestorePasswordView {
     constructor(
         public httpService: HttpService,
         public routeParams: ActivatedRoute,
+        public router: Router,
         public toast:ToastsManager
     ) {}
 
@@ -47,11 +48,13 @@ export class RestorePasswordView {
                 {
                     token: this.token,
                     password: this.password
-                }
-                ,'Пароль успешно обновлен'
+                },
+                'Пароль успешно обновлен'
             ).subscribe(
-                d => this.pend = false,
-                err => this.pend = false)
+                d => {this.router.navigate([''])},
+                err => {},
+                () => {this.pend = false}
+            )
         } else {
             this.toast.error('Пароли не совпадают!', 'Ошибка', {
                 showCloseButton: true,

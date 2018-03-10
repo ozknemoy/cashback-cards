@@ -8,6 +8,8 @@ import {LocalStorage} from "../services/localStorage.service";
   <a routerLink="/">Home</a>
   <a routerLink="/registration">regs</a>
   <a routerLink="/restore-password">restore</a>
+  <a routerLink="/supplier">supplier</a>
+  <a routerLink="/suppliers">suppliers</a>
   <a routerLink="/geo">geo</a>
   <router-outlet></router-outlet>
   `

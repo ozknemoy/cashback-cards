@@ -25,6 +25,10 @@ module.exports = {
     ]
   },
   plugins: [
+    // кастомизация вебпака
+    // лежит тут node_modules/@angular/cli/models/webpack-configs/common.js
+    // node_modules/@angular/cli/models/webpack-configs/production.js
+    // https://medium.com/@Ai_boy/configure-angular-2-cli-webpack-beta-14-5a7052ce6156#43f1
     new webpack.ContextReplacementPlugin(
       // fixes WARNING Critical dependency: the request of a dependency is an expression
       /(.+)?angular(\\|\/)core(.+)?/,
