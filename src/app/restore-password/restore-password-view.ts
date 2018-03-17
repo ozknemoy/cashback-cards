@@ -2,7 +2,7 @@
  * Created by ozknemoy on 05.05.2017.
  */
 import {Component,Inject} from '@angular/core';
-import {AutoUnsubscribe} from "../../services/@AutoUnsubscribe.decorator";
+import {AutoUnsubscribe} from "../../decorators/auto-unsubscribe.decorator";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ToastsManager} from "ng2-toastr";
 import {HttpService} from "../../services/http.service";

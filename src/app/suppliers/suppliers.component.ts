@@ -2,7 +2,7 @@
  * Created by ozknemoy on 13.04.2017.
  */
 import {Component} from '@angular/core';
-import {AutoUnsubscribe} from "../../services/@AutoUnsubscribe.decorator";
+import {AutoUnsubscribe} from "../../decorators/auto-unsubscribe.decorator";
 import {HttpService} from "../../services/http.service";
 
 interface ISupplier {

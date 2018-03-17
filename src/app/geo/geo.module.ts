@@ -2,6 +2,10 @@ import {NgModule, Component, OnInit, ChangeDetectionStrategy} from '@angular/cor
 import {RouterModule} from '@angular/router';
 import {HttpService} from '../../services/http.service';
 import {AgmCoreModule, LatLngBounds, LatLngLiteral} from '@agm/core';
+import {AutoUnsubscribe} from "../../decorators/auto-unsubscribe.decorator";
+import {LocalStorage} from "../../services/localStorage.service";
+import {debounceMethod} from "../../decorators/debounce.decorator";
+
 
 interface IGeoPosition {
     coords: {
@@ -29,17 +33,20 @@ interface IFreegeoIp {
     metro_code: number;
 }
 
-
+@AutoUnsubscribe()
 @Component({
     selector: 'geo-view',
     changeDetection: ChangeDetectionStrategy.OnPush,
     styles: [`
   agm-map {
-    height: 500px;
+    height: 300px;
+  }
+  .map-holder {
+      margin: 0 25px 0 200px;
   }
   `],
     template: `
-  <agm-map [zoom]="11" [latitude]="lat || _lat" [longitude]="lng || _lng"
+  <div class="map-holder"><agm-map [zoom]="11" [latitude]="lat || _lat" [longitude]="lng || _lng"
            (centerChange)="centerChange($event)"
            (boundsChange)="boundsChange($event)"
            (zoomChange)="zoomChange($event)">
@@ -48,60 +55,70 @@ interface IFreegeoIp {
            это <strong>ПИТЕР</strong>
         </agm-info-window>
     </agm-marker>
-  </agm-map>
+  </agm-map></div>
   `
 })
 export class GeoComponent implements OnInit {
     orders;
-    title = 'My first AGM project';
-    lat: number;
-    lng: number;
+    public lat: number;
+    public lng: number;
     // значения по умолчанию для центровки
-    _lat = 60;
-    _lng = 30;
+    public _lat = 60;
+    public _lng = 30;
+    public zoom:number;
+    public ne:LatLngLiteral;
+    public sw:LatLngLiteral;
+    public center:LatLngLiteral;
+    public isBrowser = this.localStorage.isBrowser;
 
-    constructor(public http: HttpService) {}
+    constructor(
+        public http: HttpService,
+        public localStorage: LocalStorage) {}
 
-    dummi() {
-          console.log('dummi');
-    }
-    getN() {
-          return Math.random();
-    }
-
-    centerChange(e: LatLngLiteral) {
-          console.log('---', e);
+    centerChange(center: LatLngLiteral) {
+        this.center = center;
+        this.getPoints();
     }
 
     zoomChange(zoom: number) {
-        console.log(zoom);
+        this.zoom = zoom;
     }
 
     boundsChange(event: LatLngBounds) {
-         console.log('+++', event);
-         console.log('+++cent',  event.getCenter().lat(), event.getCenter().lng());
-         console.log('+++NorthEast',  event.getNorthEast().lat(), event.getNorthEast().lng());
-         console.log('+++getSouthWest',  event.getSouthWest().lat(), event.getSouthWest().lng());
+        this.getPoints();
+        this.ne = {lat:event.getNorthEast().lat(), lng: event.getNorthEast().lng()};
+        this.sw = {lat:event.getSouthWest().lat(), lng: event.getSouthWest().lng()};
+    }
+
+    @debounceMethod(1000)
+    getPoints() {
+        console.log('+++NorthEast',this.ne );
+        console.log('+++getSouthWest',this.sw );
+        console.log('+++zoom',this.zoom);
+        console.log('+++center',this.center);
     }
 
     ngOnInit() {
-        navigator.geolocation.getCurrentPosition(
-            (position: IGeoPosition) => {
-                // клиент красавчик, разрешил геолокацию
-                this.lat = position.coords.latitude;
-                this.lng = position.coords.longitude;
-            }, (e) => {
-                this.withoutGeoOnlyOnce();
-            }
-        );
+        if(this.isBrowser) {
+            navigator.geolocation.getCurrentPosition(
+                (position: IGeoPosition) => {
+                    // клиент красавчик, разрешил геолокацию
+                    this.lat = position.coords.latitude;
+                    this.lng = position.coords.longitude;
+                }, (e) => {
+                    this.withoutGeoOnlyOnce();
+                }
+            );
 
-        // если еще не разрешили и не запретили геолокацию
-        setTimeout(() => this.withoutGeoOnlyOnce(), 5e3);
+            // если еще не разрешили и не запретили геолокацию
+            setTimeout(() => this.withoutGeoOnlyOnce(), 5e3);
+        }
+
 
     }
 
     withoutGeoOnlyOnce() {
-        if (this.lat) { return; }
+        if (this.lat) return;
         // https://github.com/fiorix/freegeoip
         // комменты https://habrahabr.ru/company/hflabs/blog/340466/
         this.http.getGlobal('https://freegeoip.net/json/')
@@ -126,6 +143,4 @@ export class GeoComponent implements OnInit {
         })
     ]
 })
-export class GeoModule {
-
-}
+export class GeoModule {}

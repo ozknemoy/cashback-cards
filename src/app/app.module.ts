@@ -30,6 +30,7 @@ import {SupplierView} from "./supplier/supplier.component";
     RestorePasswordView,
     RegistrationView,
     SuppliersView,
+    SupplierView,
   ],
   imports: [
     vendorModules,

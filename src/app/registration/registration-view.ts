@@ -3,7 +3,7 @@ import {ReCaptchaComponent} from "angular2-recaptcha";
 import {ActivatedRoute} from "@angular/router";
 import {LocalStorage} from "../../services/localStorage.service";
 import {Router} from "@angular/router";
-import {AutoUnsubscribe} from "../../services/@AutoUnsubscribe.decorator";
+import {AutoUnsubscribe} from "../../decorators/auto-unsubscribe.decorator";
 import {UAService} from "../../services/user-agent.service";
 import {Meta,Title} from "@angular/platform-browser";
 import {TITLE} from '../../config/small.configs'
