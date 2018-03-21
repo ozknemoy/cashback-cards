@@ -1,5 +1,9 @@
 .section{
     padding: 70px 0;
+    position: relative;
+    .row + .category{
+        margin-top: $margin-base-vertical;
+    }
 }
 .section-navbars{
     padding-bottom: 0;
@@ -11,3 +15,13 @@
 .section-signup{
     padding-top: 20vh;
 }
+
+
+.clear-filter{
+    &:after,
+    &:before{
+        display: none;
+    }
+}
+
+

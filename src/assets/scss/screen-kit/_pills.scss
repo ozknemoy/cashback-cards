@@ -1,86 +1,118 @@
 .nav-pills{
 
-    > li {
-        > a{
-            line-height: $mdb-btn-font-size-base * 2;
-            text-transform: uppercase;
-            font-size: $mdb-btn-font-size-base;
-            font-weight: $font-weight-bold;
-            min-width: 100px;
+    .nav-item {
+        .nav-link{
+            padding: 0 15.5px;
             text-align: center;
-            color: $gray;
-            transition: all .3s;
+            height: 60px;
+            width: 60px;
+            font-weight: $font-weight-normal;
+            color: $dark-gray;
+            margin-right: 19px;
+            background-color: $opacity-gray-3;
+            border-radius: $btn-round-radius;
 
             &:hover{
-                background-color: rgba(200, 200, 200, 0.2);
+                background-color: $opacity-gray-3;
+            }
+
+            &.active{
+                &,
+                &:focus,
+                &:hover{
+                    background-color: $dark-gray;
+                    color: $white-color;
+                    box-shadow: 0px 5px 35px 0px rgba(0, 0, 0, 0.3);
+                }
+            }
+
+            &.disabled,
+            &:disabled,
+            &[disabled]{
+                opacity: .5;
             }
         }
 
         i{
             display: block;
-            font-size: 30px;
-            padding: 15px 0;
+            font-size: 20px;
+            line-height: 60px;
         }
+    }
 
-        &.active > a{
-            &,
-            &:focus,
-            &:hover{
-                background-color: $brand-primary;
+    &.nav-pills-neutral{
+        .nav-item {
+            .nav-link{
+                background-color: $opacity-2;
                 color: $white-color;
-                @include shadow-big-color($brand-primary);
+
+                &.active{
+                    &,
+                    &:focus,
+                    &:hover{
+                        background-color: $white-color;
+                        color: $primary-color;
+                    }
+                }
             }
         }
+    }
 
+    &.nav-pills-primary{
+        .nav-item {
+            .nav-link.active{
+                &,
+                &:focus,
+                &:hover{
+                    background-color: $brand-primary;
+                }
+            }
+        }
     }
 
     &.nav-pills-info{
-        > li {
-            &.active > a{
+        .nav-item {
+            .nav-link.active{
                 &,
                 &:focus,
                 &:hover{
                     background-color: $brand-info;
-                    @include shadow-big-color($brand-info);
                 }
             }
         }
     }
 
     &.nav-pills-success{
-        > li {
-            &.active > a{
+        .nav-item {
+            .nav-link.active{
                 &,
                 &:focus,
                 &:hover{
                     background-color: $brand-success;
-                    @include shadow-big-color($brand-success);
                 }
             }
         }
     }
 
     &.nav-pills-warning{
-        > li {
-            &.active > a{
+        .nav-item {
+            .nav-link.active{
                 &,
                 &:focus,
                 &:hover{
                     background-color: $brand-warning;
-                    @include shadow-big-color($brand-warning);
                 }
             }
         }
     }
 
     &.nav-pills-danger{
-        > li {
-            &.active > a{
+        .nav-item {
+            .nav-link.active{
                 &,
                 &:focus,
                 &:hover{
                     background-color: $brand-danger;
-                    @include shadow-big-color($brand-danger);
                 }
             }
         }
@@ -88,4 +120,12 @@
 }
 .tab-space{
     padding: 20px 0 50px 0px;
+}
+
+.nav-align-center{
+    text-align: center;
+
+    .nav-pills{
+        display: inline-flex;
+    }
 }

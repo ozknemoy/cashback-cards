@@ -1,0 +1,46 @@
+@import 'screen-kit/variables';
+@import 'screen-kit/mixins';
+@import 'screen-kit/layout';
+@import 'screen-kit/fonts';
+
+// Plugins CSS
+@import "screen-kit/plugins/plugin-bootstrap-switch";
+@import "screen-kit/plugins/plugin-nouislider";
+@import "screen-kit/plugins/plugin-datepicker";
+@import "screen-kit/plugins/plugin-awselect";
+
+// Core CSS
+@import "screen-kit/buttons";
+@import "screen-kit/inputs";
+@import "screen-kit/label";
+@import "screen-kit/checkboxes-radio";
+@import "screen-kit/progress";
+@import "screen-kit/badges";
+@import "screen-kit/pagination";
+@import "screen-kit/typography";
+@import "screen-kit/misc";
+@import "screen-kit/pills";
+@import "screen-kit/scroll";
+
+// components
+@import "screen-kit/breadcrumbs";
+@import "screen-kit/social-buttons";
+@import "screen-kit/tabs";
+@import "screen-kit/navbar";
+@import "screen-kit/dropdown";
+@import "screen-kit/alerts";
+@import "screen-kit/images";
+@import "screen-kit/popups";
+@import "screen-kit/nucleo-outline";
+@import "screen-kit/modals";
+@import "screen-kit/carousel";
+@import "screen-kit/cards";
+@import "screen-kit/footers";
+
+
+// example pages and sections
+@import "screen-kit/example-pages";
+@import "screen-kit/sections";
+@import "screen-kit/responsive";
+@import "screen-kit/partners";
+@import "screen-kit/authorization";

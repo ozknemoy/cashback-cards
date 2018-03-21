@@ -1,0 +1,24 @@
+// main partners
+.main_partners {
+    background: #f1f1f1;
+    p {
+        font-size: 14px;
+    }
+    &--item {
+        
+        display: block;
+        margin: 0 0 30px;
+        position: relative;
+        padding-top: 50%;
+
+
+        img {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+    }
+}

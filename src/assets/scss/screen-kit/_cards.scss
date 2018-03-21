@@ -1,178 +1,78 @@
-.card {
-    border-radius: $border-radius-base;
-    // box-shadow: 0 1px 2px rgba(0,0,0,.05),0 0 0 1px rgba(63,63,68,.1);
-    background-color: #FFFFFF;
-    margin-bottom: 30px;
+.card{
+    border: 0;
+    border-radius: $border-radius-small;
     display: inline-block;
+    position: relative;
+    overflow: hidden;
     width: 100%;
-    &.card-no-m {
-        .content {
-            padding: 0;
-        }
-        .header {
-            margin: 0;
-        }
-    }
-    .card-height-indicator {
-        margin-top: 100%;
-    }
-    .card-content {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
+    margin-bottom: 20px;
+    box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
+
+    .card-body{
+        min-height: 190px;
     }
 
-    border-radius: $border-radius-base;
-    color: $mdb-card-body-text;
-    background: $mdb-card-body-background;
-
-    @include shadow-2dp();
-
-    .card-image {
-        height: 60%;
-        position: relative;
-        overflow: hidden;
-        img {
-            width: 100%;
-            height: 100%;
-            border-top-left-radius: 2px;
-            border-top-right-radius: 2px;
-            pointer-events: none;
-        }
-        .card-image-headline {
-            position: absolute;
-            bottom: 16px;
-            left: 18px;
-            color: $mdb-card-image-headline;
-            font-size: 2em;
-        }
-        &-title {
-            @include icon-gradient(rgba(0,0,0,.0), $black); 
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            color: $white;
-            padding: 26% 10px 10px;
-        }
-        &.card-image-margin {
-            text-align: center;
-            padding: 15px;
-            img {
-                width: auto;
-                height: auto;
-                max-width: 90%;
-                max-height: 90%;
-            }
-        }
+    &[data-background-color="orange"]{
+        background-color: $primary-color;
     }
 
-    .footer{
-        padding: 0;
-        margin: 0 15px;
-        
-        .legend{
-            padding: 5px 0;
-        }
-        
-        hr{
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
+    &[data-background-color="red"]{
+        background-color: $danger-color;
     }
 
-    .content{
+    &[data-background-color="yellow"]{
+        background-color: $warning-color;
+    }
+
+    &[data-background-color="blue"]{
+        background-color: $info-color;
+    }
+
+    &[data-background-color="green"]{
+        background-color: $success-color;
+    }
+    .content {
         padding: 15px;
     }
-
-    .card-body {
-        height: 30%;
-        padding: 18px;
+    .footer {
+        padding: 15px;
     }
-
-    .card-footer {
-        height: 10%;
-        padding: 18px;
-        button, a {
-            margin: 0 !important;
-            position: relative;
-            bottom: 25px;
-            width: auto;
-            &:first-child {
-                left: -15px;
+    .card-icon {
+        background: $white-color;
+        width: 70px;
+        height: 70px;
+        padding: 15px;
+        display: inline-block;
+        border-radius: 50%;
+        svg {
+            width: 100%;
+            height: 100%;
+            path, circle {
+            fill: $brand-info;
+                // @include transition($fast-transition-time, $transition-linear);
             }
         }
     }
-
-    .header{
-        @include shadow-big();
-        margin: $margin-base;
-        border-radius: $border-radius-base;
-        padding: $padding-base 0;
-        background-color: $white-color;
-    }
-
-    .header-table{
-        // @include shadow-big();
-        margin: 0 0 $margin-base;
-        border-radius: $border-radius-base;
-        padding: $padding-base;
-        background-color: $white-color;
-    }
-
-    .header-primary{
-        background: $color-primary-400;// для говнобраузеров
-        background: linear-gradient(60deg, $color-primary-400, $color-primary-700);
-        .title {
-            color: $white;
-        }
-    }
-    .header-info{
-        background: linear-gradient(60deg, $color-info-400, $color-info-700);
-    }
-    .header-success{
-        background: linear-gradient(60deg, $color-success-400, $color-success-700);
-    }
-    .header-warning{
-        background: linear-gradient(60deg, $color-warning-600, $color-warning-700);
-    }
-    .header-danger{
-        background: linear-gradient(60deg, $color-danger-400, $color-danger-700);
-    }
-
-    [class*="header-"]{
-        color: #FFFFFF;
-    }
-    .avatar{
-        width: 30px;
-        height: 30px;
-        overflow: hidden;
-        border-radius: 50%;
-        margin-right: 5px;
-    }
-}
-
-.card-raised{
-    @include shadow-big();
 }
 
 .card-signup{
+    max-width: 350px;
+    margin: 0 auto;
+
     .header{
-        @include shadow-big();
         margin-left: 20px;
         margin-right: 20px;
-        margin-top: -40px;
-        padding: 20px 0;
+        padding: 30px 0;
     }
     .text-divider{
         margin-top: 30px;
         margin-bottom: 0px;
         text-align: center;
     }
-    .content{
-        padding: 15px;
+    .card-body{
+        padding-top: 0px;
+        padding-bottom: 0px;
+        min-height: auto;
     }
 
     .checkbox{
@@ -187,25 +87,20 @@
     }
 
     .social-line{
-        margin-top: $margin-base;
+        margin-top: 20px;
         text-align: center;
 
-        .btn{
-            color: $white-color;
+        .btn.btn-icon ,
+        .btn.btn-icon .btn-icon -mini{
             margin-left: 5px;
             margin-right: 5px;
+            box-shadow: 0px 5px 50px 0px rgba(0, 0, 0, 0.2);
         }
     }
-}
 
-.card-nav-tabs{
-    margin-top: 45px;
-
-    .header{
-        margin-top: -$margin-base * 2;
-    }
-    .nav-tabs{
-        background: transparent;
+    .footer{
+        margin-bottom: 10px;
+        margin-top: 24px;
     }
 }
 
@@ -223,68 +118,145 @@
         padding-right: 0;
     }
 }
-.card-user{
-    .image{
-        height: 110px;
-        background-size: cover;
-        background-position: center;
-        img {
+
+.card-category {
+    background: transparent;
+    box-shadow: none;
+    // text-align: center;
+    // padding-top: 100%;
+    position: relative;
+    // top: -30px;
+    // box-shadow: none;
+    .content {
+        // position: absolute;
+        // top: 50%;
+        // @include transform-translate-y(-50%);
+        padding: 10px 15px 15px 50px;
+    }
+    .icon {
+        width: 35px;
+        height: 35px;
+        // margin: 0 auto 15px;
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        svg {
             width: 100%;
-        }
-    }
-    .image-plain{
-        height: 0;
-        margin-top: 110px;
-    }
-    .author{
-        text-align: center;
-        text-transform: none;
-        margin-top: -60px;
-        &.no-image {
-            margin-top: 0;
-        }
-    }
-    .avatar{
-        width: 100px;
-        height: 100px;
-        border: 3px solid #FFFFFF;
-        position: relative;
-        // margin-bottom: 15px;
-        
-        &.border-gray{
-            border-color: #EEEEEE;
-        }
-        &.border-blue{
-            border-color: $grey-200;
-        }
-    }
-    .title{
-        line-height: 24px;
-    }
-    .content{
-        min-height: 240px;
-    }
-    &-table {
-        .material-icons {
-            vertical-align: middle;
-            font-size: 20px;
-            margin-right: 10px;
-        }
-        
-        a {
-            text-decoration: underline;
-            &:hover {
-                text-decoration: none;
+            height: 100%;
+            path, circle {
+                fill: $dark-gray;
             }
         }
     }
-}
-.card-user,
-.card-price{
-    .footer{
-        padding: 5px 15px 10px;
-    }
-    hr{
-        margin: 5px 15px;
+    .description {
+        line-height: 1.2;
+        // height: 40px;
+        position: relative;
+        overflow: hidden;
     }
 }
+
+.card-flat {
+    box-shadow: none;
+    border: 1px solid $light-gray;
+}
+
+.card-wrap {
+    position: relative;
+    .card-info {
+        position: absolute;
+        top: 16px;
+        right: 0px;
+        bottom: 2px;
+        z-index: 1;
+        .btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            border-color: $light-gray;
+            border-radius: 0;
+            border-top: 0;
+            border-right: 0;
+            border-bottom: 0;
+        }
+    }
+    &:hover {
+        .card-button {
+            background-color: $primary-color;
+            color: $white-color;
+            svg {
+                path, circle {
+                    fill: $white-color;
+                }
+            }
+        }
+        .btn {
+            color: $white-color;
+        }
+    }
+    .card-button {
+        border: 1px solid $light-gray;
+        box-shadow: none;
+        position: relative;
+        color: $text-color;
+        margin: 20px 0 0;
+        @include transition($fast-transition-time, $transition-linear);
+        
+        .content {
+            display: block;
+            .icon {
+                width: 30px;
+                height: 30px;
+                float: left;
+            }
+            &:after {
+                content: '';
+                display: block;
+                clear: both;
+            }
+        }
+        img {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            width: 30px;
+        }
+        svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+            path, circle {
+                fill: $primary-color;
+                @include transition($fast-transition-time, $transition-linear);
+            }
+        }
+        .title {
+            font-weight: $font-weight-normal;
+            position: absolute;
+            left: 65px;
+            right: 70px;
+            top: 50%;
+            display: block;
+            @include transform-translate-y(-50%);
+            line-height: 1.1;
+            text-decoration: none;
+        }
+    }
+}
+
+
+
+.card-icon {
+    text-align: center;
+    // min-height: 170px;
+    img {
+        max-width: 20%;
+    }
+
+    .description {
+
+    }
+}
+

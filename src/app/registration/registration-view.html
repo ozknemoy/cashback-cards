@@ -1,150 +1,91 @@
 
-<div id="registration">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                <form  #authForm="ngForm">
+<div class="wrap">
+    <div class="auth">
+        <div class="auth--bg"></div>
 
-                    <div class="form-group label-floating is-empty">
-                        <label class="control-label">Фамилия*:</label>
-                        <input type="text" class="form-control" name="last_name" required [(ngModel)]="form.last_name">
-                        <label class="label control-label-error a-validation">
-                            <i class="material-icons">error</i>&nbsp;Введите фамилию!
-                        </label>
+        <div class="auth--content">
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <div class="col-12 col-md-4 auth--heading">
+                        <h1>Регистрация</h1>
+
+                        <p>
+                            <button (click)="step='one'">1</button>
+                            <button (click)="step='two'">2</button>
+                            <button (click)="step='three'">3</button>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ut modi, eveniet dolorem vero expedita similique officia hic ipsum molestiae ullam in, nam laborum mollitia necessitatibus id earum magni totam.</p>
+                        <a routerLink="/" class="btn btn-neutral btn-simple">Вернуться на главную</a>
+                    </div>
+                    <div class="col-12 col-md-4 auth--wrap" [ngSwitch]="step">
+
+                        <form #stepOneForm="ngForm" *ngSwitchCase="'one'">
+                            <div class="form-group">
+                                <label>Номер телефона</label>
+                                <label class="input-group">
+                                    <span class="input-group-addon"><i class="mdi mdi-phone"></i></span>
+                                    <input type="text" name="phone" class="form-control" required
+                                           minlength="11"
+                                           placeholder="7 123 456 7890"
+                                           mask='+7(000)000-0000'
+                                           [ngModel]="stepOneModel.phone">
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Придумайте пароль</label>
+                                <label class="input-group">
+                                    <span class="input-group-addon"><i class="mdi mdi-key"></i></span>
+                                    <input type="password" name="password" class="form-control" required
+                                           pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{6,}$"
+                                           [(ngModel)]="stepOneModel.password">
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Введите новый пароль еще раз</label>
+                                <label class="input-group">
+                                    <span class="input-group-addon"><i class="mdi mdi-key"></i></span>
+                                    <input type="password" name="passwordTwo" class="form-control" required
+                                           [(ngModel)]="stepOneModel.passwordTwo">
+                                </label>
+                            </div>
+
+                            <div class="text-center">
+                                <button class="btn btn-success"
+                                        (click)="toStepTwo(stepOneForm.value)"
+                                        [disabled]="stepOneForm.invalid || !isEqualValidPassword(stepOneForm)">Далее</button>
+                            </div>
+                            <div class="text-center">
+                                <p>У вас есть аккаунт?</p>
+                                <a class="btn btn-simple btn-success" routerLink="/registration">Авторизация</a>
+                            </div>
+                        </form>
+
+                        <form action="" *ngSwitchCase="'two'">
+                            <div class="form-group">
+                                <label>Код из смс</label>
+                                <input type="text" class="form-control">
+                            </div>
+
+                            <div class="text-center">
+                                <button class="btn btn-success">Далее</button>
+                                <button class="btn btn-success btn-link">Выслать код повторно</button>
+                            </div>
+                        </form>
+
+                        <form action="" *ngSwitchCase="'three'">
+                            <div class="form-group">
+                                <label>Номер карты</label>
+                                <input type="text" class="form-control">
+                            </div>
+
+
+                            <button class="btn btn-success">Далее</button>
+
+
+                            <p>У вас нету <!--Карты болельщика-->{{ 'user_cards' | translate }}? Создайте новую карту!</p>
+                            <button class="btn btn-success">Создать новую карту</button>
+                        </form>
                     </div>
 
-                    <div class="form-group label-floating is-empty">
-                        <label class="control-label">Имя*:</label>
-                        <input type="text" class="form-control" name="first_name" required [(ngModel)]="form.first_name">
-                        <label class="label control-label-error a-validation">
-                            <i class="material-icons">error</i>&nbsp;Введите имя!
-                        </label>
-                    </div>
-
-                    <div class="form-group label-floating is-empty">
-                        <label class="control-label">Номер Наставника:</label>
-                        <input type="text" class="form-control" name="refIn"
-                               [disabled]="hasReferal"
-                               [(ngModel)]="form.refIn">
-                        <label *ngIf=hasReferal class="label control-label-error">
-                            Вы регистрируетесь в структуре наставника
-                            {{refUserName + ' (' + refUser.ref + ')'}}
-                        </label>
-                    </div>
-
-                    <div class="form-group label-floating is-empty"
-                         [ngClass]="{'has-success': isEqualEmail(authForm)}">
-                        <label class="control-label">Почта*:</label>
-                        <input type="email" class="form-control required" name="email" required
-                               email
-                               [(ngModel)]="form.email">
-                        <!--удаляю тег чтобы не нарушать каскад css-->
-                        <span class="glyphicon glyphicon-ok form-control-feedback"
-                              *ngIf="isEqualEmail(authForm)"></span>
-                        <label class="label control-label-error a-validation">
-                            <i class="material-icons">error</i>&nbsp;Введите правильный email!
-                        </label>
-                    </div>
-
-                    <div class="form-group label-floating is-empty"
-                         [ngClass]="{'has-success': isEqualEmail(authForm),
-                                     'has-error':secondEmail !== form.email}">
-                        <label class="control-label">Подтвердите почту*:</label>
-                        <input type="email" class="form-control required"
-                               name="secondEmail" required
-                               email
-                               [(ngModel)]="secondEmail">
-                        <!--удаляю тег чтобы не нарушать каскад css-->
-                        <span class="glyphicon glyphicon-ok form-control-feedback"
-                              *ngIf="isEqualEmail(authForm)"></span>
-                        <span class="glyphicon glyphicon-remove form-control-feedback"
-                              *ngIf="secondEmail !== form.email"></span>
-
-                    </div>
-
-                    <div class="form-group label-floating is-empty"
-                         [ngClass]="{'has-success': isEqualPassword(authForm)}">
-                        <label class="control-label">Пароль*:</label>
-                        <input type="password" class="form-control" name="password" required
-                               pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{6,}$"
-                               [(ngModel)]="form.password">
-                        <!--удаляю тег чтобы не нарушать каскад css-->
-                        <span class="glyphicon glyphicon-ok form-control-feedback"
-                              *ngIf="isEqualPassword(authForm)"></span>
-                        <label class="label control-label-error a-validation">
-                            <i class="material-icons">error</i>&nbsp;
-                            Минимальная длина 6 символов. Обязательно наличие латинских букв разного регистра и цифр в любой последовательности
-                        </label>
-                    </div>
-
-                    <div class="form-group label-floating is-empty"
-                         [ngClass]="{'has-success': isEqualPassword(authForm),
-                                     'has-error':secondPassword !== form.password}">
-                        <label class="control-label">Подтвердите пароль*:</label>
-                        <input type="password" class="form-control"
-                               name="secondPassword"
-                               [(ngModel)]="secondPassword">
-                        <span class="glyphicon glyphicon-ok form-control-feedback"
-                              *ngIf="isEqualPassword(authForm)"></span>
-                        <span class="glyphicon glyphicon-remove form-control-feedback"
-                              *ngIf="secondPassword !== form.password"></span>
-                    </div>
-
-                    <div class="form-group label-floating is-empty">
-                        <label class="control-label">Телефон*:</label>
-                        <input type="text" class="form-control" required name="phone"
-                               *ngIf="!isAndroid"
-                               minlength="11"
-                               placeholder="7 123 456 7890"
-                               mask='+7(000)000-0000' [(ngModel)]="phone">
-                        <label class="label control-label-error a-validation">
-                            <i class="material-icons">error</i>&nbsp;Введите правильный телефон!
-                        </label>
-                    </div>
-                </form>
-
-                <div class="text-center"><!-- && authForm.valid-->
-                    <div *ngIf="isBrowser">
-                        <re-captcha site_key="{{siteKey}}" class="text-center"
-                                    (captchaResponse)="setCaptcha($event)"
-                                    (captchaExpired)="captchaExpired()">
-                        </re-captcha>
-                    </div>
-                    <!--{{authForm.invalid}}/ <pre (click)="check(authForm)">{{authForm.value|json}}</pre>-->
-                    <label class="white-label">
-                        <span class="checkbox ib">
-                            <input type="checkbox" [(ngModel)]="userAgreement">
-                            <span class="checkbox-material">
-                                <span class="check"></span>
-                            </span>
-                        </span>
-                        Нажимая кнопку «Зарегистрироваться», вы соглашаетесь с условиями
-                        <a href="http://prioriticlub.ru/files/loyalty.pdf" target="_blank" download>
-                            Программы лояльности Prioriti
-                        </a>
-                    </label>
-                    <label class="white-label">
-                        <span class="checkbox ib">
-                            <input type="checkbox" [(ngModel)]="personalDataAgreement">
-                            <span class="checkbox-material">
-                                <span class="check"></span>
-                            </span>
-                        </span>
-                        Подтверждаю свое <a href="http://prioriticlub.ru/filess/personal-data-agreement.pdf" target="_blank" download>
-                            согласие
-                        </a> на обработку моих персональных данных
-                    </label>
-                    <br>
-                    <div class="form-group">
-                        <button class="btn btn-primary"
-                                (click)="signup()"
-                                [disabled]="(secondPassword && secondPassword !== form.password) ||
-                                    (secondEmail && secondEmail !== form.email) ||
-                                     authForm.invalid || !secretKey ||
-                                      !userAgreement || !personalDataAgreement">
-                            Зарегистрироваться
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>

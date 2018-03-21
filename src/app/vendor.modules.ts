@@ -9,6 +9,7 @@ import {ToastModule, ToastOptions} from 'ng2-toastr/ng2-toastr';
 import {NgxQRCodeModule} from "ngx-qrcode2";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {NgxMaskModule} from 'ngx-mask'
+import {TranslateModule} from '@ngx-translate/core';
 
 // в импорты модулей приложения. не в модуль директив!!!
 export const vendorModules = [
@@ -18,7 +19,7 @@ export const vendorModules = [
     NgxPaginationModule,
     NgxQRCodeModule,
     NgxMaskModule.forRoot(),
-
+    TranslateModule.forRoot(),
     //bootstrap Modules
     ModalModule.forRoot(),
 ];

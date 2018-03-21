@@ -20,6 +20,11 @@ import {AuthGuard} from "../services/auth-guard.service";
 import {SuppliersView} from "./suppliers/suppliers.component";
 import {HttpClient} from "@angular/common/http";
 import {SupplierView} from "./supplier/supplier.component";
+import {LoginView} from "./login/login.component";
+import {ProfileView} from "./profile/profile.component";
+import {TranslateService} from "@ngx-translate/core";
+import {soccer} from "../locales/soccer";
+import {crimea} from "../locales/crimea";
 
 
 
@@ -31,6 +36,8 @@ import {SupplierView} from "./supplier/supplier.component";
     RegistrationView,
     SuppliersView,
     SupplierView,
+    LoginView,
+    ProfileView,
   ],
   imports: [
     vendorModules,
@@ -41,6 +48,8 @@ import {SupplierView} from "./supplier/supplier.component";
       { path: 'registration', component: RegistrationView, pathMatch: 'full'},
       { path: 'suppliers', component: SuppliersView, pathMatch: 'full'},
       { path: 'supplier', component: SupplierView, pathMatch: 'full'},
+      { path: 'login', component: LoginView, pathMatch: 'full'},
+      { path: 'profile', component: ProfileView, pathMatch: 'full'},
 
         // AuthGuard
       { path: 'geo', loadChildren: './geo/geo.module#GeoModule', canActivate: [AuthGuard], canLoad: [AuthGuard]},
@@ -59,4 +68,12 @@ import {SupplierView} from "./supplier/supplier.component";
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+
+  constructor(translate: TranslateService) {
+    translate.setDefaultLang('soccer');
+    translate.setTranslation('soccer', soccer);
+    translate.setTranslation('crimea', crimea);
+    translate.use('soccer');
+  }
+}

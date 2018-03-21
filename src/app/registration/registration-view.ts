@@ -16,33 +16,14 @@ import {SharedService} from "../../services/shared.service";
 })
 @AutoUnsubscribe()
 export class RegistrationView{
-    @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
-    public siteKey = '6LcR7hoUAAAAANihMjw0Lrw-HW__OohS8wZNGDVh';
-    public showCapcha = false;
-    public secretKey:string;
-    public refUserName:string;
-    public hasReferal = false;
-    public isBrowser = false;
-    public userAgreement = true;
-    public personalDataAgreement = false;
-    public refUser:any;
-    public form = {
-        last_name: '',
-        first_name: '',
-        refIn:  <string>null,
-        email: <string>null,
-        password:  <string>null,
-        phone: '',
-        //recaptcha: null
+    public stepOneModel = {
+        phone: null,
+        password: null,
+        passwordTwo: null
     };
-    // дублеры мыла и пароля должны быть одинаковы при инициализации
-    public secondPassword =  <string>null;
-    public secondEmail =  <string>null;
-    public pending = false;
-    public regSuccess = false;
-    public isAndroid = false;
-    public ref:string;
-    public login$$;public ref$$;
+
+    public step: 'one' | 'two' | 'three' = 'one';
+
     constructor(
         public httpService:HttpService,
         private sharedService: SharedService,
@@ -61,35 +42,22 @@ export class RegistrationView{
             { property: 'og:title', content: 'Регистрация на приорити' }
         ]);
         this.titleService.setTitle('Регистрация');
-        if(this.localStorage.isBrowser) {
-            this.isBrowser = true;
-            this.isAndroid = this.uAService.is().android;
-        }
+
     }
 
-    // пробросить  в контроллер ключ или так this.captcha.getResponse()
-    handleCorrectCaptcha(e) {
-        this.secretKey = e;
-    }
-    captchaExpired() {
-        this.secretKey = null;
-        this.captcha.reset();
+    isEqualValidPassword(stepOneForm):boolean {
+        const stepOneModel = stepOneForm.controls;
+        return  stepOneModel.password && stepOneModel.password.valid
+            &&  stepOneModel.passwordTwo.value === stepOneModel.password.value
     }
 
-    setCaptcha(e) {
-        this.secretKey = e;
-    }
-
-    isEqualEmail(authForm):boolean {
-        return  this.secondEmail && authForm.controls.email && authForm.controls.email.valid && this.secondEmail === this.form.email
-    }
-
-    isEqualPassword(authForm):boolean {
-        return  this.secondPassword && authForm.controls.password && authForm.controls.password.valid && this.secondPassword === this.form.password
+    toStepTwo(stepOneFormValue) {
+        console.log("8888",stepOneFormValue);
+        this.step = 'two';
     }
 
     signup() {
-        this.pending = true;
+        /*this.pending = true;
         this.form.email = <any>this.form.email.toLowerCase();
         this.httpService.postWithToast(
             'users/registration',
@@ -106,8 +74,8 @@ export class RegistrationView{
             }).subscribe(d => {})
         }, err => {
             this.pending = false;
-            this.captchaExpired()
-        })
+
+        })*/
     }
 
     ngOnDestroy() {

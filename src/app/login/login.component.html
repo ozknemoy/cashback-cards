@@ -1,0 +1,54 @@
+
+<div class="wrap">
+    <div class="auth">
+        <div class="auth--bg"></div>
+
+        <div class="auth--content">
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <div class="col-12 col-md-4 auth--heading">
+                        <h1>Авторизация</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ut modi, eveniet dolorem vero expedita similique officia hic ipsum molestiae ullam in, nam laborum mollitia necessitatibus id earum magni totam.</p>
+                        <a routerLink="/" class="btn btn-neutral btn-simple">Вернуться на главную</a>
+                    </div>
+                    <div class="col-12 col-md-4 auth--wrap">
+                        <form #loginForm="ngForm">
+                            <div class="form-group">
+                                <label>Номер телефона</label>
+                                <label class="input-group">
+                                    <span class="input-group-addon"><i class="mdi mdi-phone"></i></span>
+                                    <input type="text" name="phone" class="form-control" required
+                                           minlength="11"
+                                           placeholder="7 123 456 7890"
+                                           mask='+7(000)000-0000'
+                                           (keyup.enter)="login(loginForm)"
+                                           [ngModel]="phone">
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Пароль</label>
+                                <label class="input-group">
+                                    <span class="input-group-addon"><i class="mdi mdi-key"></i></span>
+                                    <input type="password"  name="password" class="form-control" required
+                                            (keyup.enter)="login(loginForm)"
+                                            [ngModel]="password">
+                                </label>
+                            </div>
+
+                            <div class="text-center">
+                                <button class="btn btn-success"
+                                        (click)="login(loginForm)"
+                                        [disabled]="loginForm.invalid">Далее</button>
+                                <a href="reset.html" class="btn btn-success btn-link">Забыли пароль?</a>
+                            </div>
+                        </form>
+                        <div class="text-center">
+                            <p>У вас нету аккаунта? </p>
+                            <a routerLink="/registration" class="btn btn-simple btn-success">Регистрация</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
