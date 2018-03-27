@@ -1,94 +1,108 @@
-
 <div class="wrap">
-    <div class="auth">
-        <div class="auth--bg"></div>
+  <div class="auth">
+    <div class="auth--bg"></div>
 
-        <div class="auth--content">
-            <div class="container">
-                <div class="row justify-content-md-center">
-                    <div class="col-12 col-md-4 auth--heading">
-                        <h1>Регистрация</h1>
+    <div class="auth--content">
+      <div class="container">
+        <div class="row justify-content-md-center">
+          <div class="col-12 col-md-4 auth--heading">
+            <h1>Регистрация</h1>
 
-                        <p>
-                            <button (click)="step='one'">1</button>
-                            <button (click)="step='two'">2</button>
-                            <button (click)="step='three'">3</button>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ut modi, eveniet dolorem vero expedita similique officia hic ipsum molestiae ullam in, nam laborum mollitia necessitatibus id earum magni totam.</p>
-                        <a routerLink="/" class="btn btn-neutral btn-simple">Вернуться на главную</a>
-                    </div>
-                    <div class="col-12 col-md-4 auth--wrap" [ngSwitch]="step">
+            <p>
+              <button (click)="step='one'">1</button>
+              <button (click)="step='two'">2</button>
+              <button (click)="step='three'">3</button>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ut modi, eveniet dolorem vero expedita
+              similique officia hic ipsum molestiae ullam in, nam laborum mollitia necessitatibus id earum magni totam.
+            </p>
+            <a routerLink="/" class="btn btn-neutral btn-simple">Вернуться на главную</a>
+          </div>
+          <div class="col-12 col-md-4 auth--wrap" [ngSwitch]="step">
 
-                        <form #stepOneForm="ngForm" *ngSwitchCase="'one'">
-                            <div class="form-group">
-                                <label>Номер телефона</label>
-                                <label class="input-group">
-                                    <span class="input-group-addon"><i class="mdi mdi-phone"></i></span>
-                                    <input type="text" name="phone" class="form-control" required
-                                           minlength="11"
-                                           placeholder="7 123 456 7890"
-                                           mask='+7(000)000-0000'
-                                           [ngModel]="stepOneModel.phone">
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label>Придумайте пароль</label>
-                                <label class="input-group">
-                                    <span class="input-group-addon"><i class="mdi mdi-key"></i></span>
-                                    <input type="password" name="password" class="form-control" required
-                                           pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{6,}$"
-                                           [(ngModel)]="stepOneModel.password">
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label>Введите новый пароль еще раз</label>
-                                <label class="input-group">
-                                    <span class="input-group-addon"><i class="mdi mdi-key"></i></span>
-                                    <input type="password" name="passwordTwo" class="form-control" required
-                                           [(ngModel)]="stepOneModel.passwordTwo">
-                                </label>
-                            </div>
+            <form #stepOneForm="ngForm" *ngSwitchCase="'one'">
+              <div class="form-group">
+                <label>Номер телефона</label>
+                <label class="input-group">
+                  <span class="input-group-addon"><i class="mdi mdi-phone"></i></span>
+                  <input type="text" name="phone" class="form-control" required
+                         minlength="11"
+                         placeholder="7 123 456 7890"
+                         mask='{{phoneMask}}'
+                         [(ngModel)]="stepOneModel.phone">
+                </label>
+              </div>
+              <div class="form-group">
+                <label>Придумайте пароль</label>
+                <label class="input-group">
+                                    <span class="input-group-addon"
+                                          (mousedown)="showPass=true"
+                                          (mouseup)="showPass=false"><i class="mdi mdi-eye"></i></span>
+                  <input type="{{showPass?'text': 'password'}}" name="password" class="form-control" required
+                         pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{6,}$"
+                         [(ngModel)]="stepOneModel.password">
+                </label>
+              </div>
+              <div class="form-group">
+                <label>Введите новый пароль еще раз</label>
+                <label class="input-group">
+                                    <span class="input-group-addon"
+                                          (mousedown)="showPass=true"
+                                          (mouseup)="showPass=false"><i class="mdi mdi-eye"></i></span>
+                  <input type="{{showPass?'text': 'password'}}" name="passwordTwo" class="form-control" required
+                         [(ngModel)]="stepOneModel.passwordTwo">
+                </label>
+              </div>
 
-                            <div class="text-center">
-                                <button class="btn btn-success"
-                                        (click)="toStepTwo(stepOneForm.value)"
-                                        [disabled]="stepOneForm.invalid || !isEqualValidPassword(stepOneForm)">Далее</button>
-                            </div>
-                            <div class="text-center">
-                                <p>У вас есть аккаунт?</p>
-                                <a class="btn btn-simple btn-success" routerLink="/registration">Авторизация</a>
-                            </div>
-                        </form>
+              <div class="text-center">
+                <button class="btn btn-success"
+                        (click)="toStepTwo()"
+                        [disabled]="stepOneForm.invalid || !isEqualValidPassword(stepOneForm)">Далее
+                </button>
+              </div>
+              <div class="text-center">
+                <p>У вас есть аккаунт?</p>
+                <a class="btn btn-simple btn-success" routerLink="/login">Авторизация</a>
+              </div>
+            </form>
 
-                        <form action="" *ngSwitchCase="'two'">
-                            <div class="form-group">
-                                <label>Код из смс</label>
-                                <input type="text" class="form-control">
-                            </div>
+            <form *ngSwitchCase="'two'">
+              <div class="form-group">
+                <label>Код из смс</label>
+                <input type="text" name="code" class="form-control" required
+                       [(ngModel)]="stepOneModel.code">
+              </div>
 
-                            <div class="text-center">
-                                <button class="btn btn-success">Далее</button>
-                                <button class="btn btn-success btn-link">Выслать код повторно</button>
-                            </div>
-                        </form>
+              <div class="text-center">
+                <button class="btn btn-success"
+                        (click)="toStepThree(stepOneModel.code)"
+                        [disabled]="!stepOneModel.code">Далее
+                </button>
+                <button class="btn btn-success btn-link">Выслать код повторно</button>
+              </div>
+            </form>
 
-                        <form action="" *ngSwitchCase="'three'">
-                            <div class="form-group">
-                                <label>Номер карты</label>
-                                <input type="text" class="form-control">
-                            </div>
+            <form *ngSwitchCase="'three'">
+              <div class="form-group">
+                <label>Номер карты</label>
+                <input type="text" name="card_number" class="form-control" required
+                       [(ngModel)]="stepOneModel.card_number">
+              </div>
+              <button class="btn btn-success"
+                      (click)="signup(true)"
+                      [disabled]="!stepOneModel.card_number">Далее
+              </button>
 
 
-                            <button class="btn btn-success">Далее</button>
+              <p>У вас нету <!--Карты болельщика-->{{ 'user_cards' | translate }}? Создайте новую карту!</p>
+              <button class="btn btn-success" (click)="signup(false)">
+                Создать новую карту
+              </button>
+            </form>
+          </div>
 
-
-                            <p>У вас нету <!--Карты болельщика-->{{ 'user_cards' | translate }}? Создайте новую карту!</p>
-                            <button class="btn btn-success">Создать новую карту</button>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 

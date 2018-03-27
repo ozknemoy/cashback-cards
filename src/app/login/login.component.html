@@ -1,54 +1,130 @@
-
 <div class="wrap">
-    <div class="auth">
-        <div class="auth--bg"></div>
+  <div class="auth">
+    <div class="auth--bg"></div>
 
-        <div class="auth--content">
-            <div class="container">
-                <div class="row justify-content-md-center">
-                    <div class="col-12 col-md-4 auth--heading">
-                        <h1>Авторизация</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ut modi, eveniet dolorem vero expedita similique officia hic ipsum molestiae ullam in, nam laborum mollitia necessitatibus id earum magni totam.</p>
-                        <a routerLink="/" class="btn btn-neutral btn-simple">Вернуться на главную</a>
-                    </div>
-                    <div class="col-12 col-md-4 auth--wrap">
-                        <form #loginForm="ngForm">
-                            <div class="form-group">
-                                <label>Номер телефона</label>
-                                <label class="input-group">
-                                    <span class="input-group-addon"><i class="mdi mdi-phone"></i></span>
-                                    <input type="text" name="phone" class="form-control" required
-                                           minlength="11"
-                                           placeholder="7 123 456 7890"
-                                           mask='+7(000)000-0000'
-                                           (keyup.enter)="login(loginForm)"
-                                           [ngModel]="phone">
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label>Пароль</label>
-                                <label class="input-group">
-                                    <span class="input-group-addon"><i class="mdi mdi-key"></i></span>
-                                    <input type="password"  name="password" class="form-control" required
-                                            (keyup.enter)="login(loginForm)"
-                                            [ngModel]="password">
-                                </label>
-                            </div>
+    <div class="auth--content">
+      <div class="container">
+        <div class="row justify-content-md-center">
+          <div class="col-12 col-md-4 auth--heading">
+            <h1>{{step === Step.login? 'Авторизация' : 'Восстановление пароля'}}</h1>
 
-                            <div class="text-center">
-                                <button class="btn btn-success"
-                                        (click)="login(loginForm)"
-                                        [disabled]="loginForm.invalid">Далее</button>
-                                <a href="reset.html" class="btn btn-success btn-link">Забыли пароль?</a>
-                            </div>
-                        </form>
-                        <div class="text-center">
-                            <p>У вас нету аккаунта? </p>
-                            <a routerLink="/registration" class="btn btn-simple btn-success">Регистрация</a>
-                        </div>
-                    </div>
+            <p>
+              <button (click)="resetStep=ResetStep.two">2</button>
+              <button (click)="resetStep=ResetStep.one">1</button>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ut modi, eveniet dolorem vero expedita
+              similique officia hic ipsum molestiae ullam in, nam laborum mollitia necessitatibus id earum magni
+              totam.</p>
+            <a routerLink="/" class="btn btn-neutral btn-simple">Вернуться на главную</a>
+          </div>
+          <div class="col-12 col-md-4 auth--wrap" [ngSwitch]="step">
+            <div *ngSwitchCase="Step.login">
+              <form #loginForm="ngForm">
+                <div class="form-group">
+                  <label>Номер телефона</label>
+                  <label class="input-group">
+                    <span class="input-group-addon"><i class="mdi mdi-phone"></i></span>
+                    <input type="text" name="phone" class="form-control" required
+                           minlength="11"
+                           placeholder="{{phoneMask}}"
+                           mask='{{phoneMask}}'
+                           (keyup.enter)="login(loginForm)"
+                           [(ngModel)]="phone">
+                  </label>
                 </div>
+                <div class="form-group">
+                  <label>Пароль</label>
+                  <label class="input-group">
+                    <span class="input-group-addon"
+                          (mousedown)="showPass=true"
+                          (mouseup)="showPass=false"><i class="mdi mdi-eye"></i></span>
+                    <input type="{{showPass?'text': 'password'}}" name="password" class="form-control" required
+                           (keyup.enter)="login(loginForm)"
+                           [(ngModel)]="password">
+                  </label>
+                </div>
+
+                <div class="text-center">
+                  <button class="btn btn-success"
+                          (click)="login(loginForm)"
+                          [disabled]="loginForm.invalid">Далее
+                  </button>
+                  <button (click)="step = Step.reset" class="btn btn-success btn-link">Забыли пароль?</button>
+                </div>
+              </form>
+              <div class="text-center">
+                <p>У вас нету аккаунта? </p>
+                <a routerLink="/registration" class="btn btn-simple btn-success">Регистрация</a>
+              </div>
             </div>
+            <div *ngSwitchCase="Step.reset">
+              <form #resetForm="ngForm" [ngSwitch]="resetStep">
+                <ng-template [ngSwitchCase]="ResetStep.one">
+                  <div class="form-group">
+                    <label>Номер телефона</label>
+                    <label class="input-group">
+                      <span class="input-group-addon"><i class="mdi mdi-phone"></i></span>
+                      <input type="text" name="phone" class="form-control" required
+                             minlength="11"
+                             placeholder="{{phoneMask}}"
+                             mask='{{phoneMask}}'
+                             (keyup.enter)="toResetStepTwo(resetForm)"
+                             [(ngModel)]="phone">
+                    </label>
+                  </div>
+                  <div class="text-center">
+                    <button class="btn btn-success"
+                            (click)="toResetStepTwo(resetForm)"
+                            [disabled]="resetForm.invalid">Далее
+                    </button>
+                  </div>
+                </ng-template>
+
+                <ng-template [ngSwitchCase]="ResetStep.two">
+                  <div class="form-group">
+                    <label>Код из смс</label>
+                    <input type="text" name="code" class="form-control" required
+                           [(ngModel)]="reset.code">
+                  </div>
+                  <div class="form-group">
+                    <label>Придумайте новый пароль</label>
+                    <label class="input-group">
+                      <span class="input-group-addon"
+                            (mousedown)="showPass=true"
+                            (mouseup)="showPass=false"><i class="mdi mdi-eye"></i></span>
+                      <input type="{{showPass?'text': 'password'}}" name="password" class="form-control" required
+                             pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{6,}$"
+                             [(ngModel)]="reset.password">
+                    </label>
+                  </div>
+                  <div class="form-group">
+                    <label>Введите новый пароль еще раз</label>
+                    <label class="input-group">
+                      <span class="input-group-addon"
+                            (mousedown)="showPass=true"
+                            (mouseup)="showPass=false"><i class="mdi mdi-eye"></i></span>
+                      <input type="{{showPass?'text': 'password'}}" name="passwordTwo" class="form-control" required
+                             [(ngModel)]="reset.passwordTwo">
+                    </label>
+                  </div>
+                  <div class="text-center">
+                    <button class="btn btn-success"
+                            (click)="resetStep=ResetStep.one">Назад
+                    </button>
+                    <button class="btn btn-success"
+                            (click)="restore(resetForm.value)"
+                            [disabled]="resetForm.invalid || !isEqualValidPassword(resetForm)">Далее
+                    </button>
+                  </div>
+                </ng-template>
+              </form>
+              <div class="text-center">
+                <button class="btn btn-simple btn-success"
+                        (click)="step = Step.login;resetStep = ResetStep.one">Авторизация</button>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

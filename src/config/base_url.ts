@@ -1,6 +1,15 @@
 
 export const DOMEN = 'http://test1.prioriticlub.ru';
 
-export const BASE_URL = 'http://testservice.prioriticlub.ru/v1/';//'http://service.prioriticlub.ru/v1/';
-// меняю на  http://service.prioriticlub.ru/v1/
-export const BASE_URL_SERVER = 'http://192.168.100.27:82/';
+export const BASE_URL = 'http://service.card.prioriticlub.ru/v1/';
+/*
+Корта болельщика:
+    back.card.prioriticlub.ru
+card.prioriticlub.ru
+service.card.prioriticlub.ru
+api.card.prioriticlub.ru
+Для Крыма:
+    back.krim.prioriticlub.ru
+krim.prioriticlub.ru
+service.krim.prioriticlub.ru
+api.krim.prioriticlub.ru*/

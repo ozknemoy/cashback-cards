@@ -27,7 +27,6 @@ import {soccer} from "../locales/soccer";
 import {crimea} from "../locales/crimea";
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,6 +64,7 @@ import {crimea} from "../locales/crimea";
     HttpService,
     UAService,
     AuthGuard,
+    {provide: 'phoneMask', useValue: '+7(000)000-0000'}
   ],
   bootstrap: [AppComponent]
 })
