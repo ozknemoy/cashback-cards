@@ -1,0 +1,11 @@
+.lk_profile {
+	@extend .card;
+	&--ball {
+		.lk_card & {
+			padding-bottom: 10px;
+		}
+		span {
+			float: right;
+		}
+	}
+}

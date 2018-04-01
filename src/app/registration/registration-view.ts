@@ -1,20 +1,13 @@
-import {Component,ViewChild,Inject} from "@angular/core";
-import {ReCaptchaComponent} from "angular2-recaptcha";
-import {ActivatedRoute} from "@angular/router";
-import {LocalStorage} from "../../services/localStorage.service";
-import {Router} from "@angular/router";
+import {Component,Inject} from "@angular/core";
 import {AutoUnsubscribe} from "../../decorators/auto-unsubscribe.decorator";
-import {UAService} from "../../services/user-agent.service";
 import {Meta,Title} from "@angular/platform-browser";
 import {TITLE} from '../../config/small.configs'
 import {HttpService} from "../../services/http.service";
-import {SharedService} from "../../services/shared.service";
 
 export function isEqualValidPassword(stepOneModel):boolean {
   return stepOneModel.password && stepOneModel.password.valid
     && stepOneModel.passwordTwo.value === stepOneModel.password.value
 }
-
 
 
 @Component({

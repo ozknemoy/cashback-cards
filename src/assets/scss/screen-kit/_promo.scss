@@ -1,0 +1,37 @@
+.lk_promotions {
+	&--item {
+		@extend .card;
+		position: relative;
+	}
+	&--img {
+		position: relative;
+		padding-top: 100%;
+		overflow: hidden;
+		display: block;
+		img {
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			margin: auto;
+			max-width: 95%;
+			max-height: 95%;
+		}
+	}
+	&--title {
+		display: block;
+		padding: 5px;
+		text-align: center;
+	}
+	&--date {
+		display: block;
+		// padding: 5px;
+		text-align: center;	
+	}
+	&--town {
+		display: block;
+		padding: 5px;
+		text-align: center;
+	}
+}

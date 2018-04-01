@@ -95,13 +95,13 @@ gulp.task('styles-dev', function () {
 });
 
 gulp.task('styles-prod', function () {
-    return gulp.src('./src/assets/scss/screen.scss')
+    return gulp.src('./src/assets/scss/screen-kit.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss(processors))
         .pipe(cleanCSS({debug: true,specialComments: false}, function (details) {
             console.log(`${details.name} :  ${details.stats.minifiedSize},       saved ${Math.floor(100 * (details.stats.originalSize - details.stats.minifiedSize) / details.stats.originalSize)}%`);
         }))
-        .pipe(gulp.dest('./dist/assets/css'))
+        .pipe(gulp.dest('./src/assets/css'))
 });
 
 /*gulp.task('_watch', function () {

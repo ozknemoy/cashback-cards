@@ -1,0 +1,7 @@
+.lk_sidebar {
+    @extend .card;
+    &--link {
+        display: block;
+        padding: 5px 0;
+    }
+}

@@ -1,0 +1,43 @@
+.lk {
+	padding: 30px 0;
+	&_card {
+		@extend .card;
+	}
+	&_title {
+		font-size: 1.5em;
+		margin-bottom: 10px;
+	}
+
+	// status
+	&_status {
+		margin: 15px 0;
+		font-size: 10px;
+		&--title {
+			text-align: center;
+		}
+		&--wrap {
+			position: relative;
+			padding: 10px 0;
+			overflow: hidden;
+		}
+		&--item {
+		}
+		&--progress {
+			
+		}
+	}
+
+
+}
+// card list
+.card_list {
+	@extend .card;
+	&--item {
+		label {
+			vertical-align: middle;
+		}
+		img {
+			max-width: 150px;
+		}
+	}
+}

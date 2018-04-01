@@ -1,0 +1,84 @@
+
+<div class="lk_content">
+  <div class="lk_content--wrap">
+    <div class="alert alert-success alert-with-icon">
+      <div class="alert-icon">
+        <i class="now-ui-icons travel_info"></i>
+      </div>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet aspernatur minus suscipit doloremque cupiditate facere delectus earum odit excepturi, consequuntur neque voluptates natus quod expedita, dolorum obcaecati, vel doloribus harum?
+    </div>
+
+    <div class="card_list">
+      <div class="content">
+        <div class="card_list--item">
+          <div class="checkbox checkbox-inline">
+            <input type="checkbox" name="" id="card1" value="1" checked>
+            <label for="card1">
+              <img src="assets/img/card.png" alt="">
+            </label>
+          </div>
+
+          <div class="card_list--title">
+            <!--Карта болельщика-->{{ 'user_card' | translate }}
+          </div>
+          <div class="card_list--num">
+            1234 1234 1234 1234
+          </div>
+          <div class="card_list--score">
+            2555 балов
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row align-items-center">
+      <div class="col-12 col-md-5">
+        <div class="lk_title">История покупок</div>
+      </div>
+      <div class="col-12 col-md-7">
+        <div class="row">
+          <div class="col-12 col-sm-6">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="За весь период"
+                     bsDaterangepicker [(ngModel)]="bsRangeValue">
+              <span class="input-group-addon">
+                <i class="now-ui-icons ui-1_calendar-60"></i>
+              </span>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6">
+            <select class="form-control">
+              <option value="">Все операции</option>
+              <option value="">Начисления</option>
+              <option value="">Списания</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lk_history">
+      <div class="content">
+        <div class="lk_history--item" *ngFor="let hist of history">
+          <div class="row align-items-center">
+            <div class="col-12 col-sm-2">
+              <div class="lk_history--date">
+                <span class="lk_history--day">{{hist.date | date: 'dd-MM-yyyy'}}</span>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div class="lk_history--title">
+                <span class="lk_history--img"><img src="assets/img/card.png" alt="card"></span>
+                {{hist.text}}
+              </div>
+            </div>
+            <div class="col-12 col-sm-2 text-right">{{hist.sum}} ₽</div>
+            <div class="col-12 col-sm-2 text-right">
+              <span class="text-success">{{hist.trans}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

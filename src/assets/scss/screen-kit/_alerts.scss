@@ -28,6 +28,16 @@
         background-color: $primary-color-alert;
     }
 
+    &.alert-with-icon {
+        padding-left: 3em;
+        .alert-icon {
+            position: absolute;
+            left: 10px;
+            top: 12px;
+            margin: 0;
+        }
+    }
+
     .alert-icon{
         display: block;
         float: left;
@@ -44,6 +54,7 @@
     i.now-ui-icons{
         font-size: 20px;
     }
+
 
     .close{
         color: $white-color;

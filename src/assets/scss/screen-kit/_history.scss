@@ -1,0 +1,43 @@
+.lk_history {
+    @extend .card;
+    &--ym {
+        position: relative;
+        text-align: center;
+        margin: 5px 0;
+        &:after {
+            background: $light-gray;
+            content: '';
+            height: 1px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+        }
+        span {
+            background: $white-color;
+            color: $dark-gray;
+            display: inline-block;
+            padding: 0 10px;
+            position: relative;
+            z-index: 1;
+        }
+    }
+    &--item {
+        border-top: 1px solid $light-gray;
+        padding-top: .8em;
+        padding-bottom: .8em;
+        &:first-child {
+            border-top: 0;
+        }
+    }
+    &--img {
+        display: inline-block;
+        width: 50px;
+        position: relative;
+        overflow: hidden;
+        vertical-align: middle;
+        img {
+            max-width: 100%;
+        }
+    }
+}
