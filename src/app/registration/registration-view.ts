@@ -3,6 +3,7 @@ import {AutoUnsubscribe} from "../../decorators/auto-unsubscribe.decorator";
 import {Meta,Title} from "@angular/platform-browser";
 import {TITLE} from '../../config/small.configs'
 import {HttpService} from "../../services/http.service";
+import {Toast, ToastsManager} from "ng2-toastr";
 
 export function isEqualValidPassword(stepOneModel):boolean {
   return stepOneModel.password && stepOneModel.password.valid
@@ -30,6 +31,7 @@ export class RegistrationView {
   constructor(
     public httpService:HttpService,
     private metaService: Meta,
+    private toast: ToastsManager,
     private titleService: Title,
     @Inject('phoneMask') public phoneMask: string
   ) {}
@@ -49,10 +51,14 @@ export class RegistrationView {
   }
 
   toStepTwo() {
-    this.httpService.getSms(this.stepOneModel.phone).subscribe(
-      d => this.step = 'two',
-      err => {}
+    this.httpService.get('users/check-phone?phone=' + this.stepOneModel.phone).subscribe(
+      d => {
+        this.httpService.getSms(this.stepOneModel.phone).subscribe(
+          d => this.step = 'two'
+        )
+      }
     )
+
   }
 
   toStepThree(sms:string) {

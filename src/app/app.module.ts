@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -19,6 +19,14 @@ import {crimea} from "../locales/crimea";
 import {LkSidebarComponent} from "../directives/lk-sidebar/lk-sidebar.component";
 import {HandleDataService} from "../services/handle-data.service";
 import {routes, routesComponent} from "../config/router";
+import {PipeModule, pipes} from "../pipes";
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import {BsDaterangepickerConfig, BsLocaleService} from "ngx-bootstrap";
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { ruLocale } from 'ngx-bootstrap/locale';
+/*import { registerLocaleData } from '@angular/common';
+import localeRu from '@angular/common/locales/ru';*/
+
 
 
 @NgModule({
@@ -28,6 +36,7 @@ import {routes, routesComponent} from "../config/router";
     LkSidebarComponent,
   ],
   imports: [
+    PipeModule,
     vendorModules,
     BrowserModule.withServerTransition({appId: 'my-app'}),
     RouterModule.forRoot(<any>routes),
@@ -43,16 +52,35 @@ import {routes, routesComponent} from "../config/router";
     UAService,
     AuthGuard,
     HandleDataService,
-    {provide: 'phoneMask', useValue: '+7(000)000-0000'}
+    {provide: 'phoneMask', useValue: '+7(000)000-0000'},
+    /*{ provide: LOCALE_ID, useValue: 'ru' }*/
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
 
-  constructor(translate: TranslateService) {
+  constructor(
+    translate: TranslateService,
+    bsDatepickerConfig: BsDatepickerConfig,
+    bsDaterangepickerConfig: BsDaterangepickerConfig,
+    localeService: BsLocaleService,
+  ) {
     translate.setDefaultLang('soccer');
     translate.setTranslation('soccer', soccer);
     translate.setTranslation('crimea', crimea);
     translate.use('soccer');
+
+    // datepicker
+    defineLocale('ru', ruLocale);
+    localeService.use('ru');
+    bsDatepickerConfig.dateInputFormat = 'DD/MM/YYYY';
+    bsDatepickerConfig.rangeInputFormat = 'DD/MM/YYYY';
+    bsDatepickerConfig.showWeekNumbers = false;
+    bsDaterangepickerConfig.rangeInputFormat = 'DD/MM/YYYY';
+    bsDaterangepickerConfig.dateInputFormat = 'DD/MM/YYYY';
+    bsDaterangepickerConfig.showWeekNumbers = false;
+
+
+    //registerLocaleData(localeRu);
   }
 }

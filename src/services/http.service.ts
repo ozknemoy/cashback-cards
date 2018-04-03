@@ -37,6 +37,7 @@ export class HttpService {
   get(url) {
     var headers = this.doWitAuth();
     return this.http.get(this.BASE_URL + url, {headers})
+      .catch(e=> this.handleError(e, '_getWithToast'))
   }
 
   getWithToast(url:string, text:string, toastLife?:number) {
@@ -299,8 +300,10 @@ export class HttpService {
       console.log((new Date() + '').slice(4, 25) + "__handleError in httpService by " + str, e.error, e.url, e.message);
     } else {
       const err = e.error;
-      if (err.errors && typeof err.errors === 'string') {
-        this.toast.error(err.errors, 'Ошибка!', {
+      console.log('----',err.error,err.errors );
+      if ((err.errors && typeof err.errors === 'string')
+        || (err.error && typeof err.error === 'string')) {
+        this.toast.error(err.errors || err.error, 'Ошибка!', {
           showCloseButton: true,
           toastLife: 22e3
         });

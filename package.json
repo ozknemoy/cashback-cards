@@ -30,7 +30,9 @@
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
     "serve:prerender": "cd dist/browser && http-server",
     "serve:ssr": "node dist/server",
-    "serve:universal": "ts-node server-dev.ts"
+    "serve:universal": "ts-node server-dev.ts",
+    "pm": "SET PORT=3333 && pm2 start dist/server.js --watch",
+    "pm-linux": "PORT=3333 pm2 start dist/server.js --watch"
   },
   "pre-commit": [
     "lint"

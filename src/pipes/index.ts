@@ -1,19 +1,20 @@
-
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
 import {TrimPipe} from './trim.pipe';
 import {ThousandPipe} from './1000.pipe'
 import {FilterPipe} from './filter.pipe'
 import {SanitizePipe} from './sanitize.pipe'
 import {RangePipe} from "./range.pipe";
+import {FromDateToDatePipe} from "./from-date-to-date.pipe";
 
 
 export const pipes = [
-    TrimPipe,ThousandPipe,FilterPipe,SanitizePipe, RangePipe
+  TrimPipe, ThousandPipe, FilterPipe, SanitizePipe, RangePipe, FromDateToDatePipe
 ];
 
 @NgModule({
-    declarations:[pipes],
-    exports:[pipes]
+  declarations: [pipes],
+  exports: [pipes],
+  providers: [pipes],
 })
-export class PipeModule{}
+export class PipeModule {}
