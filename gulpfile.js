@@ -76,25 +76,25 @@ gulp.task('replace-test', function () {
             .pipe(replace({patterns: back}))
             .pipe(gulp.dest('dist'))
 });
-gulp.task('css-afterbuild', function () {
-    return gulp.src('dist/assets/css/*.css')
+gulp.task('css-before-build', function () {
+    return gulp.src('src/assets/css/*.css')
         .pipe(postcss(processors))
         .pipe(cleanCSS({debug: true,specialComments: false}, function (details) {
             console.log(`${details.name} :  ${details.stats.minifiedSize},       saved ${Math.floor(100 * (details.stats.originalSize - details.stats.minifiedSize) / details.stats.originalSize)}%`);
         }))
-        .pipe(gulp.dest('dist/assets/css/'))
+        .pipe(gulp.dest('src/assets/css'))
 });
 
 gulp.task('styles-dev', function () {
-    return gulp.src('./src/assets/scss/screen.scss')
+    return gulp.src('./src/assets/scss/screen-kit.scss')
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./dist/assets/css'))
+        .pipe(gulp.dest('./src/assets/css'))
         .pipe(browserSync.stream());
 });
 
-gulp.task('styles-prod', function () {
+gulp.task('styles-build-scss', function () {
     return gulp.src('./src/assets/scss/screen-kit.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss(processors))

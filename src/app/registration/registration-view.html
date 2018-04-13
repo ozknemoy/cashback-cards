@@ -4,20 +4,26 @@
 
     <div class="auth--content">
       <div class="container">
-        <div class="row justify-content-md-center">
+        <div class="row justify-content-md-center" [ngSwitch]="step">
           <div class="col-12 col-md-4 auth--heading">
             <h1>Регистрация</h1>
-
             <p>
               <!--<button (click)="step='one'">1</button>
               <button (click)="step='two'">2</button>
               <button (click)="step='three'">3</button>-->
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ut modi, eveniet dolorem vero expedita
-              similique officia hic ipsum molestiae ullam in, nam laborum mollitia necessitatibus id earum magni totam.
+              <span *ngSwitchCase="'one'">
+Карта {{'userOf' | translate}} помогает Вам получать больше выгод от своих повседневных покупок. А еще обладатели карты {{'userOf' | translate}} получают привилегии и специальные предложения от наших партнеров
+              </span>
+              <span *ngSwitchCase="'two'">
+Вам на телефон выслан код подтверждения. Введите его и нажмите кнопку Далее, чтобы продолжить.  Повторную смс с кодом вы можете запросить через 15 минут.
+              </span>
+              <span *ngSwitchCase="'three'">
+Если у Вас есть карта {{'userOf' | translate}}, введите ее номер в специальное поле и нажмите далее. Номер написан на карте, и имеет формат 6110 9000 0000 0012. Если карты у Вас нет, ничего страшного! Просто нажмите «Создать новую карту».
+              </span>
             </p>
-            <a routerLink="/" class="btn btn-neutral btn-simple">Вернуться на главную</a>
+            <!--<a routerLink="/" class="btn btn-neutral btn-simple">Вернуться на главную</a>-->
           </div>
-          <div class="col-12 col-md-4 auth--wrap" [ngSwitch]="step">
+          <div class="col-12 col-md-4 auth--wrap">
 
             <form #stepOneForm="ngForm" *ngSwitchCase="'one'">
               <div class="form-group">
@@ -25,29 +31,43 @@
                 <label class="input-group">
                   <span class="input-group-addon"><i class="mdi mdi-phone"></i></span>
                   <input type="text" name="phone" class="form-control" required
-                         minlength="11"
-                         placeholder="7 123 456 7890"
-                         mask='{{phoneMask}}'
+                         *ngIf="!isAndroid"
+                         [minlength]="11"
+                         [placeholder]="phonePlaceholder"
+                         [mask]='phoneMask'
+                         [(ngModel)]="stepOneModel.phone">
+                  <input type="text" name="phone" class="form-control" required
+                         *ngIf="isAndroid"
+                         [minlength]="11"
+                         [maxlength]="11"
+                         [placeholder]="phonePlaceholder"
                          [(ngModel)]="stepOneModel.phone">
                 </label>
               </div>
               <div class="form-group">
                 <label>Придумайте пароль</label>
                 <label class="input-group">
-                                    <span class="input-group-addon"
-                                          (mousedown)="showPass=true"
-                                          (mouseup)="showPass=false"><i class="mdi mdi-eye"></i></span>
+                  <span class="input-group-addon"
+                        (mousedown)="showPass=true"
+                        (mouseup)="showPass=false">
+                    <i class="mdi mdi-eye"></i>
+                  </span>
                   <input type="{{showPass?'text': 'password'}}" name="password" class="form-control" required
                          pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{6,}$"
                          [(ngModel)]="stepOneModel.password">
                 </label>
+                <div class="input-description">
+                  Не менее 6 символов. Обязательно наличие только латинских букв разного регистра и цифр
+                </div>
               </div>
               <div class="form-group">
                 <label>Введите новый пароль еще раз</label>
                 <label class="input-group">
-                                    <span class="input-group-addon"
-                                          (mousedown)="showPass=true"
-                                          (mouseup)="showPass=false"><i class="mdi mdi-eye"></i></span>
+                  <span class="input-group-addon"
+                        (mousedown)="showPass=true"
+                        (mouseup)="showPass=false">
+                    <i class="mdi mdi-eye"></i>
+                  </span>
                   <input type="{{showPass?'text': 'password'}}" name="passwordTwo" class="form-control" required
                          [(ngModel)]="stepOneModel.passwordTwo">
                 </label>
@@ -77,23 +97,33 @@
                         (click)="toStepThree(stepOneModel.code)"
                         [disabled]="!stepOneModel.code">Далее
                 </button>
-                <button class="btn btn-success btn-link">Выслать код повторно</button>
+                <button class="btn btn-success btn-link" (click)="getSms()">Выслать код повторно</button>
               </div>
             </form>
 
-            <form *ngSwitchCase="'three'">
+            <form *ngSwitchCase="'three'" #stepThreeForm="ngForm">
               <div class="form-group">
                 <label>Номер карты</label>
                 <input type="text" name="card_number" class="form-control" required
+                       *ngIf="!isAndroid"
+                       [placeholder]="cardMask"
+                       mask='{{cardMask}}'
+                       [minlength]="16"
+                       [(ngModel)]="stepOneModel.card_number">
+                <input type="text" name="card_number" class="form-control" required
+                       *ngIf="isAndroid"
+                       [placeholder]="cardMask"
+                       [minlength]="16"
+                       [maxlength]="16"
                        [(ngModel)]="stepOneModel.card_number">
               </div>
               <button class="btn btn-success"
                       (click)="signup(true)"
-                      [disabled]="!stepOneModel.card_number">Далее
+                      [disabled]="stepThreeForm.invalid">Далее
               </button>
 
 
-              <p>У вас нету <!--Карты болельщика-->{{ 'user_cards' | translate }}? Создайте новую карту!</p>
+              <p>У вас нету <!--болельщика-->карты {{'userOf' | translate }}? Создайте новую карту!</p>
               <button class="btn btn-success" (click)="signup(false)">
                 Создать новую карту
               </button>

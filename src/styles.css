@@ -1,3 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
 
 @import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+@import '../node_modules/ng2-toastr/ng2-toastr.css';
+/*@import './assets/css/screen-kit.css';*/
+
+
+
+/* всегда в конце */
+[hidden]{display: none!important}
+.cursor-pointer, .pointer{cursor: pointer}
+.pointer-none{pointer-events: none}
+.ngx-pagination > li > a {padding: 0 11px}
+.ngx-pagination > li > a:hover {padding: 0 11px;border: 0;border-radius: 30px}
+.pagination .ngx-pagination li{
+  cursor: pointer;
+  border: 0;
+  border-radius: 30px;
+  padding: 0 11px;
+  min-width: 30px;
+  height: 30px;
+  line-height: 30px;
+  font-weight: 400;
+  font-size: 12px;
+}
+.pagination .ngx-pagination li.current {
+  margin: 0 11px;
+  color: #fff;
+  background-color: #1fda9a;
+  border-color: #1fda9a;
+  box-shadow: 0 4px 5px 0 rgba(31, 218, 154, 0.14), 0 1px 10px 0 rgba(31, 218, 154, 0.12), 0 2px 4px -1px rgba(31, 218, 154, 0.2);
+
+}
+
+.dib {
+  display: inline-block;
+}
+
+.input-description {
+  font-size: 12px;
+  color: grey;
+}

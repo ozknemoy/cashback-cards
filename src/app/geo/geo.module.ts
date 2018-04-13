@@ -3,7 +3,7 @@ import {RouterModule} from '@angular/router';
 import {HttpService} from '../../services/http.service';
 import {AgmCoreModule, LatLngBounds, LatLngLiteral} from '@agm/core';
 import {AutoUnsubscribe} from "../../decorators/auto-unsubscribe.decorator";
-import {LocalStorage} from "../../services/localStorage.service";
+import {AuthLocalStorage} from "../../services/auth-local-storage.service";
 import {debounceMethod} from "../../decorators/debounce.decorator";
 
 
@@ -69,11 +69,11 @@ export class GeoComponent implements OnInit {
     public ne:LatLngLiteral;
     public sw:LatLngLiteral;
     public center:LatLngLiteral;
-    public isBrowser = this.localStorage.isBrowser;
+    public isBrowser = this.authLocalStorage.isBrowser;
 
     constructor(
         public http: HttpService,
-        public localStorage: LocalStorage) {}
+        public authLocalStorage: AuthLocalStorage) {}
 
     centerChange(center: LatLngLiteral) {
         this.center = center;

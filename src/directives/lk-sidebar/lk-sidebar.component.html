@@ -2,39 +2,35 @@
 <div class="lk_sidebar">
   <div class="content">
     <div class="lk_sidebar--summary">
-      <div class="lk_person--name">Александр</div>
-      <div class="lk_person--ball total">Баланс баллов: <span>1234</span></div>
+      <div class="lk_profile--name">{{authLocalStorage.auth.data.name}} </div>
+      <div class="lk_profile--ball total">Баланс баллов: <span>{{card.points | thousand}}</span></div>
     </div>
     <div class="lk_sidebar--nav">
-      <a class="lk_sidebar--link" routerLink="/profile">Главная</a>
-      <a class="lk_sidebar--link" routerLink="/profile/history">История операций</a>
-      <a class="lk_sidebar--link" routerLink="/profile/settings">Настройки профиля</a>
+      <a class="lk_sidebar--link" routerLink="/profile/main" routerLinkActive="current">
+        <i class="mdi mdi-home"></i> Главная
+      </a>
+      <a class="lk_sidebar--link" routerLink="/profile/history" routerLinkActive="current">
+        <i class="mdi mdi-credit-card-multiple"></i> История операций
+      </a>
+      <a class="lk_sidebar--link" routerLink="/profile/settings" routerLinkActive="current">
+        <i class="mdi mdi-settings"></i> Настройки профиля
+      </a>
     </div>
     <div class="lk_status">
       <div class="lk_status--title">
-        Ваш статус  <span>Серебряный</span> <br>
-        Сумма покупок до 5000 рублей
-        <span>За каждые 100 рублей - 1 балл</span>
+        Ваш статус  <span class="lk_status--label label-2">{{card.status.name}}</span>
       </div>
-
       <div class="lk_status--wrap">
-        <div class="lk_status--item">
-          <div class="lk_status--item--title">Платиновый</div>
-          > 10 000 рублей
-          <span>100 рублей - 5 баллов</span>
+        <div class="lk_status--item" *ngFor="let level of bonusLevels; let $index = index">
+          <div class="lk_status--item--icon"></div>
+          <div class="lk_status--item--title">{{level.percent}}%</div>
+          <div class="lk_status--item--sum">{{level.amount_from}} <i class="mdi mdi-currency-rub"></i></div>
         </div>
-        <div class="lk_status--item">
-          <div class="lk_status--item--title">Золотой</div>
-          > 5000 рублей
-          <span>100 рублей - 3 балл</span>
+        <div class="lk_status--progress" [style.left]="(0 || followed) + '%'">
+          <span>{{card.bonus_amount | thousand}} <i class="mdi mdi-currency-rub"></i></span>
         </div>
-        <div class="lk_status--item">
-          <div class="lk_status--item--title">Серебряный</div>
-          < 5000 рублей
-          <span>100 рублей - 1 балл</span>
-        </div>
-        <div class="lk_status--progress"></div>
       </div>
     </div>
+    <qr-barcode-button code="{{card.fullNumber}}"></qr-barcode-button>
   </div>
 </div>

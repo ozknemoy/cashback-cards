@@ -4,8 +4,8 @@ import {RouterModule} from '@angular/router';
 
 import { AppComponent } from './app.component';
 import {TransferHttpCacheModule} from '@nguniversal/common';
-import {HttpClientModule} from "@angular/common/http";
-import {LocalStorage} from "../services/localStorage.service";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AuthLocalStorage} from "../services/auth-local-storage.service";
 import {HttpService} from "../services/http.service";
 import {vendorModules} from "./vendor.modules";
 import {SharedService} from "../services/shared.service";
@@ -24,6 +24,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import {BsDaterangepickerConfig, BsLocaleService} from "ngx-bootstrap";
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ruLocale } from 'ngx-bootstrap/locale';
+import {MainInterceptor} from "../config/interceptor";
 /*import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';*/
 
@@ -47,12 +48,19 @@ import localeRu from '@angular/common/locales/ru';*/
   ],
   providers: [
     SharedService,
-    LocalStorage,
+    AuthLocalStorage,
     HttpService,
     UAService,
     AuthGuard,
     HandleDataService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MainInterceptor,
+      multi: true,
+    },
     {provide: 'phoneMask', useValue: '+7(000)000-0000'},
+    {provide: 'phonePlaceholder', useValue: '7 123 456 7890'},
+    {provide: 'cardMask', useValue: '0000 0000 0000 0000'},
     /*{ provide: LOCALE_ID, useValue: 'ru' }*/
   ],
   bootstrap: [AppComponent]

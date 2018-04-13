@@ -125,60 +125,130 @@
     }
 }
 
-@keyframes lds-dual-ring {
-    0% {
-        -webkit-transform: rotate(0);
-        transform: rotate(0);
-    }
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
-@-webkit-keyframes lds-dual-ring {
-    0% {
-        -webkit-transform: rotate(0);
-        transform: rotate(0);
-    }
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
 
-.progress_circle {
-    width: 50px;
-    height: 50px;
-    position: relative;
-    &--load {
-        position: absolute;
-        content: '';
-        width: 50px;
-        height: 50px;
-        top: 50%;
-        left: 50%;
-        margin: -25px 0 0 -25px;
-        border-radius: 50%;
-
-        border: 1px solid #000;
-        border-color: $brand-primary transparent $brand-primary transparent;
-        -webkit-animation: lds-dual-ring 1s linear infinite;
-        animation: lds-dual-ring 1s linear infinite;
-
-    }
+// profile progress
+.lk_status {
+    border-top: 1px solid $light-gray;
+    margin: 0 -15px;
+    padding: 15px 15px 0;
+    font-size: 10px;
     &--title {
-        font-size: 18px;
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 50%;
         text-align: center;
-        font-weight: $font-weight-light;
-        @include transform-translate-y(-50%);
-        &:after {
-            content: '%';
-            display: inline-block;
-            font-size: 16px;
+    }
+    &--wrap {
+        height: 10px;
+        position: relative;
+        margin: 30px 20px;
+        &:before {
+            background: rgba(25,132,231,1);
+            background: -moz-linear-gradient(left, rgba(25,132,231,1) 0%, rgba(88,240,202,1) 50%, rgba(255,117,158,1) 100%);
+            background: -webkit-gradient(left top, right top, color-stop(0%, rgba(25,132,231,1)), color-stop(50%, rgba(88,240,202,1)), color-stop(100%, rgba(255,117,158,1)));
+            background: -webkit-linear-gradient(left, rgba(25,132,231,1) 0%, rgba(88,240,202,1) 50%, rgba(255,117,158,1) 100%);
+            background: -o-linear-gradient(left, rgba(25,132,231,1) 0%, rgba(88,240,202,1) 50%, rgba(255,117,158,1) 100%);
+            background: -ms-linear-gradient(left, rgba(25,132,231,1) 0%, rgba(88,240,202,1) 50%, rgba(255,117,158,1) 100%);
+            background: linear-gradient(to right, rgba(25,132,231,1) 0%, rgba(88,240,202,1) 50%, rgba(255,117,158,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1984e7', endColorstr='#ff759e', GradientType=1 );
+            content: '';
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            height: 4px;
+            position: absolute;
+            z-index: 2;
+            border-radius: 2px;
         }
     }
+    &--progress {
+        background: $light-gray;
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 4px;
+        z-index: 2;
+        span {
+            background: rgba(255,117,158,1);
+            position: absolute;
+            bottom: 11px;
+            left: 0;
+            text-align: right;
+            font-size: 11px;
+            color: $white-color;
+            white-space: nowrap;
+            padding: 0 5px;
+            text-align: center;
+            border-radius: 10px;
+            @include transform-translate-x(-50%);
+            &:after {
+                background: #ff759e;
+                content: '';
+                position: absolute;
+                height: 11px;
+                width: 1px;
+                top: 17px;
+                left: 50%;
+            }
+        }
+    }
+    &--item {
+        position: absolute;
+        bottom: 8px;
+        font-size: 12px;
+        z-index: 3;
+        white-space: nowrap;
+        &:nth-child(1) {
+            right: 0;
+        }
+        &:nth-child(2) {
+            right: 50%;
+        }
+        &:nth-child(3) {
+            right: 100%;
+        }
+        &.current {
+            &:nth-child(1) {
+                .lk_status--item--icon {
+                    background: $color-3;
+                    border-color: $color-3;
+                }
+            }
+            &:nth-child(2) {
+                .lk_status--item--icon {
+                    background: $color-2;
+                    border-color: $color-2;
+                }
+            }
+            &:nth-child(3) {
+                .lk_status--item--icon {
+                    background: $color-1;
+                    border-color: $color-1;
+                }   
+            }
+        }
+        &--icon {
+            background: $white-color;
+            border: 1px solid $light-gray;
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            left: -5px;
+            top: -5px;
+            border-radius: 10px;
+            z-index: 2;
+        }
+        &--title {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            @include transform-translate-x(-50%);
+        }
+        &--sum {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            @include transform-translate-x(-50%);
+        }
+        
+    }
+    
 }

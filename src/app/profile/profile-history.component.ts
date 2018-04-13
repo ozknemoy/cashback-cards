@@ -4,10 +4,18 @@ import {HttpService} from "../../services/http.service";
 import {HandleDataService} from "../../services/handle-data.service";
 
 interface IHistory {
-  date: string,
-  description: string,
-  amount: number,
-  trans: number
+  id: number;
+  shop_id: number;
+  type: number;
+  description: string;
+  amount: string;
+  created_at: string;
+  updated_at: string;
+  status: number;
+  external_id: number;
+  from?: any;
+  to?: any;
+  card_id: number;
 }
 
 @Component({
@@ -20,23 +28,9 @@ export class ProfileHistoryView {
   public currentPage = 1;
   public hist;
   public filter = {
-    type: null
+    status: null
   };
-
-  public history: IHistory[] = [
-    {date: '2018-04-01', description: 'Назначение платежа', amount: 45645674, trans: 4545},
-    {date: '2018-01-15', description: 'Назначение ', amount: 45645674, trans: 4545},
-    {date: '2018-01-15', description: 'Назначение платежа', amount: 45645674, trans: 4545},
-    {date: '2018-01-15', description: 'Назначение ', amount: 45645674, trans: 4545},
-    {date: '2018-01-15', description: 'Назначение платежа', amount: 45645674, trans: 4545},
-    {date: '2018-01-15', description: 'Назначение ', amount: 45645674, trans: 4545},
-    {date: '2018-01-15', description: 'Назначение платежа', amount: 45645674, trans: 4545},
-    {date: '2018-01-15', description: 'Назначение ', amount: 45645674, trans: 4545},
-    {date: '2017-11-15', description: 'Назначение платежа', amount: 45645674, trans: 4545},
-    {date: '2017-09-15', description: 'Назначение ', amount: 45645674, trans: 4545},
-    {date: '2017-01-15', description: 'Назначение платежа', amount: 45645674, trans: 4545},
-  ];
-  public historyRanged: IHistory[];
+  public history: IHistory[];
 
   constructor(
     public httpService: HttpService,
@@ -46,12 +40,13 @@ export class ProfileHistoryView {
   }
 
   ngOnInit() {
-    this.historyRanged = this.history
+    this.httpService.get('profiles/get-payments').subscribe(history=> {
+      this.history = history;
+    })
   }
 
   onDateRangeChange() {
     this.currentPage = 1;
-
   }
 
 }

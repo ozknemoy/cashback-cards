@@ -1,1 +1,29 @@
+<button class="btn btn-sm btn-success" (click)="type = type === Type.List? Type.Map : Type.List">
+  {{type === Type.List?'перейти к карте':'перейти к списку'}}
+</button>
 
+<div [ngSwitch]="type">
+  <ng-template [ngSwitchCase]="Type.List">
+    <div class="row">
+      <div class="col-12 col-md-5">
+        <select class="form-control" [(ngModel)]="filter.category.id">
+          <option value="">Все</option>
+          <option *ngFor="let cat of categories" [ngValue]="cat.id">{{cat.name}}</option>
+        </select>
+      </div>
+      <div class="col-12 col-md-7">
+        <input type="text" class="form-control" placeholder="метро" [(ngModel)]="filter.metro">
+      </div>
+    </div>
+
+    <div style="border: 1px solid black;width:50%" *ngFor="let partner of partners | filter:filter:false">
+      <img [src]="partner.image" alt="">
+      {{partner.city.name}} {{partner.name}}
+    </div>
+  </ng-template>
+
+  <ng-template [ngSwitchCase]="Type.Map">
+    <map-view [points]="_partners" (onBoundsChange)="onBoundsChange($event)"></map-view>
+  </ng-template>
+
+</div>

@@ -1,7 +1,25 @@
 .lk_sidebar {
     @extend .card;
     &--link {
+    	// background: $color-3;
+    	background: $white-color;
         display: block;
-        padding: 5px 0;
+        padding: 5px 15px;
+        margin: 0 -15px;
+        color: $dark-gray;
+        @include transition($fast-transition-time, $transition-linear);
+        &.current {
+        	background: $brand-success;
+        	color: $white-color;
+        }
+        &:hover {
+        	background: $brand-success;
+        	color: $white-color;
+        	text-decoration: none;
+        }
+        .mdi {
+        	font-size: 20px;
+        	vertical-align: middle;
+        }
     }
 }

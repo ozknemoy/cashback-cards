@@ -1,64 +1,99 @@
 
 <div class="lk_content">
-  <div class="lk_content--wrap">
-
-    <p class="alert alert-success">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente ad maiores aperiam nostrum minima repellendus, consectetur, voluptatibus dolorum illo, quis quia provident suscipit eum explicabo omnis doloremque nihil sed nulla!</p>
+  <div class="lk_content--wrap" *ngIf="!isLoading">
+    <p *ngIf="semiFilledProfile;else filledProfile" class="alert alert-success">
+      Приветствуем Вас, Уважаемый {{'user' | translate}}! Представьтесь пожалуйста и получите 400 приветственных баллов
+      на свой счет. <a class="btn btn-info btn-sm" routerLink="/profile/settings">ПОЛУЧИТЬ БАЛЛЫ</a>
+    </p>
+    <ng-template #filledProfile>
+      <p class="alert alert-success">
+        <span *ngIf="level<3; else level3">
+          Ваш статус {{card.status.name}}, Вам доступен кэш бек {{card.status.percent}}%.
+          Покупайте больше! При сумме покупок более {{card.status.amount_to}} руб. Ваш кэш бек уже {{bonusLevels[level].percent}}%
+        </span>
+        <ng-template #level3>
+          <span>
+            Поздравляем!
+            Ваш статус {{card.status.name}}, Вам доступен кэш бек {{card.status.percent}}%.
+            Пользуйтесь картой, для сохранения статуса. При отсутствии покупок в течение месяца, ваш статус будет снижен.
+          </span>
+        </ng-template>
+      </p>
+    </ng-template>
 
     <div class="lk_card">
       <div class="content">
-        <div class="lk_card--title">Моя карта: 7789 0041 0997 8126</div>
+        <div class="lk_card--title">Моя карта: {{card.number | card}}</div>
         <div class="lk_card--content">
           <div class="row">
             <div class="col-12 col-md-6">
               <div class="lk_card--image"><img src="assets/img/card.png" alt=""></div>
             </div>
             <div class="col-12 col-md-6">
-              <div class="lk_profile--ball">Общая сумма начисленных баллов <span>3 605</span></div>
-              <div class="lk_profile--ball">Статус <span>Серебрянный</span></div>
-              <div class="lk_profile--ball">Курс балла <span>1 - 1 ₽</span></div>
-
-              <div class="lk_profile--ball">Сумма доступная к списанию в рублях <span>360 ₽</span></div>
-              <div class="lk_profile--ball">Общий оборот по карте <span>1212 ₽</span></div>
-
+              <div class="lk_profile--ball">
+                Сумма покупок по карте <span>{{card.self_points | thousand}}</span>
+              </div>
+              <div class="lk_profile--ball">
+                Статус <span>{{card.status.name}}</span>
+              </div>
+              <div class="lk_profile--ball">
+                Курс балла <span>1 - 1 <i class="mdi mdi-currency-rub"></i></span>
+              </div>
+              <div class="lk_profile--ball">
+                Сумма доступная к списанию в рублях <span>{{card.points | thousand}}
+                <i class="mdi mdi-currency-rub"></i></span>
+              </div>
+              <!--<div class="lk_profile--ball">
+               Общий оборот по карте <span>{{card.self_points | thousand}}2 ₽</span>
+              </div>-->
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="lk_promotions">
+    <!--<div class="lk_promotions">
       <div class="lk_title">Текущие акции для вас</div>
       <div class="row">
         <div class="col-12 col-xs-6 col-md-4">
-          <a class="lk_promotions--item">
-            <span class="lk_promotions--img"><img src="assets/img/gift.png" alt=""></span>
-            <span class="lk_promotions--title">Название акции</span>
-            <span class="lk_promotions--date">с 12.12.0001 по 12.12.3001</span>
-            <span class="lk_promotions--town">Санкт-Петербург</span>
-          </a>
-        </div>
-        <div class="col-12 col-xs-6 col-md-4">
-          <a class="lk_promotions--item">
-            <span class="lk_promotions--img"><img src="assets/img/gift.png" alt=""></span>
-            <span class="lk_promotions--title">Название акции</span>
-            <span class="lk_promotions--date">с 12.12.0001 по 12.12.3001</span>
-            <span class="lk_promotions--town">Санкт-Петербург</span>
-          </a>
-        </div>
-        <div class="col-12 col-xs-6 col-md-4">
-          <a class="lk_promotions--item">
-            <span class="lk_promotions--img"><img src="assets/img/gift.png" alt=""></span>
-            <span class="lk_promotions--title">Название акции</span>
-            <span class="lk_promotions--date">с 12.12.0001 по 12.12.3001</span>
-            <span class="lk_promotions--town">Санкт-Петербург</span>
+          <a class="lk_promotions&#45;&#45;item" routerLink="/action/1">
+            <span class="lk_promotions&#45;&#45;img"><img src="assets/img/gift.png" alt=""></span>
+            <span class="lk_promotions&#45;&#45;title">Название акции</span>
+            <span class="lk_promotions&#45;&#45;date">с 12.12.0001 по 12.12.3001</span>
+            <span class="lk_promotions&#45;&#45;town">Санкт-Петербург</span>
           </a>
         </div>
       </div>
       <div class="text-center">
         <a routerLink="/partners" class="btn btn-success btn-simple">Все партнеры</a>
       </div>
+    </div>-->
+    <div class="lk_promotions">
+      <div class="lk_title">Магазины</div>
+      <div class="row">
+        <div class="col-12 col-xs-6 col-md-4">
+          <a class="lk_promotions--item">
+            <span class="lk_promotions--img"><img src="assets/img/gift.png" alt=""></span>
+            <span class="lk_promotions--title">Магазин 1</span>
+          </a>
+        </div>
+        <div class="col-12 col-xs-6 col-md-4">
+          <a class="lk_promotions--item">
+            <span class="lk_promotions--img"><img src="assets/img/gift.png" alt=""></span>
+            <span class="lk_promotions--title">Магазин 1</span>
+          </a>
+        </div>
+        <div class="col-12 col-xs-6 col-md-4">
+          <a class="lk_promotions--item">
+            <span class="lk_promotions--img"><img src="assets/img/gift.png" alt=""></span>
+            <span class="lk_promotions--title">Магазин 1</span>
+          </a>
+        </div>
+      </div>
+      <div class="text-center">
+        <button routerLink="/partners" class="btn btn-success btn-simple">Все магазины</button>
+      </div>
     </div>
-
 
 
   </div>

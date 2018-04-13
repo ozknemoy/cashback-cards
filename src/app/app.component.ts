@@ -1,6 +1,6 @@
 import {Component, ViewContainerRef} from '@angular/core';
 import {ToastsManager} from "ng2-toastr";
-import {LocalStorage} from "../services/localStorage.service";
+import {AuthLocalStorage} from "../services/auth-local-storage.service";
 
 @Component({
   selector: 'app-root',
@@ -10,9 +10,9 @@ export class AppComponent {
   constructor(
       toast:ToastsManager,
       vRef:ViewContainerRef,
-      localStorage: LocalStorage
+      authLocalStorage: AuthLocalStorage
   ) {
     // всегда надо инжектить в корневой компонент
-    if(localStorage.isBrowser) toast.setRootViewContainerRef(vRef);
+    if(authLocalStorage.isBrowser) toast.setRootViewContainerRef(vRef);
   }
 }

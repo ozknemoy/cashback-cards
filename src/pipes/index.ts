@@ -6,10 +6,12 @@ import {FilterPipe} from './filter.pipe'
 import {SanitizePipe} from './sanitize.pipe'
 import {RangePipe} from "./range.pipe";
 import {FromDateToDatePipe} from "./from-date-to-date.pipe";
+import {CardPipe} from "./card";
 
 
 export const pipes = [
-  TrimPipe, ThousandPipe, FilterPipe, SanitizePipe, RangePipe, FromDateToDatePipe
+  TrimPipe, ThousandPipe, FilterPipe, SanitizePipe, RangePipe,
+  FromDateToDatePipe, CardPipe,
 ];
 
 @NgModule({

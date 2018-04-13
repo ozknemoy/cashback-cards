@@ -1,0 +1,44 @@
+<div class="modal-header">
+  <button type="button" class="close" aria-label="Close"
+          (click)="close()"><span aria-hidden="true">×</span>
+  </button>
+  <h4 class="modal-title">Ваш {{type === Type.barcode?'штрих-код':'QR-код'}}</h4>
+</div>
+
+<div class="text-center" [ngSwitch]="type">
+  <div *ngSwitchCase="Type.barcode">
+    <ngx-barcode [bc-value]="code"
+                 [bc-width]="2"
+                 [bc-format]="'CODE128'"
+                 [bc-element-type]="'img'"
+                 padding="150"
+                 [bc-display-value]="true"></ngx-barcode>
+    <!--скрываю оcновной компонент чтобы показать обычный img растянутый на весь экран-->
+    <!--<img id="dummi-img" width="100%" [src]="this.imgUrl">-->
+  </div>
+  <div *ngSwitchCase="Type.qrcode">
+    <ngx-qrcode [qrc-value]="code"></ngx-qrcode>
+  </div>
+</div>
+<div>
+</div>
+
+<div class="text-center">
+  <div class="btn-group">
+    <button class="btn btn-info"
+            [ngClass]="{active: type === Type.qrcode}"
+            (click)="type = Type.qrcode">
+      QR-код
+    </button>
+    <button class="btn btn-info"
+            [ngClass]="{active: type === Type.barcode}"
+            (click)="type = Type.barcode">
+      штрих-код
+    </button>
+  </div>
+  <div>
+    <button class="btn btn-success" (click)="saveImg()">
+      Сохранить код
+    </button>
+  </div>
+</div>

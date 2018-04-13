@@ -18,9 +18,9 @@ export const routes = [
   { path: 'partner/:id', component: PartnerView},
   { path: 'action/:id', component: ActionView},
   { path: 'login', component: LoginView},
-  { path: 'profile', component: ProfileView,  canActivate: [AuthGuard],
+  { path: 'profile', component: ProfileView, canActivate: [AuthGuard],
     children: [
-      {path: '', component: ProfileMainView},
+      {path: 'main', component: ProfileMainView, pathMatch: 'full'},
       {path: 'settings', component: ProfileSettingsView},
       {path: 'history', component: ProfileHistoryView},
     ]},

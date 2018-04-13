@@ -1,20 +1,13 @@
 {
-  "name": "ng-universal-demo",
-  "version": "0.0.1",
+  "name": "card",
+  "version": "0.0.2",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/ozknemoy/angular-5-universal-aot.git"
   },
   "contributors": [
-    "AngularClass <hello@angularclass.com>",
-    "PatrickJS <patrick@angularclass.com>",
-    "Jeff Whelpley <jeff@gethuman.com>",
-    "Jeff Cross <crossj@google.com>",
-    "Mark Pieszak <mpieszak84@gmail.com>",
-    "Jason Jean <jasonjean1993@gmail.com>",
-    "ozknemoy <ozk.nemoy@gmail.com>",
-    "Fabian Wiles <fabian.wiles@gmail.com>"
+    "ozknemoy <ozk.nemoy@gmail.com>"
   ],
   "scripts": {
     "ng": "ng",
@@ -34,10 +27,6 @@
     "pm": "SET PORT=3333 && pm2 start dist/server.js --watch",
     "pm-linux": "PORT=3333 pm2 start dist/server.js --watch"
   },
-  "pre-commit": [
-    "lint"
-  ],
-  "private": true,
   "dependencies": {
     "@agm/core": "^1.0.0-beta.2",
     "@angular/animations": "^5.2.0",

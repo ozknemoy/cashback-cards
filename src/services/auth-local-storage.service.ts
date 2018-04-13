@@ -5,25 +5,48 @@ import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import {Inject,Injectable} from '@angular/core';
 import {Router} from "@angular/router";
+import {stringifyElement} from "@angular/platform-browser/testing/src/browser_util";
+import {ToastsManager} from "ng2-toastr";
+import {SharedService} from "./shared.service";
+
+
+class AuthKeys {
+  hash: string;
+  name: string;
+  surname: string;
+  patronymic: string;
+}
+
+class AuthData extends AuthKeys {
+  public data = {
+    name: null
+  }
+}
 
 @Injectable()
-export class LocalStorage {
+export class AuthLocalStorage {
   public hash:string;// для ноды
-  public auth = {data: {}};
+  public auth = new AuthData();
   storageKeyPrefix:string = 'prioriti-';
-  public auth_keys = ['hash', /*'id',*/ 'first_name', 'last_name', 'middle_name'];
+  public auth_keys = ['hash', 'name', 'surname', 'patronymic'];
 
   public isBrowser:boolean = isPlatformBrowser(this.platformId);
 
   constructor(
     @Inject(PLATFORM_ID) private platformId:Object,
-    private router:Router
+    private router:Router,
+    private toast: ToastsManager
   ) {
     this.initAuth();
   }
 
-  setAuth(obj) {
-    this.setKeys(obj);
+  setAuth(_obj, keys = this.auth_keys) {
+    // сохраняю только нужные свойства
+    let obj = {};
+    keys.forEach((k: keyof AuthKeys)=> {
+      obj[k] = _obj[k]
+    });
+    this.setKeysToLS(obj);
     this.setAppAuth(obj);
     this.setCookies(obj);
   }
@@ -37,15 +60,28 @@ export class LocalStorage {
   // ноде это нужно чтобы с сервера пришел  хедер с логином или без него
   initAuth() {
     if (!this.get('hash') && this.isBrowser) return;
-    this.auth_keys.forEach(key=> {
+    this.auth_keys.forEach((key: keyof AuthKeys)=> {
       this.auth[key] = this.get(key);
       this.auth.data[key] = this.auth[key]
     })
   }
 
+  logout(toastText = 'Вы успешно вышли', toastLife = 4e3) {
+    this.clearAuth();
+
+    if(toastText) {
+      this.toast.info('', toastText, {
+        showCloseButton: true,
+        toastLife
+      });
+    }
+
+    //this.sharedService.emit['isLogIn'](false);
+  }
+
   clearAuth() {
     this.reset();
-    this.auth = {data: {}};
+    this.auth = new AuthData();
     this.deleteAuthCookies();
     this.handleLogout();
   }
@@ -81,7 +117,7 @@ export class LocalStorage {
     window.localStorage.removeItem(this.storageKeyPrefix + key)
   };
 
-  setKeys(obj) {
+  setKeysToLS(obj) {
     if (this.isBrowser) {
       for (let key in obj) {
         window.localStorage.setItem(this.storageKeyPrefix + key, obj[key])
@@ -110,10 +146,10 @@ export class LocalStorage {
 
   setCookie(name, value, options = <any>{expires: 100000000}) {
 
-    var expires = options.expires;
+    let expires = options.expires;
 
     if (typeof expires == "number" && expires) {
-      var d = new Date();
+      let d = new Date();
       d.setTime(d.getTime() + expires * 1000);
       expires = options.expires = d;
     }
@@ -123,11 +159,11 @@ export class LocalStorage {
 
     value = encodeURIComponent(value);
 
-    var updatedCookie = name + "=" + value;
+    let updatedCookie = name + "=" + value;
 
-    for (var propName in options) {
+    for (let propName in options) {
       updatedCookie += "; " + propName;
-      var propValue = options[propName];
+      const propValue = options[propName];
       if (propValue !== true) {
         updatedCookie += "=" + propValue;
       }

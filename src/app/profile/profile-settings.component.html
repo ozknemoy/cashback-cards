@@ -9,20 +9,23 @@
             <form #userForm="ngForm">
               <div class="form-group">
                 <label class="label">Имя</label>
-                <input type="text" class="form-control" name="name" [(ngModel)]="user.name">
+                <input type="text" class="form-control" name="name" required
+                       [(ngModel)]="user.name">
               </div>
               <div class="form-group">
                 <label class="label">Фамилия</label>
-                <input type="text" class="form-control" name="surname" [(ngModel)]="user.surname">
+                <input type="text" class="form-control" name="surname" required
+                       [(ngModel)]="user.surname">
               </div>
               <div class="form-group">
                 <label class="label">Отчество</label>
-                <input type="text" class="form-control" name="patronymic" [(ngModel)]="user.patronymic">
+                <input type="text" class="form-control" name="patronymic" required
+                       [(ngModel)]="user.patronymic">
               </div>
               <div class="form-group">
                 <label class="label">Дата рождения</label>
                 <div class="input-group">
-                  <input type="text" class="form-control" name="_birthday"
+                  <input type="text" class="form-control" name="_birthday" required
                          [(ngModel)]="user._birthday"
                          bsDatepicker>
                   <span class="input-group-addon">
@@ -33,7 +36,7 @@
               <div class="form-group">
                 <label class="label">Пол</label>
                 <div class="radio">
-                  <input type="radio" name="gender" id="gender1"
+                  <input type="radio" name="gender" id="gender1" required
                          [value]="1"
                          [(ngModel)]="user.gender">
                   <label for="gender1">
@@ -41,7 +44,7 @@
                   </label>
                 </div>
                 <div class="radio">
-                  <input type="radio" name="gender" id="gender2"
+                  <input type="radio" name="gender" id="gender2" required
                          [value]="2"
                          [(ngModel)]="user.gender">
                   <label for="gender2">
@@ -51,32 +54,20 @@
               </div>
               <div class="form-group">
                 <label class="label">E-mail</label>
-                <input type="text" class="form-control" name="email" [(ngModel)]="user.email" email>
+                <input type="text" class="form-control" name="email" required
+                       [(ngModel)]="user.email" email>
               </div>
               <div class="form-group">
                 <label class="label">Телефон</label>
-                <input type="text" class="form-control" name="phone" [(ngModel)]="user.phone" disabled>
+                <input type="text" class="form-control" name="phone"
+                       [(ngModel)]="user.phone" disabled>
               </div>
             </form>
 
-
-            <button class="btn btn-success" (click)="save()">Сохранить изменения</button>
+            <button class="btn btn-success" (click)="tryToSave(userForm)">Сохранить изменения</button>
           </div>
         </div>
       </div>
     </div>
-
-    <!--<div class="lk_title">Пароль</div>
-    <div class="lk_profile">
-      <div class="content">
-        <div class="row">
-          <div class="col-12 col-md-6">
-            <button class="btn btn-success">Сменить пароль</button>
-          </div>
-        </div>
-      </div>
-    </div>-->
-
-
   </div>
 </div>

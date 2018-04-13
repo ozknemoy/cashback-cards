@@ -11,6 +11,9 @@ import {NgxQRCodeModule} from "ngx-qrcode2";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {NgxMaskModule} from 'ngx-mask'
 import {TranslateModule} from '@ngx-translate/core';
+import {GeoComponent} from "./geo/geo.module";
+import {AgmCoreModule} from "@agm/core";
+import {NgxBarcodeModule} from "ngx-barcode";
 
 // в импорты модулей приложения. не в модуль директив!!!
 export const vendorModules = [
@@ -21,6 +24,12 @@ export const vendorModules = [
   NgxQRCodeModule,
   NgxMaskModule.forRoot(),
   TranslateModule.forRoot(),
+  AgmCoreModule.forRoot({
+    // https://console.developers.google.com/apis/credentials?project=my-project-1520354209044&authuser=0
+    apiKey: 'AIzaSyD3LusG3ps3C' + 'gXLBUiMHbpyfQPBA6VTEac'
+  }),
+  NgxBarcodeModule,
+
   //bootstrap Modules
   ModalModule.forRoot(),
   BsDatepickerModule.forRoot(),

@@ -3,7 +3,7 @@ import {Inject,Injectable} from '@angular/core';
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BASE_URL} from "../config/base_url";
-import {LocalStorage} from "./localStorage.service";
+import {AuthLocalStorage} from "./auth-local-storage.service";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -13,35 +13,37 @@ import {ToastsManager} from "ng2-toastr";
 import {SharedService} from "./shared.service";
 
 import {isBefore, /*isWithinRange,*/ addMinutes, differenceInMinutes} from 'date-fns'
+import {BonusLevels, Card} from "../app/profile/profile-settings.component";
 
 @Injectable()
 export class HttpService {
 
   public BASE_URL = BASE_URL;
-  public isBrowser = this.localStorage.isBrowser;
+  public isBrowser = this.authLocalStorage.isBrowser;
+  private remoteProfile;
 
   constructor(
-    public localStorage:LocalStorage,
+    public authLocalStorage:AuthLocalStorage,
     public http:HttpClient,
     public sharedService:SharedService,
     public router:Router,
     public toast:ToastsManager
   ) {
-
+    this.setRemoteProfile();
   }
 
   getGlobal(url) {
     return this.http.get(url)
   }
 
-  get(url) {
-    var headers = this.doWitAuth();
+  get(url, withoutHash = false) {
+    const headers = this.doWitAuth('', withoutHash);
     return this.http.get(this.BASE_URL + url, {headers})
       .catch(e=> this.handleError(e, '_getWithToast'))
   }
 
-  getWithToast(url:string, text:string, toastLife?:number) {
-    return this.get(url).map((d)=> {
+  getWithToast(url:string, text:string, toastLife?:number, withoutHash = false) {
+    return this.get(url, withoutHash).map((d)=> {
       this.toast.info('', text, {
         showCloseButton: true,
         toastLife
@@ -59,9 +61,9 @@ export class HttpService {
    }*/
 
 
-  post(url:string, _d, textToast:string = '', toastLife = 7e3) {//WithAuth
-    var d = JSON.stringify(_d);
-    var headers = this.doWitAuth(d);
+  post(url:string, _d, textToast:string = '', toastLife = 7e3, withoutHash = false) {//WithAuth
+    const d = JSON.stringify(_d);
+    const headers = this.doWitAuth(d, withoutHash);
     return this.http.post(this.BASE_URL + url, d, {headers})
       .map((d)=> {
         if (textToast) this.toast.info('', textToast, {
@@ -73,16 +75,184 @@ export class HttpService {
       .catch(e=> this.handleError(e, '_post'))
   }
 
-  doWitAuth(str = ''):HttpHeaders {
-    const t = this.getToken();
+  doWitAuth(str = '', withoutHash):HttpHeaders {
+    const bdHash = withoutHash? null : this.getToken();
     let _headers:HttpHeaders = new HttpHeaders();
-    let hash = this.getHash(str);
-
-    if (t) _headers = _headers.append('X-AUTH-TOKEN', 'PiU ' + t);
-    _headers = _headers.append('X-DUDE', 'ANG ' + hash)
+    let md5 = this.getMD5(str);
+    //console.log('--doWitAuth--bdHash',bdHash);
+    if (bdHash) _headers = _headers.append('X-AUTH-TOKEN', 'PiU ' + bdHash);
+    _headers = _headers.append('X-DUDE', 'ANG ' + md5)
       .append('Content-Type', 'application/json');
     return _headers
   }
+
+  // приходится после логина сетить новый экземпляр в котором будет хеш
+  setRemoteProfile() {
+    // работает только при одновременных запросах(пока ждут ответа)
+    this.remoteProfile = this.get('profiles/main').share();
+  }
+
+  getRemoteProfile() {
+    return this.remoteProfile
+  }
+
+  public bonusLevels = this.get('handbooks/bonus-levels', true).share();
+
+  getBonusLevels(card: Card) {
+    return this.bonusLevels
+      .map(bonusLevels=> bonusLevels.sort((a, d)=> a.amount_to < d.amount_to? 1 : -1))
+      .map(bonusLevels=> {
+        const [followed, level] = this.countLevelsInfo(bonusLevels, card);
+        return {
+          bonusLevels,
+          followed,
+          level
+        }
+      });
+  }
+
+  countLevelsInfo(bonusLevels:BonusLevels[], card: Card) {
+    // тут обратный сорт по убыванию // из-за верстки
+    let level;
+    let followed = card.bonus_amount*100/(bonusLevels[0].amount_from - bonusLevels[2].amount_from);
+    followed = Math.min(followed,100);
+    if(card.bonus_amount >= bonusLevels[1].amount_to) {
+      level = 3
+    } else if(card.bonus_amount < bonusLevels[1].amount_from) {
+      level = 1
+    } else {
+      level = 2
+    }
+    return [followed, level]
+  }
+
+  getMD5(str:string, withSalt = true) {
+    return this.MD5(str + (withSalt ? '605ac13117bae148' + 'bd010f610833baad' : ''))
+  }
+
+  // обрабатываю ошибки тостами для браузера и консолью для ноды
+  handleError(e, str:string) {
+    if (!this.isBrowser) {
+      console.log((new Date() + '').slice(4, 25) + "__handleError in httpService by " + str, e.error, e.url, e.message);
+    } else {
+      const err = e.error;
+      console.log('----',err.error,err.errors );
+      if ((err.errors && typeof err.errors === 'string')
+        || (err.error && typeof err.error === 'string')) {
+        this.toast.error(err.errors || err.error, 'Ошибка!', {
+          showCloseButton: true,
+          toastLife: 22e3
+        });
+      } else if (err.errors && typeof err.errors === 'object') {
+        this.handleErrObject(err.errors).forEach(message=> {
+          this.toast.error(message, 'Ошибка!', {
+            showCloseButton: true,
+            toastLife: 22e3
+          });
+        })
+      }
+
+    }
+
+    return Observable.throw(e)
+  }
+
+  // обрабатываю в удобоваримый вид ошибки с сервера
+  handleErrObject(obj) {
+    var arrOfErrors = [];
+    for (var key in obj) {
+      arrOfErrors.push(obj[key][0])
+    }
+    return arrOfErrors
+  }
+
+  isAuth():boolean {
+    return !!this.getToken()
+  }
+
+  getToken() {
+    if (this.isBrowser) {
+      return this.authLocalStorage.get('hash');
+    } else {
+      return this.authLocalStorage.auth['hash']
+    }
+
+  }
+
+  restorePassword(password:string) {
+    return this.postWithToast(
+      'users/requestPasswordReset',
+      {"email": password},
+      'Вы успешно сменили пароль.')
+  };
+
+  preRestorePassword(resetForm:Object) {
+    return this.postWithToast(
+      'users/requestPasswordReset',
+      {PasswordResetRequestForm: resetForm},
+      'Пароль успешно изменен. Теперь вы можете авторизоваться', 20e3)
+  };
+
+  login(credentials) {
+    // на всякий случай убиваю hash чтобы он  не отправлялся на бек
+    //this.authLocalStorage.auth['hash'] = '';
+    return this.post('users/auth', credentials, 'Вы успешно вошли.', 7e3, true)
+      .map(loginInfo=> {
+        // чтобы не отображать null строкой из хранилища перезаписываю пустое имя
+        loginInfo.name = loginInfo.name || '';
+        this.authLocalStorage.setAuth(loginInfo);
+        // задержка вроде для мозиллы
+        setTimeout(()=> {
+          this.setRemoteProfile();
+          this.sharedService.emit['isLogIn'](true);
+          this.router.navigate(['/profile/main']);
+        }, 200);
+        return loginInfo
+      })
+  }
+
+  postWithToast(url:string, _d, text = 'Успешно сохранено', toastLife?) {
+    return this.post(url, _d, text, toastLife)
+  }
+
+  getSms(phone) {
+    if(this.isSmsObsolete(phone)) {
+      return this.getWithToast(
+        `users/get-confirm-code?phone=${phone}`,
+        'Вам отправлена смс на указанный номер',
+        5e3,
+        true
+      )
+    } else {
+      // тогда просто вернуть успех
+      console.warn('is fresh');
+      return Observable.of(1)
+    }
+
+  }
+
+  private smsPrefix = 'sms-';
+
+  private isSmsObsolete(phone: string, timeout = 15) {
+    const prevSmsDate = this.authLocalStorage.get(this.smsPrefix + phone);
+    if(prevSmsDate) {
+      // проверяю если дата в хранилище + N минут раньше чем сейчас
+      if(isBefore(addMinutes(new Date(prevSmsDate), timeout),new Date())) {
+        this.authLocalStorage.set(this.smsPrefix + phone, new Date());
+        return true
+      } else {
+        this.toast.info('', `Вы можете запросить смс раз в ${timeout} мин. Осталось ${1 + differenceInMinutes(addMinutes(new Date(prevSmsDate), timeout), new Date())} мин`, {
+          showCloseButton: true,
+          toastLife: 10e3
+        });
+        return false
+      }
+    } else {
+      this.authLocalStorage.set(this.smsPrefix + phone, new Date());
+      return true
+    }
+  }
+
 
   MD5(s) {
     function L(k, d) {
@@ -289,125 +459,4 @@ export class HttpService {
     var i = B(Y) + B(X) + B(W) + B(V);
     return i.toLowerCase()
   };
-
-  getHash(str:string, withSalt = true) {
-    return this.MD5(str + (withSalt ? '605ac13117bae148' + 'bd010f610833baad' : ''))
-  }
-
-  // обрабатываю ошибки тостами для браузера и консолью для ноды
-  handleError(e, str:string) {
-    if (!this.isBrowser) {
-      console.log((new Date() + '').slice(4, 25) + "__handleError in httpService by " + str, e.error, e.url, e.message);
-    } else {
-      const err = e.error;
-      console.log('----',err.error,err.errors );
-      if ((err.errors && typeof err.errors === 'string')
-        || (err.error && typeof err.error === 'string')) {
-        this.toast.error(err.errors || err.error, 'Ошибка!', {
-          showCloseButton: true,
-          toastLife: 22e3
-        });
-      } else if (err.errors && typeof err.errors === 'object') {
-        this.handleErrObject(err.errors).forEach(message=> {
-          this.toast.error(message, 'Ошибка!', {
-            showCloseButton: true,
-            toastLife: 22e3
-          });
-        })
-      }
-
-    }
-
-    return Observable.throw(e)
-  }
-
-  // обрабатываю в удобоваримый вид ошибки с сервера
-  handleErrObject(obj) {
-    var arrOfErrors = [];
-    for (var key in obj) {
-      arrOfErrors.push(obj[key][0])
-    }
-    return arrOfErrors
-  }
-
-  isAuth():boolean {
-    return !!this.getToken()
-  }
-
-  getToken() {
-    if (this.isBrowser) {
-      return this.localStorage.get('hash');
-    } else {
-      return this.localStorage.auth['hash']
-    }
-
-  }
-
-  restorePassword(password:string) {
-    return this.postWithToast(
-      'users/requestPasswordReset',
-      {"email": password},
-      'Вы успешно сменили пароль.')
-  };
-
-  preRestorePassword(resetForm:Object) {
-    return this.postWithToast(
-      'users/requestPasswordReset',
-      {PasswordResetRequestForm: resetForm},
-      'Пароль успешно изменен.', 20e3)
-  };
-
-  login(obj) {
-    return this.postWithToast('users/auth', obj, 'Вы успешно вошли.', 7e3)
-      .map(d=> {
-        this.localStorage.setAuth(d);
-        // задержка вроде для мозиллы
-        setTimeout(()=> {
-          this.sharedService.emit['isLogIn'](true);
-          this.router.navigate(['/profile']);
-        }, 100);
-        return d
-      })
-  }
-
-  postWithToast(url:string, _d, text = 'Успешно сохранено', toastLife?) {
-    return this.post(url, _d, text, toastLife)
-  }
-
-  getSms(phone) {
-    if(this.isSmsObsolete(phone)) {
-      return this.getWithToast(
-        `users/get-confirm-code?phone=${phone}`,
-        'Вам отправлена смс на указанный номер',
-        5e3
-      )
-    } else {
-      // тогда просто вернуть успех
-      console.warn('is fresh');
-      return Observable.of(1)
-    }
-
-  }
-
-  private smsPrefix = 'sms-';
-
-  private isSmsObsolete(phone: string, timeout = 15) {
-    const prevSmsDate = this.localStorage.get(this.smsPrefix + phone);
-    if(prevSmsDate) {
-      // проверяю если дата в хранилище + N минут раньше чем сейчас
-      if(isBefore(addMinutes(new Date(prevSmsDate), timeout),new Date())) {
-        this.localStorage.set(this.smsPrefix + phone, new Date());
-        return true
-      } else {
-        this.toast.info('', `Вы можете запросить смс раз в ${timeout} мин. Осталось ${1 + differenceInMinutes(addMinutes(new Date(prevSmsDate), timeout), new Date())} мин`, {
-          showCloseButton: true,
-          toastLife: 10e3
-        });
-        return false
-      }
-    } else {
-      this.localStorage.set(this.smsPrefix + phone, new Date());
-      return true
-    }
-  }
 }

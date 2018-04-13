@@ -2,6 +2,9 @@ import {Component} from '@angular/core';
 import {AutoUnsubscribe} from "../../decorators/auto-unsubscribe.decorator";
 import {HttpService} from "../../services/http.service";
 import {HandleDataService} from "../../services/handle-data.service";
+import {AuthLocalStorage} from "../../services/auth-local-storage.service";
+import {NgForm} from "@angular/forms";
+import {ToastsManager} from "ng2-toastr";
 
 /*
 Fynjy, [27.03.18 16:50]
@@ -9,23 +12,36 @@ Fynjy, [27.03.18 16:50]
 ['birthday','string','max'=>10,'on'=>'user_edit'],
 ['email','email','on'=>'user_edit'],
 ['gender','integer','on'=>'user_edit']*/
-interface IUser {
-  name: string,
-  surname: string,
-  patronymic: string,
-  birthday: string,
-  _birthday: Date,
-  email: string,
-  phone: string,
-  gender: number,
+
+export class User {
+  name: string = null;
+  surname: string = null;
+  patronymic: string = null;
+  birthday: string = null;
+  _birthday: Date = null;
+  email: string = null;
+  phone: string = null;
+  gender: number = null;
+}
+export class BonusLevels {
+  id: number = null;
+  name: string = null;
+  amount_from: number = null;
+  amount_to: number = null;
+  percent: number = null;//сколько кешбека он получает
 }
 
-interface ICard {
-  number: number,
-  points: number,
-  self_points: number,
-  status: number,
+export class Card {
+  // Сумма доступная к списанию  == баланс карты /греков
+  // Сумма доступная к списанию в рублях  == баллы на вывод /антон
+  points: number = null;
+  self_points: number = null;// сумма покупок по карте
+  status: BonusLevels = new BonusLevels();
+  number: number = null;// номер карты
+  fullNumber: string = null;// номер карты
+  bonus_amount: number = null;// текущая сумма в статусе
 }
+
 
 @Component({
   selector: 'profile-settings-view',
@@ -33,42 +49,33 @@ interface ICard {
 })
 @AutoUnsubscribe()
 export class ProfileSettingsView {
-  public user:IUser = {
-    name: null,
-    surname: null,
-    patronymic: null,
-    birthday: null,
-    _birthday: null,
-    email: null,
-    phone: null,
-    gender: null,
-  };
-  public card:ICard = {
-    number : null,
-    points: null,
-    self_points: null,
-    status: null,
-  };
+  public user: User = new User;
+  public card: Card = new Card;
+  setProfile$$;
+  getProfile$$;
 
   constructor(
     public httpService: HttpService,
+    public authLocalStorage: AuthLocalStorage,
+    public toast: ToastsManager,
     public HandleDataService: HandleDataService
   ) {
   }
 
   ngOnInit() {
-    this.httpService.get('profiles/main').subscribe((profile: any) => {
+    this.getProfile$$ = this.httpService.getRemoteProfile()/*.first()*/.subscribe((profile: any) => {
       this.user = profile[0].User;
       this.user._birthday = this.HandleDataService.dateFromServer(this.user.birthday);
       this.card = profile[1].Card;
     })
   }
 
-  save() {
-    this.user.birthday = this.HandleDataService.dateToServer(this.user._birthday);
-    console.log(this.user);
-    this.httpService.postWithToast('profiles/main', {User: this.user}).subscribe(profile => {
+  tryToSave(userForm: NgForm) {
+    if(userForm.invalid) return this.toast.error('','Заполнены не все поля');
 
+    this.user.birthday = this.HandleDataService.dateToServer(this.user._birthday);
+    this.setProfile$$ = this.httpService.postWithToast('profiles/main', {User: this.user}).subscribe(profile => {
+      this.authLocalStorage.setAuth(this.user, ['name', 'surname', 'patronymic'])
     })
   }
 

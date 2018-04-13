@@ -2,7 +2,7 @@ import {Component,ChangeDetectorRef} from "@angular/core";
 import {Router} from "@angular/router";
 import {SharedService} from "../../services/shared.service";
 import {HttpService} from "../../services/http.service";
-import {LocalStorage} from "../../services/localStorage.service";
+import {AuthLocalStorage} from "../../services/auth-local-storage.service";
 import {BsModalService} from "../../../node_modules/ngx-bootstrap/modal/bs-modal.service";
 import {BsModalRef} from "../../../node_modules/ngx-bootstrap/modal/bs-modal-ref.service";
 
@@ -19,7 +19,7 @@ export class LoginModalComponent {
     constructor(public httpService: HttpService,
                 public router: Router,
                 public bsModalRef: BsModalRef,
-                public localStorage: LocalStorage,
+                public authLocalStorage: AuthLocalStorage,
                 private sharedService: SharedService
     ) {
 

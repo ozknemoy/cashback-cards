@@ -8,19 +8,19 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/share';
-import {LocalStorage} from "./localStorage.service";
+import {AuthLocalStorage} from "./auth-local-storage.service";
 
 @Injectable()
 export class SharedService {
 
     public listener = {};
     public emit = {};
-    constructor(public localStorage:LocalStorage) {
+    constructor(public authLocalStorage:AuthLocalStorage) {
         this.makeProxy(
             'isLogIn',
-            this.localStorage.isBrowser
-                ? this.localStorage.get('hash')
-                : this.localStorage.auth['hash']
+            this.authLocalStorage.isBrowser
+                ? this.authLocalStorage.get('hash')
+                : this.authLocalStorage.auth['hash']
         );
     }
 

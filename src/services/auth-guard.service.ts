@@ -19,18 +19,16 @@ export class AuthGuard implements CanActivate, CanLoad {
     }
 
     canLoad() {
-        console.log("canLoad");
         return this.checkLogin();
     }
 
     checkLogin(): boolean {
         if (!this.httpService.isAuth()) {
-            console.log("AuthGuard  notAuth");
+            //console.log("AuthGuard  notAuth");
             this.router.navigate(['']);
             return false
         }
         else {
-            console.log("AuthGuard  isAuth");
             return true
         }
     }

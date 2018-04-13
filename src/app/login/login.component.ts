@@ -3,9 +3,10 @@ import {Component,ChangeDetectorRef,Inject} from "@angular/core";
 import {Router} from "@angular/router";
 import {SharedService} from "../../services/shared.service";
 import {HttpService} from "../../services/http.service";
-import {LocalStorage} from "../../services/localStorage.service";
+import {AuthLocalStorage} from "../../services/auth-local-storage.service";
 import {NgForm} from "@angular/forms";
 import {isEqualValidPassword} from "../registration/registration-view";
+import {UAService} from "../../services/user-agent.service";
 
 enum Step {
   login = 'login',
@@ -43,12 +44,23 @@ export class LoginView {
   public ResetStep = ResetStep;
   public resetStep = ResetStep.one;
   public showPass = false;
+  public isAndroid = false;
+  public isBrowser = this.authLocalStorage.isBrowser;
 
   constructor(
     public httpService:HttpService,
-    @Inject('phoneMask') public phoneMask: string
+    public authLocalStorage: AuthLocalStorage,
+    public uAService: UAService,
+    @Inject('phoneMask') public phoneMask: string,
+    @Inject('phonePlaceholder') public phonePlaceholder: string
   ) {
 
+  }
+
+  ngOnInit() {
+    if(this.isBrowser) {
+      this.isAndroid = this.uAService.is().android;
+    }
   }
 
   login(form: NgForm) {
@@ -67,7 +79,10 @@ export class LoginView {
   restore(reset: IReset) {
     this.pend = true;
     this.httpService.preRestorePassword({...reset, ...{phone: this.phone}}).subscribe(
-      d=> {},
+      d=> {
+        this.step = Step.login;
+        this.resetStep = ResetStep.one;
+      },
       e=> {},
       ()=> this.pend = false
     )

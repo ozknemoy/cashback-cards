@@ -4,6 +4,8 @@ import {Meta,Title} from "@angular/platform-browser";
 import {TITLE} from '../../config/small.configs'
 import {HttpService} from "../../services/http.service";
 import {Toast, ToastsManager} from "ng2-toastr";
+import {UAService} from "../../services/user-agent.service";
+import {AuthLocalStorage} from "../../services/auth-local-storage.service";
 
 export function isEqualValidPassword(stepOneModel):boolean {
   return stepOneModel.password && stepOneModel.password.valid
@@ -27,16 +29,25 @@ export class RegistrationView {
   private login$$;
   public step:'one' | 'two' | 'three' = 'one';
   public showPass = false;
+  public isAndroid = false;
+  public isBrowser = this.authLocalStorage.isBrowser;
 
   constructor(
     public httpService:HttpService,
     private metaService: Meta,
     private toast: ToastsManager,
     private titleService: Title,
-    @Inject('phoneMask') public phoneMask: string
+    public uAService: UAService,
+    public authLocalStorage: AuthLocalStorage,
+    @Inject('phoneMask') public phoneMask: string,
+    @Inject('cardMask') public cardMask: string,
+    @Inject('phonePlaceholder') public phonePlaceholder: string
   ) {}
 
   ngOnInit() {
+    if(this.isBrowser) {
+      this.isAndroid = this.uAService.is().android;
+    }
     //https://netbasal.com/exploring-the-new-meta-service-in-angular-version-4-b5ba2403d3e6
     this.metaService.addTags([
       {name: 'twitter:title', content: 'Регистрация'},
@@ -73,11 +84,12 @@ export class RegistrationView {
   signup(withExistedCard:boolean) {
     //если card_number нет, то создастся новая карта
     if (!withExistedCard) this.stepOneModel.card_number = null;
-    this.httpService.postWithToast(
+    this.httpService.post(
       'users/registration',
       {RegistrationForm: this.stepOneModel},
       'Вы успешно зарегистрировались.',
-      10e3
+      10e3,
+      true
     ).subscribe(
       d => {
         // сразу же логин. не обрабатываю провал тк данные верные
@@ -87,6 +99,10 @@ export class RegistrationView {
         }).subscribe(d => {})
     }, err => {}
     )
+  }
+
+  getSms() {
+    this.httpService.getSms(this.stepOneModel.phone)
   }
 
   ngOnDestroy() {

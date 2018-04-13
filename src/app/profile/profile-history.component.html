@@ -1,16 +1,9 @@
 
 <div class="lk_content">
   <div class="lk_content--wrap">
-    <div class="alert alert-success alert-with-icon">
-      <div class="alert-icon">
-        <i class="now-ui-icons travel_info"></i>
-      </div>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet aspernatur minus suscipit doloremque cupiditate facere delectus earum odit excepturi, consequuntur neque voluptates natus quod expedita, dolorum obcaecati, vel doloribus harum?
-    </div>
-
     <div class="card_list">
-      <div class="content">
-        <div class="card_list--item">
+      <!--<div class="content">
+        <div class="card_list&#45;&#45;item">
           <div class="checkbox checkbox-inline">
             <input type="checkbox" name="" id="card1" value="1" checked>
             <label for="card1">
@@ -18,17 +11,17 @@
             </label>
           </div>
 
-          <div class="card_list--title">
-            <!--Карта болельщика-->{{ 'user_card' | translate }}
+          <div class="card_list&#45;&#45;title">
+            &lt;!&ndash;Карта болельщика&ndash;&gt;{{ 'user_card' | translate }}
           </div>
-          <div class="card_list--num">
+          <div class="card_list&#45;&#45;num">
             1234 1234 1234 1234
           </div>
-          <div class="card_list--score">
+          <div class="card_list&#45;&#45;score">
             2555 балов
           </div>
         </div>
-      </div>
+      </div>-->
     </div>
 
     <div class="row align-items-center">
@@ -49,10 +42,10 @@
             </div>
           </div>
           <div class="col-12 col-sm-5">
-            <select class="form-control" [(ngModel)]="filter.type">
+            <select class="form-control" [(ngModel)]="filter.status">
               <option [value]="null">Все операции</option>
-              <option [value]="2">Начисления</option>
-              <option [value]="3">Списания</option>
+              <option [value]="1">Начисления</option>
+              <option [value]="2">Списания</option>
             </select>
           </div>
         </div>
@@ -62,14 +55,15 @@
     <div class="lk_history">
       <div class="content">
         <div class="lk_history--item"
-             *ngFor="let hist of historyRanged
-             | fromDateToDate : bsRangeValue[0] : bsRangeValue[1]
-             | paginate: { itemsPerPage: 5, currentPage: currentPage};
+             *ngFor="let hist of history
+             | fromDateToDate : bsRangeValue[0] : bsRangeValue[1] : 'created_at'
+             | filter: filter
+             | paginate: { itemsPerPage: 15, currentPage: currentPage};
               trackBy: hist?.date">
           <div class="row align-items-center">
             <div class="col-12 col-sm-2">
               <div class="lk_history--date">
-                <span class="lk_history--day">{{hist.date | date: 'dd.MM.yy HH:mm'}}</span>
+                <span class="lk_history--day">{{hist.created_at | date: 'dd.MM.yy HH:mm'}}</span><!---->
               </div>
             </div>
             <div class="col-12 col-sm-6">
@@ -78,7 +72,9 @@
                 {{hist.description}}
               </div>
             </div>
-            <div class="col-12 col-sm-2 text-right">{{hist.amount}} ₽</div>
+            <div class="col-12 col-sm-2 text-right">
+              {{hist.amount}}
+            </div>
             <div class="col-12 col-sm-2 text-right">
               <span class="text-success">{{hist.trans}}</span>
             </div>
