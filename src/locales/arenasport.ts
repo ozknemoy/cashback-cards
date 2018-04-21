@@ -4,10 +4,10 @@
 
 import {locales} from './main'
 
-let _soccer = {};
+let _arenasport = {};
 for(let prop in locales) {
-    _soccer[prop] = locales[prop][0]
+    _arenasport[prop] = locales[prop][0]
 }
 
-export const soccer = _soccer;
+export const arenasport = _arenasport;
 

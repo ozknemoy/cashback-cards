@@ -14,7 +14,7 @@ import {DirectiveModule} from "./directive.modules";
 import {UAService} from "../services/user-agent.service";
 import {AuthGuard} from "../services/auth-guard.service";
 import {TranslateService} from "@ngx-translate/core";
-import {soccer} from "../locales/soccer";
+import {arenasport} from "../locales/arenasport";
 import {crimea} from "../locales/crimea";
 import {LkSidebarComponent} from "../directives/lk-sidebar/lk-sidebar.component";
 import {HandleDataService} from "../services/handle-data.service";
@@ -25,6 +25,7 @@ import {BsDaterangepickerConfig, BsLocaleService} from "ngx-bootstrap";
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ruLocale } from 'ngx-bootstrap/locale';
 import {MainInterceptor} from "../config/interceptor";
+import {SeoService} from "../services/seo.service";
 /*import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';*/
 
@@ -53,6 +54,7 @@ import localeRu from '@angular/common/locales/ru';*/
     UAService,
     AuthGuard,
     HandleDataService,
+    SeoService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: MainInterceptor,
@@ -73,10 +75,10 @@ export class AppModule {
     bsDaterangepickerConfig: BsDaterangepickerConfig,
     localeService: BsLocaleService,
   ) {
-    translate.setDefaultLang('soccer');
-    translate.setTranslation('soccer', soccer);
+    translate.setDefaultLang('arenasport');
+    translate.setTranslation('arenasport', arenasport);
     translate.setTranslation('crimea', crimea);
-    translate.use('soccer');
+    translate.use("arenasport");// тут специально такие ковычки!!!
 
     // datepicker
     defineLocale('ru', ruLocale);

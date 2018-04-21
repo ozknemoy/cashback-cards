@@ -6,6 +6,7 @@ import {HttpService} from "../../services/http.service";
 import {Toast, ToastsManager} from "ng2-toastr";
 import {UAService} from "../../services/user-agent.service";
 import {AuthLocalStorage} from "../../services/auth-local-storage.service";
+import {SeoService} from "../../services/seo.service";
 
 export function isEqualValidPassword(stepOneModel):boolean {
   return stepOneModel.password && stepOneModel.password.valid
@@ -41,19 +42,15 @@ export class RegistrationView {
     public authLocalStorage: AuthLocalStorage,
     @Inject('phoneMask') public phoneMask: string,
     @Inject('cardMask') public cardMask: string,
-    @Inject('phonePlaceholder') public phonePlaceholder: string
+    @Inject('phonePlaceholder') public phonePlaceholder: string,
+    public seoService: SeoService
   ) {}
 
   ngOnInit() {
     if(this.isBrowser) {
+      this.seoService.handleOne('main');
       this.isAndroid = this.uAService.is().android;
     }
-    //https://netbasal.com/exploring-the-new-meta-service-in-angular-version-4-b5ba2403d3e6
-    this.metaService.addTags([
-      {name: 'twitter:title', content: 'Регистрация'},
-      {property: 'og:title', content: 'Регистрация'}
-    ]);
-    this.titleService.setTitle('Регистрация');
 
   }
 

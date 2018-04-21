@@ -1,8 +1,257 @@
 
-<a routerLink="/">Home</a>
-<a routerLink="/registration">regs</a>
+<!--
 <a routerLink="/partners">partners</a>
-<a routerLink="/login">login</a>
 <a routerLink="/profile/main">profile</a>
 <button (click)="authLocalStorage.logout()">logout</button>
+-->
 
+<div id="bodyClick" 
+     *ngIf="isMobileMenuOpen"
+     (click)="isMobileMenuOpen = !isMobileMenuOpen"></div>
+
+<div [ngClass]="{'nav-open':isMobileMenuOpen}">
+  <div class="wrap sidebar-collapse">
+    <!-- header -->
+    <div class="header header_nav navbar navbar-expand-lg">
+      <button class="navbar-toggler" type="button"
+              [ngClass]="{'toggled':isMobileMenuOpen}"
+              (click)="isMobileMenuOpen = !isMobileMenuOpen">
+        <span class="navbar-toggler-bar bar1"></span>
+        <span class="navbar-toggler-bar bar2"></span>
+        <span class="navbar-toggler-bar bar3"></span>
+      </button>
+
+      <div class="header_nav--container collapse navbar-collapse">
+        <div class="header_nav--col">
+          <a href="" class="header_nav--link">Преимущества карты</a>
+          <a href="" class="header_nav--link">Как оформить</a>
+          <a href="" class="header_nav--link">Как накопить</a>
+        </div>
+        <div class="header_nav--col">
+          <a href="" class="header_nav--link">Как потратить</a>
+          <a routerLink="/partners" class="header_nav--link">Где воспользоваться</a>
+          <a routerLink="login" class="btn btn-neutral btn-simple btn-sm">Войти</a>
+        </div>
+      </div>
+      <a routerLink="/" class="logo"></a>
+
+      <a routerLink="/login" *ngIf="!authLocalStorage.auth.data.hash; else isLogIn"
+         class="btn btn-neutral btn-simple btn_mob btn-sm">Войти</a>
+      <ng-template #isLogIn>
+        <a routerLink="/profile/main" class="btn btn-neutral btn-simple btn_mob btn-sm">Личный кабинет</a>
+      </ng-template>
+    </div>
+    <!-- header end -->
+
+    <!-- welcome slide -->
+    <div class="w_slide">
+      <div class="w_slide--bg"></div>
+      <div class="w_slide--content">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-12 col-lg-6">
+              <div class="w_slide--img">
+                <img src="assets/img/arena-card.png" alt="">
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <h1 class="page-title">{{adminH1}}</h1>
+              <p>{{'home.welcomeSlide' | translate}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- welcome slide end -->
+
+    <!-- content section 1 -->
+    <div class="section_block section-1">
+      <div class="row m-0">
+        <div class="col-12 col-md-6 p-0 order-md-6">
+          <div class="section_block--content">
+            <div class="section_block--wrap" [innerHTML]="'home.sectionOne' | translate"></div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 p-0 order-md-1">
+          <div class="section_block--img" style="background-image: url(assets/img/section_img--1.png)"></div>
+        </div>
+      </div>
+    </div>
+    <!-- content section 1 end -->
+
+    <!-- content section 2 -->
+    <div class="section_block section-2">
+      <div class="row m-0">
+        <div class="col-12 col-md-6 p-0">
+          <div class="section_block--content">
+            <div class="section_block--wrap">
+              <h3 class="page-title h2">Более 100 партнеров, где можно получить, или потратить баллы! </h3>
+              <p>Количество партнеров активно увеличивается!</p>
+              <a routerLink="/registration" class="btn btn-neutral btn-simple">Оформить карту</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 p-0">
+          <div class="section_block--img" style="background-image: url('assets/img/section_img--2.png')"></div>
+        </div>
+      </div>
+    </div>
+    <!-- content section 2 end -->
+
+    <!-- content section 3 -->
+    <div class="section_block section-3">
+      <div class="row m-0">
+        <div class="col-12 col-md-6 p-0 order-md-6">
+          <div class="section_block--content">
+            <div class="section_block--wrap">
+              <h3 class="page-title h2">Специальные предложения и уникальные акции только для держателей {{'user_cards' | translate}}</h3>
+              <p>Скидки до 70% на товары!</p>
+              <a routerLink="/registration" class="btn btn-neutral btn-simple">Оформить карту</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 p-0 order-md-1">
+          <div class="section_block--img" style="background-image: url('assets/img/section_img--3.png')"></div>
+        </div>
+      </div>
+    </div>
+    <!-- content section 3 end -->
+
+    <!-- content section 4 -->
+    <div class="section_block section-4">
+      <div class="row m-0">
+        <div class="col-12 col-md-6 p-0">
+          <div class="section_block--content">
+            <div class="section_block--wrap">
+              <p class="page-title h2 text-warning">Как оформить?</p>
+              <p class="page-title h2">Получи {{'user_card_to' | translate}} бесплатно у <a routerLink="/partners" class="">партнеров</a></p>
+              <p class="page-title h2">Создай виртуальную карту в <a routerLink="/registration">личном кабинете</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 p-0">
+          <div class="section_block--img" style="background-image: url('assets/img/section_img--4.png')"></div>
+        </div>
+      </div>
+    </div>
+    <!-- content section 4 end -->
+
+    <!-- content section 5 -->
+    <div class="section_block section-5">
+      <div class="row m-0">
+        <div class="col-12 col-md-4 p-0">
+          <div class="section-col-1">
+            <div class="section_block--content">
+              <div class="section_block--wrap">
+                <p class="page-title h2 text-warning">Как накопить баллы?</p>
+                <p class="page-title h2">За каждые 100 руб. в чеке вы получаете 1 балл. </p>
+                <p>Накапливайте баллы уже с первой покупки</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 p-0">
+          <div class="section-col-2">
+            <div class="section_block--content">
+              <div class="section_block--wrap">
+                <p class="page-title h2">Покупай больше. Когда сумма ваших покупок больше 5000 руб. за каждые 100 руб. вы получаете 3 балла</p>
+                <p>Прогрессивная система накопления баллов наиболее выгодна при активном участии в программе</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 p-0">
+          <div class="section-col-3">
+            <div class="section_block--content">
+              <div class="section_block--wrap">
+                <p class="page-title h2">Получай баллы за активность:</p>
+                <p>+ 20 дополнительных баллов за регистрацию на сайте: <a routerLink="/registration">{{host}}</a>. Делай ставки на сайте <a href="http://prostoprosport.ru/" target="_blank">http://prostoprosport.ru/</a> и выигрывай баллы онлайн!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- content section 5 end -->
+
+    <!-- content section 6 -->
+    <div class="section_block section-6">
+      <div class="row m-0">
+        <div class="col-12 col-md-6 p-0 order-md-6">
+          <div class="section_block--content">
+            <div class="section_block--wrap">
+              <p class="page-title h2 text-black">Как потратить баллы?</p>
+              <p class="page-title h2">Перед покупкой товара, или услуги у участника нашей программы сообщи кассиру о желании оплатить покупку баллами и они будут учтены из расчета 1 балл — 1 рубль. </p>
+              <p>Обрати внимание, что {{'user_card' | translate}} должна быть активирована!v</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 p-0 order-md-1">
+          <div class="section_block--img" style="background-image: url('assets/img/section_img--6.png')"></div>
+        </div>
+      </div>
+    </div>
+    <!-- content section 6 -->
+
+    <!-- content section 7 -->
+    <div class="section_block section-7">
+
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-12">
+            <p class="page-title h2">Где воспользоваться?</p>
+          </div>
+          <div class="col-12">
+            <div class="row justify-content-md-center">
+              <div class="col-6 col-sm-3">
+                <div class="partner_logo">
+                  <img src="assets/img/partner_logo--1.png" alt="">
+                </div>
+              </div>
+              <div class="col-6 col-sm-3">
+                <div class="partner_logo">
+                  <img src="assets/img/partner_logo--2.png" alt="">
+                </div>
+              </div>
+              <div class="col-6 col-sm-3">
+                <div class="partner_logo">
+                  <img src="assets/img/partner_logo--3.png" alt="">
+                </div>
+              </div>
+              <div class="col-6 col-sm-3">
+                <div class="partner_logo">
+                  <img src="assets/img/partner_logo--4.png" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <a routerLink="/partners" class="btn btn-neutral btn-simple">Больше предложений</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- content section 7 end -->
+
+    <footer class="footer">
+      <div class="container">
+        <div class="text-center">
+          <div class="footer-social">
+            <a href=""><i class="mdi mdi-vk"></i></a>
+            <a href=""><i class="mdi mdi-instagram"></i></a>
+            <a href=""><i class="mdi mdi-google-plus"></i></a>
+            <a href=""><i class="mdi mdi-facebook"></i></a>
+            <a href=""><i class="mdi mdi-twitter"></i></a>
+            <a href=""><i class="mdi mdi-youtube"></i></a>
+          </div>
+          <div class="footer-links">
+            <a href="">Программы лояльности</a>
+            <a href="">Партнерам</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>

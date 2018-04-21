@@ -11,24 +11,26 @@ import {SharedService} from "./shared.service";
 
 
 class AuthKeys {
-  hash: string;
-  name: string;
-  surname: string;
-  patronymic: string;
+  hash: string = null;
+  name: string = null;
+  surname: string = null;
+  patronymic: string = null;
 }
 
 class AuthData extends AuthKeys {
-  public data = {
-    name: null
-  }
+  public data = new AuthKeys();
 }
 
 @Injectable()
 export class AuthLocalStorage {
   public hash:string;// для ноды
   public auth = new AuthData();
-  storageKeyPrefix:string = 'prioriti-';
-  public auth_keys = ['hash', 'name', 'surname', 'patronymic'];
+  public nodeData = {
+    host: null,
+    localUrl: null
+  };
+  private readonly storageKeyPrefix:string = 'prioriti-';
+  public readonly auth_keys = ['hash', 'name', 'surname', 'patronymic'];
 
   public isBrowser:boolean = isPlatformBrowser(this.platformId);
 

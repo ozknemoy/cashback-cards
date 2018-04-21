@@ -4,14 +4,15 @@
  */
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+//import {CollapseModule} from 'ngx-bootstrap/collapse';
 import {ReCaptchaModule} from 'angular2-recaptcha';
 import {NgxPaginationModule} from 'ngx-pagination/dist/ngx-pagination';
-import {ToastModule, ToastOptions} from 'ng2-toastr/ng2-toastr';
+import {ToastModule} from 'ng2-toastr/ng2-toastr';
 import {NgxQRCodeModule} from "ngx-qrcode2";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {NgxMaskModule} from 'ngx-mask'
 import {TranslateModule} from '@ngx-translate/core';
-import {GeoComponent} from "./geo/geo.module";
+//import {GeoComponent} from "./geo/geo.module";
 import {AgmCoreModule} from "@agm/core";
 import {NgxBarcodeModule} from "ngx-barcode";
 
@@ -33,6 +34,6 @@ export const vendorModules = [
   //bootstrap Modules
   ModalModule.forRoot(),
   BsDatepickerModule.forRoot(),
-
+  //CollapseModule.forRoot(),
 ];
 

@@ -18,7 +18,7 @@
 Вам на телефон выслан код подтверждения. Введите его и нажмите кнопку Далее, чтобы продолжить.  Повторную смс с кодом вы можете запросить через 15 минут.
               </span>
               <span *ngSwitchCase="'three'">
-Если у Вас есть карта {{'userOf' | translate}}, введите ее номер в специальное поле и нажмите далее. Номер написан на карте, и имеет формат 6110 9000 0000 0012. Если карты у Вас нет, ничего страшного! Просто нажмите «Создать новую карту».
+Если у Вас есть карта {{'userOf' | translate}}, введите ее номер в специальное поле и нажмите далее. Номер написан на карте, и имеет формат {{'cardFormat' | translate}}. Если карты у Вас нет, ничего страшного! Просто нажмите «Создать новую карту».
               </span>
             </p>
             <!--<a routerLink="/" class="btn btn-neutral btn-simple">Вернуться на главную</a>-->
@@ -85,21 +85,24 @@
               </div>
             </form>
 
-            <form *ngSwitchCase="'two'">
-              <div class="form-group">
-                <label>Код из смс</label>
-                <input type="text" name="code" class="form-control" required
-                       [(ngModel)]="stepOneModel.code">
-              </div>
+            <ng-template [ngSwitchCase]="'two'">
+              <form>
+                <div class="form-group">
+                  <label>Код из смс</label>
+                  <input type="text" name="code" class="form-control" required
+                         [(ngModel)]="stepOneModel.code">
+                </div>
+              </form>
 
               <div class="text-center">
-                <button class="btn btn-success"
+                <button class="btn btn-success" type="button"
                         (click)="toStepThree(stepOneModel.code)"
                         [disabled]="!stepOneModel.code">Далее
                 </button>
                 <button class="btn btn-success btn-link" (click)="getSms()">Выслать код повторно</button>
               </div>
-            </form>
+            </ng-template>
+
 
             <form *ngSwitchCase="'three'" #stepThreeForm="ngForm">
               <div class="form-group">
