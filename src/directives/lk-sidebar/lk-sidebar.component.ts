@@ -13,7 +13,7 @@ import {BonusLevels, Card, User} from "../../app/profile/profile-settings.compon
   templateUrl: './lk-sidebar.component.html'
 })
 export class LkSidebarComponent {
-
+  public isMobileMenuOpen = false;
   public isLoading = true;
   public followed = 0;
   public level = 1;
@@ -21,6 +21,7 @@ export class LkSidebarComponent {
   public card: Card = new Card();
   public bonusLevels:BonusLevels[];
   getProfile$$;
+
   constructor(public httpService: HttpService,
               public HandleDataService: HandleDataService,
               public authLocalStorage: AuthLocalStorage) {

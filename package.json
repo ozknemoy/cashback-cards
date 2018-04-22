@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "ng": "ng",
-    "start": "ng serve -aot --progress=false",
+    "start": "ng serve -aot --progress=false --pretty",
     "build": "ng build",
     "lint": "ng lint --fix",
     "build:client-and-server-bundles": "ng build --prod && ng build --prod --app 1 --output-hashing=false",

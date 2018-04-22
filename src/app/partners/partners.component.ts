@@ -5,6 +5,7 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {AutoUnsubscribe} from "../../decorators/auto-unsubscribe.decorator";
 import {HttpService} from "../../services/http.service";
 import {publicDecrypt} from "crypto";
+import {SeoService} from "../../services/seo.service";
 
 /*
 /v1/shops/find-shop post {"ShopSearch":{XXXX}}
@@ -69,9 +70,10 @@ export class PartnersView {
     metro: null
   };
 
-  constructor(public httpService: HttpService) {}
+  constructor(public httpService: HttpService, public seoService: SeoService) {}
 
   ngOnInit() {
+    this.seoService.handleOne('main.shop');
     this.httpService.get('handbooks/shop-categories').subscribe(cat=> this.categories = cat);
     this.httpService.post('shops/find-shop', {ShopSearch: null})
       .subscribe((partners: IPartner[]) => {

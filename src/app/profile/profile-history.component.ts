@@ -30,7 +30,7 @@ export class ProfileHistoryView {
   public filter = {
     status: null
   };
-  public history: IHistory[];
+  public history: IHistory[] = [];
 
   constructor(
     public httpService: HttpService,

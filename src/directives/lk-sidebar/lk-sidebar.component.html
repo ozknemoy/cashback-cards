@@ -1,18 +1,36 @@
 
-<div class="lk_sidebar">
-  <div class="content">
+
+<div [ngClass]="{'nav-open':isMobileMenuOpen}">
+  <div class="sidebar-collapse">
+
+    <div id="bodyClick"
+         *ngIf="isMobileMenuOpen"
+         (click)="isMobileMenuOpen = false"></div>
+<div class="lk_sidebar navbar navbar-expand-lg">
+  <button class="navbar-toggler" type="button"
+          [ngClass]="{'toggled':isMobileMenuOpen}"
+          (click)="isMobileMenuOpen = !isMobileMenuOpen">
+    <span class="navbar-toggler-bar bar1"></span>
+    <span class="navbar-toggler-bar bar2"></span>
+    <span class="navbar-toggler-bar bar3"></span>
+  </button>
+
+  <div class="content collapse navbar-collapse">
     <div class="lk_sidebar--summary">
       <div class="lk_profile--name">{{authLocalStorage.auth.data.name}} </div>
       <div class="lk_profile--ball total">Баланс баллов: <span>{{card.points | thousand}}</span></div>
     </div>
     <div class="lk_sidebar--nav">
-      <a class="lk_sidebar--link" routerLink="/profile/main" routerLinkActive="current">
+      <a class="lk_sidebar--link" routerLink="/profile/main" routerLinkActive="current"
+         (click)="isMobileMenuOpen = false">
         <i class="mdi mdi-home"></i> Главная
       </a>
-      <a class="lk_sidebar--link" routerLink="/profile/history" routerLinkActive="current">
+      <a class="lk_sidebar--link" routerLink="/profile/history" routerLinkActive="current"
+         (click)="isMobileMenuOpen = false">
         <i class="mdi mdi-credit-card-multiple"></i> История операций
       </a>
-      <a class="lk_sidebar--link" routerLink="/profile/settings" routerLinkActive="current">
+      <a class="lk_sidebar--link" routerLink="/profile/settings" routerLinkActive="current"
+         (click)="isMobileMenuOpen = false">
         <i class="mdi mdi-settings"></i> Настройки профиля
       </a>
     </div>
@@ -32,5 +50,7 @@
       </div>
     </div>
     <qr-barcode-button code="{{card.fullNumber}}"></qr-barcode-button>
+  </div>
+</div>
   </div>
 </div>

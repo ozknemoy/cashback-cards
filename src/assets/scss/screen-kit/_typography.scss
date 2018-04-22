@@ -117,7 +117,7 @@ p{
   color: $brand-danger !important;
 }
 .text-black{
-  color: $light-black;
+  color: $black-color !important;
 }
 
 .blockquote{
@@ -162,7 +162,8 @@ p{
 }
 
 .page-title {
-    
+    font-family: 'Proxima Nova Cn Bl';
+    font-size: 36px;
     span {
         display: inline-block;
         position: relative;

@@ -1,11 +1,21 @@
 .lk_profile {
+	background-color: rgba(255,255,255,0.9);
 	@extend .card;
 	&--ball {
+		font-size: 16px;
+		@media screen and (max-width: 767px){
+			font-size: 12px;
+		}
 		.lk_card & {
 			padding-bottom: 10px;
 		}
 		span {
 			float: right;
+			font-weight: 700;
 		}
+	}
+	&--name {
+		font-weight: 700;
+    	font-size: 18px;
 	}
 }

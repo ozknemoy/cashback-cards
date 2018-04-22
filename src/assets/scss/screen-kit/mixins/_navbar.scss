@@ -67,17 +67,17 @@
         .navbar-toggler-bar{
             display: block;
             position: relative;
-            width: 22px;
-            height: 1px;
-            border-radius: 1px;
-            background: $brand-info;
+            width: 37px;
+            height: 3px;
+            border-radius: 3px;
+            background: $white-color;
 
             & + .navbar-toggler-bar{
                 margin-top: 7px;
             }
 
             &.bar2{
-                width: 17px;
+                width: 27px;
                 transition: width .2s linear;
             }
         }
@@ -109,18 +109,18 @@
       opacity: 1;
     }
     .bar3 {
-      bottom: 0px;
+      bottom: 8px;
       @include bar-animation($bottombar-back);
     }
     .toggled .bar1 {
-      top: 6px;
+      top: 8px;
       @include bar-animation($topbar-x);
     }
     .toggled .bar2 {
       opacity: 0;
     }
     .toggled .bar3 {
-      bottom: 6px;
+      bottom: 8px;
       @include bar-animation($bottombar-x);
     }
 
@@ -144,15 +144,16 @@
 }
 
 @mixin navbar-collapse() {
-    .navbar-collapse{
+    .navbar-collapse:not(.content){
         position: fixed;
         display: block;
         top: 0;
         height: 100% !important;
         width: 300px;
-        right: 0;
+        left: 0;
         z-index: 1032;
         visibility: visible;
+        padding-top: 100px;
         background-color: #999;
         overflow-y: visible;
         border-top: none;
@@ -160,7 +161,7 @@
 
         max-height: none !important;
 
-        @include transform-translate-x(300px);
+        @include transform-translate-x(-300px);
         @include transition (0.50s, cubic-bezier(0.685, 0.0473, 0.346, 1));
 
         &:before{
@@ -227,8 +228,8 @@
         position: fixed;
         opacity: 1;
         top: 0;
-        left: auto;
-        right: 300px;
+        left: 300px;
+        right: auto;
         content: "";
         z-index: 9999;
         overflow-x: hidden;

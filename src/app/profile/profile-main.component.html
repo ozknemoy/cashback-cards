@@ -1,27 +1,28 @@
 
 <div class="lk_content">
   <div class="lk_content--wrap" *ngIf="!isLoading">
-    <p *ngIf="semiFilledProfile;else filledProfile" class="alert alert-success">
-      Приветствуем Вас, Уважаемый {{'user' | translate}}! Представьтесь пожалуйста и получите 400 приветственных баллов
-      на свой счет. <a class="btn btn-info btn-sm" routerLink="/profile/settings">ПОЛУЧИТЬ БАЛЛЫ</a>
-    </p>
-    <ng-template #filledProfile>
-      <p class="alert alert-success">
+    <div class="lk_card">
+      <p *ngIf="semiFilledProfile;else filledProfile" class="alert alert-success">
+        Приветствуем Вас, Уважаемый {{'user' | translate}}! Представьтесь пожалуйста и получите 400 приветственных баллов
+        на свой счет. <a class="btn btn-info btn-sm" routerLink="/profile/settings">ПОЛУЧИТЬ БАЛЛЫ</a>
+      </p>
+      <ng-template #filledProfile>
+        <p class="alert alert-success">
         <span *ngIf="level<3; else level3">
           Ваш статус {{card.status.name}}, Вам доступен кэш бек {{card.status.percent}}%.
           Покупайте больше! При сумме покупок более {{card.status.amount_to}} руб. Ваш кэш бек уже {{bonusLevels[level].percent}}%
         </span>
-        <ng-template #level3>
+          <ng-template #level3>
           <span>
             Поздравляем!
             Ваш статус {{card.status.name}}, Вам доступен кэш бек {{card.status.percent}}%.
             Пользуйтесь картой, для сохранения статуса. При отсутствии покупок в течение месяца, ваш статус будет снижен.
           </span>
-        </ng-template>
-      </p>
-    </ng-template>
+          </ng-template>
+        </p>
+      </ng-template>
 
-    <div class="lk_card">
+
       <div class="content">
         <div class="lk_card--title">Моя карта: {{card.number | card}}</div>
         <div class="lk_card--content">
@@ -69,29 +70,29 @@
       </div>
     </div>-->
     <div class="lk_promotions">
-      <div class="lk_title">Магазины</div>
+      <div class="lk_title text-center">Магазины</div>
       <div class="row">
         <div class="col-12 col-xs-6 col-md-4">
           <a class="lk_promotions--item">
-            <span class="lk_promotions--img"><img src="assets/img/gift.png" alt=""></span>
+            <span class="lk_promotions--img"><img src="assets/img/partner_logo-b--1.png" alt=""></span>
             <span class="lk_promotions--title">Магазин 1</span>
           </a>
         </div>
         <div class="col-12 col-xs-6 col-md-4">
           <a class="lk_promotions--item">
-            <span class="lk_promotions--img"><img src="assets/img/gift.png" alt=""></span>
+            <span class="lk_promotions--img"><img src="assets/img/partner_logo-b--2.png" alt=""></span>
             <span class="lk_promotions--title">Магазин 1</span>
           </a>
         </div>
         <div class="col-12 col-xs-6 col-md-4">
           <a class="lk_promotions--item">
-            <span class="lk_promotions--img"><img src="assets/img/gift.png" alt=""></span>
+            <span class="lk_promotions--img"><img src="assets/img/partner_logo-b--3.png" alt=""></span>
             <span class="lk_promotions--title">Магазин 1</span>
           </a>
         </div>
       </div>
       <div class="text-center">
-        <button routerLink="/partners" class="btn btn-success btn-simple">Все магазины</button>
+        <button routerLink="/partners" class="btn btn-neutral btn-simple">Все магазины</button>
       </div>
     </div>
 

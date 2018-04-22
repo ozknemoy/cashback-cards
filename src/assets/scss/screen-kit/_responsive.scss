@@ -1,4 +1,4 @@
-@media screen and (max-width: 991px){
+@media screen and (max-width: 1110px){
     .sidebar-collapse{
         @include navbar-collapse();
 
@@ -99,7 +99,7 @@
     }
 }
 
-@media screen and (min-width: 992px){
+@media screen and (min-width: 1110px){
     .burger-menu{
         @include navbar-collapse();
 

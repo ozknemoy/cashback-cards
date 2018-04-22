@@ -23,9 +23,6 @@ export class SeoService {
               private titleService: Title,
               public meta: Meta,
               public authLocalStorage: AuthLocalStorage) {
-    if(this.isServer){
-
-    }
 
   }
   /*В админке блок SEO он создает только для блоков, у которых нет сущностей, типо списка магазинов и главная,
@@ -35,11 +32,11 @@ export class SeoService {
 где path это либо main тогда вернет сео для главной, либо main.НАЗВАНИЕ_СУЩНОСТИ вернет сео для главной и
  сео для сушности, либо main.НАЗВАНИЕ_СУЩНОСТИ.ИД_СУЩНОСТИ тогда вернет тоже + сео для конкретного обьекта*/
 
-  handleOne(chunkUrl: string, i = 0) {
-    if(!this.isServer) {// todo сделать наоборот
-      console.log('--------SeoService--------');
+  handleOne(chunkUrl: string, i?) {
+    // todo если показывать и браузеру то надо делать не addTags a update
+    if(this.isServer) {// todo сделать наоборот
       this.httpService.get(this.baseSeoUrl + chunkUrl).subscribe((seo: SeoResponse[])=> {
-        if(seo && seo.length) this.handleSeoResponse(seo[i]);
+        if(seo && seo.length) this.handleSeoResponse(seo[i? i : seo.length-1]);
       })
     }
   }
@@ -47,6 +44,7 @@ export class SeoService {
   handleSeoResponse(seo: SeoResponse) {
     const localUrl = this.authLocalStorage.nodeData.localUrl;
     const host = this.authLocalStorage.nodeData.host;
+    console.log('--------SeoService--------',host + localUrl);
     this.meta.addTags([
       {property: 'og:image', content: host + this.photoFolder + seo.image},
       {property: 'og:description', content: seo.description},

@@ -28,8 +28,6 @@ export class AppServerModule {
       public authLocalStorage:AuthLocalStorage,
       @Inject(REQUEST) private req: Request
   ) {
-    //console.log("AppServerModule", req);
-
     // пишу в localstorage поля из куки и урлы
     authLocalStorage.setCookiesToLS(req.headers.cookie);
     authLocalStorage.nodeData.host = req.headers.host;

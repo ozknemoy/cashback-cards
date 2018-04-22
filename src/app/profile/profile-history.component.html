@@ -1,8 +1,8 @@
 
 <div class="lk_content">
   <div class="lk_content--wrap">
-    <div class="card_list">
-      <!--<div class="content">
+    <!--<div class="card_list">
+      <div class="content">
         <div class="card_list&#45;&#45;item">
           <div class="checkbox checkbox-inline">
             <input type="checkbox" name="" id="card1" value="1" checked>
@@ -21,8 +21,8 @@
             2555 балов
           </div>
         </div>
-      </div>-->
-    </div>
+      </div>
+    </div>-->
 
     <div class="row align-items-center">
       <div class="col-12 col-md-5">
@@ -53,7 +53,7 @@
     </div>
 
     <div class="lk_history">
-      <div class="content">
+      <div class="content" *ngIf="history.length">
         <div class="lk_history--item"
              *ngFor="let hist of history
              | fromDateToDate : bsRangeValue[0] : bsRangeValue[1] : 'created_at'
@@ -66,7 +66,7 @@
                 <span class="lk_history--day">{{hist.created_at | date: 'dd.MM.yy HH:mm'}}</span><!---->
               </div>
             </div>
-            <div class="col-12 col-sm-6">
+            <div class="col-12 col-sm-8">
               <div class="lk_history--title">
                 <span class="lk_history--img"><img src="assets/img/card.png" alt="card"></span>
                 {{hist.description}}
@@ -75,9 +75,9 @@
             <div class="col-12 col-sm-2 text-right">
               {{hist.amount}}
             </div>
-            <div class="col-12 col-sm-2 text-right">
+            <!--<div class="col-12 col-sm-2 text-right">
               <span class="text-success">{{hist.trans}}</span>
-            </div>
+            </div>-->
           </div>
         </div>
         <pagination-controls (pageChange)="currentPage=$event"

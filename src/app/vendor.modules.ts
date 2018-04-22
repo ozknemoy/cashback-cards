@@ -15,8 +15,9 @@ import {TranslateModule} from '@ngx-translate/core';
 //import {GeoComponent} from "./geo/geo.module";
 import {AgmCoreModule} from "@agm/core";
 import {NgxBarcodeModule} from "ngx-barcode";
+import ret = require('../../config-ext/index.js');
 
-// в импорты модулей приложения. не в модуль директив!!!
+
 export const vendorModules = [
   NoopAnimationsModule,
   ToastModule.forRoot(),
@@ -25,10 +26,7 @@ export const vendorModules = [
   NgxQRCodeModule,
   NgxMaskModule.forRoot(),
   TranslateModule.forRoot(),
-  AgmCoreModule.forRoot({
-    // https://console.developers.google.com/apis/credentials?project=my-project-1520354209044&authuser=0
-    apiKey: 'AIzaSyD3LusG3ps3C' + 'gXLBUiMHbpyfQPBA6VTEac'
-  }),
+  AgmCoreModule.forRoot({apiKey: ret.gMapsArenasport}),
   NgxBarcodeModule,
 
   //bootstrap Modules

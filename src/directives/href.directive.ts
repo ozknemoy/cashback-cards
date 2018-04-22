@@ -2,16 +2,21 @@
 /**
  * Created by ozknemoy on 19.05.2017.
  */
-import {Directive,Input} from "@angular/core";
+import {Directive, ElementRef, Input} from "@angular/core";
 @Directive({
     selector : '[href]',
     host : {
-        '(click)' : 'preventDefault($event)'
-    }
+        '(click)' : 'click($event)'
+    },
 })
 export class HrefDirective {
     @Input() href;
-    preventDefault(event) {
-        if(this.href.length == 0) event.preventDefault();
-    }
+  private target = this.el.nativeElement.getAttribute('target');
+
+  constructor(private el: ElementRef) {}
+
+  click(event) {
+      console.log('***', this.href, this.target);
+      window.open(this.href, this.target)
+  }
 }

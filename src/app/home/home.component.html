@@ -1,16 +1,9 @@
 
-<!--
-<a routerLink="/partners">partners</a>
-<a routerLink="/profile/main">profile</a>
-<button (click)="authLocalStorage.logout()">logout</button>
--->
-
-<div id="bodyClick" 
-     *ngIf="isMobileMenuOpen"
-     (click)="isMobileMenuOpen = !isMobileMenuOpen"></div>
-
 <div [ngClass]="{'nav-open':isMobileMenuOpen}">
   <div class="wrap sidebar-collapse">
+    <div id="bodyClick"
+         *ngIf="isMobileMenuOpen"
+         (click)="isMobileMenuOpen = false"></div>
     <!-- header -->
     <div class="header header_nav navbar navbar-expand-lg">
       <button class="navbar-toggler" type="button"
@@ -165,7 +158,7 @@
             <div class="section_block--content">
               <div class="section_block--wrap">
                 <p class="page-title h2">Получай баллы за активность:</p>
-                <p>+ 20 дополнительных баллов за регистрацию на сайте: <a routerLink="/registration">{{host}}</a>. Делай ставки на сайте <a href="http://prostoprosport.ru/" target="_blank">http://prostoprosport.ru/</a> и выигрывай баллы онлайн!</p>
+                <p>+ 20 дополнительных баллов за регистрацию на сайте: <a [href]="'https://' + reklamaUrl" target="_blank" class="pointer">{{reklamaUrl}}</a>. Делай ставки на сайте <a href="http://prostoprosport.ru/" target="_blank">http://prostoprosport.ru/</a> и выигрывай баллы онлайн!</p>
               </div>
             </div>
           </div>

@@ -113,7 +113,7 @@
 .btn-simple{
     border: $border;
     border-color: $default-color;
-    padding: $padding-btn-vertical - 1 $padding-round-horizontal - 1;
+    padding: $padding-btn-vertical $padding-round-horizontal;
     background-color: $transparent-bg;
 }
 

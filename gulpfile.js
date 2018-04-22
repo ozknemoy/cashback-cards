@@ -39,6 +39,9 @@ const styleCrimeaReg = /crimea-screen-kit\.css/g;
 const styleArenasport = 'arenasport-screen-kit.css';
 const styleArenasportReg = /arenasport-screen-kit\.css/g;
 
+const gMapsArenasport = 'gMapsArenasport';
+const gMapsCrimea = 'gMapsCrimea';
+
 gulp.task('replace-crimea-to-Prod', function () {
   return replaceProd({
     port:[portReg, portCrimeaProd],
@@ -97,7 +100,8 @@ gulp.task('replace-test-arenasport-to-crimea', function () {
     port:[portReg, portCrimeaTest],
     locale: [localeArenasportReg, localeCrimea],
     api: [apiArenasportTestReg, apiCrimeaTest],
-    style: [styleArenasportReg, styleCrimea]
+    style: [styleArenasportReg, styleCrimea],
+    map: [new RegExp(gMapsArenasport, 'g'), gMapsCrimea]
   })
 });
 
@@ -106,11 +110,12 @@ gulp.task('replace-test-crimea-to-arenasport', function () {
     port:[portReg, portArenasportTest],
     locale: [localeCrimeaReg, localeArenasport],
     api: [apiCrimeaTestReg, apiArenasportTest],
-    style: [styleCrimeaReg, styleArenasport]
+    style: [styleCrimeaReg, styleArenasport],
+    map: [new RegExp(gMapsCrimea, 'g'), gMapsArenasport]
   })
 });
 
-function replaceTest({port, locale, api, style}) {
+function replaceTest({port, locale, api, style, map}) {
   const _locale = [{
     match: locale[0],
     replacement: function () {
@@ -135,10 +140,17 @@ function replaceTest({port, locale, api, style}) {
       return style[1]
     }
   }];
+  const _map = [{
+    match: map[0],
+    replacement: function () {
+      return map[1]
+    }
+  }];
   return gulp.src("./server.ts").pipe(replace({patterns: _port})).pipe(gulp.dest(''))
   && gulp.src("./src/app/app.module.ts").pipe(replace({patterns: _locale})).pipe(gulp.dest('./src/app'))
   && gulp.src("./src/config/base_url.ts").pipe(replace({patterns: _api})).pipe(gulp.dest('src/config'))
   && gulp.src("./src/index.html").pipe(replace({patterns: _style})).pipe(gulp.dest('src'))
+  && gulp.src("./src/app/vendor.modules.ts").pipe(replace({patterns: _map})).pipe(gulp.dest('src/app'))
 }
 
 gulp.task('css-before-build', function () {

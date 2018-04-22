@@ -91,6 +91,19 @@
             }
         }
 
+        &.btn-neutral{
+            color: $white-color;
+
+            &:hover,
+            &:focus,
+            &:active{
+                background-color: $btn-states-color;
+                color: $default-states-color;
+            }
+        }
+
+        
+
         &.active,
         &:active,
         &:active:focus,
@@ -126,10 +139,12 @@
         &:hover,
         &:focus,
         &:active{
-            background-color: $transparent-bg;
-            color: $btn-states-color;
+            // background-color: $transparent-bg;
+            // color: $btn-states-color;
+            color: $brand-success;
             border-color: $btn-states-color;
-            box-shadow: none;
+            box-shadow:  0 3px 8px 0 rgba(0,0,0, 0.17);
+            // box-shadow: none;
         }
     }
 

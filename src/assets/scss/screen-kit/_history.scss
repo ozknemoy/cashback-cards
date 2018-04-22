@@ -1,4 +1,5 @@
 .lk_history {
+    background-color: rgba(255,255,255,0.9);
     @extend .card;
     &--ym {
         position: relative;
@@ -30,12 +31,22 @@
             border-top: 0;
         }
     }
-    &--img {
-        display: inline-block;
-        width: 50px;
+    &--title {
         position: relative;
+        padding-left: 60px;
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+    }
+    &--img {
+        display: block;
+        width: 50px;
+        position: absolute;
         overflow: hidden;
-        vertical-align: middle;
+        left: 0;
+        top: 50%;
+        
+        @include transform-translate-y(-50%);
         img {
             max-width: 100%;
         }

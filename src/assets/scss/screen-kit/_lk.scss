@@ -1,26 +1,70 @@
 .lk {
-	padding: 30px 0;
+	background: rgba(0,0,0,0.5);
+	padding: 0 0 100px;
+	min-height: 100vh;
+	&_content {
+		margin-top: 30px;
+	}
 	&_card {
+		background-color: rgba(255,255,255,0.9);
 		@extend .card;
+		&--image {
+			display: inline-block;
+			border-radius: 10px;
+			position: relative;
+			overflow: hidden;
+		}
+		&--title {
+			font-family: 'Proxima Nova Cn Rg';
+    		font-size: 24px;
+    		@media screen and (max-width: 767px){
+    			font-size: 18px;
+    		}
+		}
+
 	}
 	&_title {
-		font-size: 1.5em;
+		font-family: 'Proxima Nova Cn Bl';
+		font-size: 2em;
 		margin-bottom: 10px;
+		color: $white-color;
 	}
-
 	
-
-
 }
 // card list
 .card_list {
+	background-color: rgba(255,255,255,0.9);
 	@extend .card;
 	&--item {
+
+		&:after {
+			content: '';
+			clear: both;
+			display: block;
+		}
+		.checkbox {
+			float: left;
+			margin-right: 15px;
+		}
 		label {
 			vertical-align: middle;
 		}
 		img {
 			max-width: 150px;
 		}
+	}
+	&--title {
+		font-family: 'Proxima Nova Cn Bl';
+		font-size: 24px;
+		@media screen and (max-width: 767px){
+			font-size: 18px;
+		}
+	}
+	&--num {
+		font-family: 'Proxima Nova Cn Rg';
+
+	}
+	&--score {
+
 	}
 }
