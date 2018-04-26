@@ -20,12 +20,12 @@ export class LkSidebarComponent {
   public user: User = new User();
   public card: Card = new Card();
   public bonusLevels:BonusLevels[];
+  public bonusLevelsForSlider:BonusLevels[];
   getProfile$$;
 
   constructor(public httpService: HttpService,
               public HandleDataService: HandleDataService,
               public authLocalStorage: AuthLocalStorage) {
-    console.log(typeof authLocalStorage.auth.data.name);
   }
 
   ngOnInit() {
@@ -35,11 +35,13 @@ export class LkSidebarComponent {
       this.user = profile[0].User;
       this.card = profile[1].Card;
 
-      this.httpService.getBonusLevels(this.card).subscribe(({bonusLevels,followed,level}) => {
-        this.bonusLevels = bonusLevels;
-        this.followed = followed;
-        this.level = level;
-      });
+      this.httpService.getBonusLevels(this.card)
+        .subscribe(({bonusLevels,bonusLevelsForSlider,followed,level}) => {
+          this.bonusLevels = bonusLevels;
+          this.bonusLevelsForSlider = bonusLevelsForSlider;
+          this.followed = followed;
+          this.level = level;
+        });
     })
   }
 

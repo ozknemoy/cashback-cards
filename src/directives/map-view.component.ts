@@ -38,21 +38,12 @@ interface IFreegeoIp {
   //changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [`
   agm-map {
-    height: 300px;
-  }
-  .map-holder {
-      margin: 0 25px 0 200px;
+    height: 450px;
+    width: 100%;
   }
   `],
   template: `
-    <div style="float:left" *ngIf="showLeftPannel">
-      <div style="border: 1px solid black" *ngFor="let point of points">
-        <a routerLink="/partner/{{point.id}}">{{point.name}}</a> <br>
-        <span *ngIf="point.phone">телефон: {{point.phone}}<br></span>
-        адрес: {{point.address}}
-      </div>
-    </div>
-  <div class="map-holder"><agm-map [zoom]="zoom" [latitude]="lat || _lat" [longitude]="lng || _lng"
+  <agm-map [zoom]="zoom" [latitude]="lat || _lat" [longitude]="lng || _lng"
            (boundsChange)="boundsChange($event)"
            (zoomChange)="zoomChange($event)">
     <agm-marker [latitude]="lat" [longitude]="lng" [label]="'M'">
@@ -67,7 +58,7 @@ interface IFreegeoIp {
         {{point.address}}
       </agm-info-window>
     </agm-marker>
-  </agm-map></div>
+  </agm-map>
   `
 })
 @AutoUnsubscribe()

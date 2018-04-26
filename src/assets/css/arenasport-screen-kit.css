@@ -2078,7 +2078,7 @@ textarea.form-control {
   text-align: center;
   font-size: 14px;
   opacity: 0;
-  color: #555555;
+  color: inherit;
   border: 0;
   background-color: inherit; }
 
@@ -2634,6 +2634,9 @@ p {
 .text-black {
   color: #000000 !important; }
 
+.text-white {
+  color: #FFFFFF !important; }
+
 .blockquote {
   border-left: none;
   border: 1px solid #888;
@@ -2682,7 +2685,8 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  min-height: 100vh; }
+  min-height: 100vh;
+  padding-bottom: 87px; }
 
 /* Animations */
 .nav-pills .nav-link,
@@ -4000,15 +4004,14 @@ yx-axis
     margin-right: 5px;
     background-color: transparent;
     border: 1px solid transparent;
-    border-radius: 30px;
+    border-radius: 3px;
     font-size: 14px;
     padding: 11px 14px;
     line-height: 1.5; }
     .nav-tabs > .nav-item > .nav-link:hover {
       background-color: transparent; }
     .nav-tabs > .nav-item > .nav-link.active {
-      border: 1px solid #888;
-      border-radius: 30px; }
+      border: 1px solid #888; }
     .nav-tabs > .nav-item > .nav-link i.now-ui-icons {
       font-size: 14px;
       position: relative;
@@ -4033,9 +4036,14 @@ yx-axis
   .nav-tabs.nav-tabs-warning > .nav-item > .nav-link.active {
     border-color: #e69100;
     color: #e69100; }
-  .nav-tabs.nav-tabs-success > .nav-item > .nav-link.active {
-    border-color: #008c46;
-    color: #008c46; }
+  .nav-tabs.nav-tabs-success > .nav-item > .nav-link {
+    background-color: #FFFFFF;
+    color: #008c46;
+    margin: 0 15px; }
+    .nav-tabs.nav-tabs-success > .nav-item > .nav-link.active {
+      background-color: #008c46;
+      border-color: #008c46;
+      color: #FFFFFF; }
   .nav-tabs .tab-icon {
     background-color: #FFFFFF;
     display: inline-block;
@@ -5219,6 +5227,9 @@ Created using IcoMoon - icomoon.io
 .footer {
   padding: 25px 0;
   background: #212123; }
+  @media screen and (max-width: 600px) {
+    .footer {
+      position: relative !important; } }
   .wrap .footer {
     position: absolute;
     bottom: 0;
@@ -5357,10 +5368,10 @@ Created using IcoMoon - icomoon.io
       .lk_sidebar--link.current .mdi {
         color: #FFFFFF; }
     .lk_sidebar--link:hover {
-      background: #008c46;
-      background: -webkit-linear-gradient(to right, #00bf60, #008c46);
-      background: linear-gradient(to right, #00bf60, #008c46);
-      color: #FFFFFF;
+      background: #008c46 !important;
+      background: -webkit-linear-gradient(to right, #00bf60, #008c46) !important;
+      background: linear-gradient(to right, #00bf60, #008c46) !important;
+      color: #FFFFFF !important;
       text-decoration: none; }
       .lk_sidebar--link:hover .mdi {
         color: #FFFFFF; }
@@ -5604,36 +5615,38 @@ Created using IcoMoon - icomoon.io
       @media screen and (max-width: 760px) {
         .section_block--content p:not(.page-title) {
           font-size: 16px; } }
-  .section_block.section-4 .page-title {
-    font-size: 36px;
-    color: #000000; }
-    .section_block.section-4 .page-title a {
-      text-decoration: underline;
-      color: #008c46; }
-      .section_block.section-4 .page-title a:hover {
-        text-decoration: none; }
-  .section_block.section-4:before {
-    background-image: url(../img/circle.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    content: '';
-    display: block;
-    position: absolute;
-    opacity: .1;
-    padding-left: 100%;
-    padding-top: 67%;
-    left: 50%;
-    top: 0;
-    -moz-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%); }
-  .section_block.section-4 .section_block--img {
-    background-size: contain;
-    background-position: left bottom;
-    padding-top: 100%; }
+  .section_block.section-4 {
+    background: #FFFFFF; }
+    .section_block.section-4 .page-title {
+      font-size: 36px;
+      color: #000000; }
+      .section_block.section-4 .page-title a {
+        text-decoration: underline;
+        color: #008c46; }
+        .section_block.section-4 .page-title a:hover {
+          text-decoration: none; }
+    .section_block.section-4:before {
+      background-image: url(../img/circle.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      content: '';
+      display: block;
+      position: absolute;
+      opacity: .1;
+      padding-left: 100%;
+      padding-top: 67%;
+      left: 50%;
+      top: 0;
+      -moz-transform: translate(-50%, -50%);
+      -o-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%); }
+    .section_block.section-4 .section_block--img {
+      background-size: contain;
+      background-position: left bottom;
+      padding-top: 100%; }
   .section_block.section-5 {
     background: #000000;
     padding-top: 120px; }
@@ -7105,10 +7118,16 @@ Created using IcoMoon - icomoon.io
 
 .lk_promotions--item {
   background-color: rgba(255, 255, 255, 0.9);
-  position: relative; }
+  position: relative;
+  color: #464646;
+  font-family: 'Proxima Nova Rg';
+  font-size: 14px; }
+  .lk_promotions--item:hover {
+    color: #008c46;
+    text-decoration: none; }
 .lk_promotions--img {
   position: relative;
-  padding-top: 100%;
+  padding-top: 70%;
   overflow: hidden;
   display: block; }
   .lk_promotions--img img {
@@ -7120,16 +7139,73 @@ Created using IcoMoon - icomoon.io
     margin: auto;
     max-width: 95%;
     max-height: 95%; }
+.lk_promotions--footer {
+  border-top: 1px solid #E3E3E3;
+  background: #FFFFFF;
+  padding: 10px;
+  display: block; }
 .lk_promotions--title {
   display: block;
-  padding: 5px;
-  text-align: center; }
+  padding: 0 50px 0 0;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 700; }
+.lk_promotions--ic {
+  border-top: 1px solid #E3E3E3;
+  margin: 5px -10px -3px;
+  display: block;
+  padding: 10px 10px 0 10px; }
+  .lk_promotions--ic .badge {
+    float: right; }
+.lk_promotions--category {
+  display: block;
+  padding: 0; }
+.lk_promotions--address {
+  display: block;
+  position: relative;
+  padding: 0 0 0 20px; }
+  .lk_promotions--address svg {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    left: 0;
+    top: 2px; }
+    .lk_promotions--address svg polygon, .lk_promotions--address svg path {
+      fill: #008c46; }
+.lk_promotions--type {
+  display: inline-block;
+  width: 20px;
+  heoght: 20px; }
+  .lk_promotions--type svg {
+    width: 100%;
+    height: 100%; }
+    .lk_promotions--type svg polygon, .lk_promotions--type svg path, .lk_promotions--type svg circle {
+      fill: #008c46; }
 .lk_promotions--date {
   display: block;
-  text-align: center; }
+  padding: 0 10px; }
 .lk_promotions--town {
   display: block;
   padding: 5px;
+  text-align: center; }
+.lk_promotions--wellcome {
+  background-image: url(../img/bg-13.jpg);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  position: relative; }
+  .lk_promotions--wellcome--wrap {
+    padding-top: 200px;
+    text-align: center;
+    color: #FFFFFF; }
+    .lk_promotions--wellcome--wrap .page-title {
+      color: #FFFFFF; }
+.lk_promotions--list {
+  background: #464646;
+  padding: 30px 0 0; }
+.lk_promotions--tabs {
   text-align: center; }
 
 .lk_history {

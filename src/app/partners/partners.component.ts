@@ -4,8 +4,8 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {AutoUnsubscribe} from "../../decorators/auto-unsubscribe.decorator";
 import {HttpService} from "../../services/http.service";
-import {publicDecrypt} from "crypto";
 import {SeoService} from "../../services/seo.service";
+import {Category, IPartner} from "./partner.model";
 
 /*
 /v1/shops/find-shop post {"ShopSearch":{XXXX}}
@@ -17,36 +17,7 @@ XXXX
 /v1/handbooks/shop-categories
 */
 
-export interface Category {
-  id: number;
-  name: string;
-}
 
-export interface City {
-  id: number;
-  name: string;
-  spx_id: number;
-  country_id: number;
-  region_id: number;
-  lat: string;
-  lon: string;
-}
-
-export interface IPartner {
-  id: number;
-  name: string;
-  category: Category;
-  city: City;
-  bonus_type: number;
-  address: string;
-  metro: string;
-  about?: string;
-  working_time?: any;
-  lat: string;
-  lon: string;
-  phone: string;
-  image: string;
-}
 
 enum Type {
   Map = 'map',
@@ -66,8 +37,9 @@ export class PartnersView {
   public type = Type.List;
   public Type = Type;
   public filter = {
-    category: {id: null},
-    metro: null
+    category: {id: ''},
+    metro: null,
+    name: null
   };
 
   constructor(public httpService: HttpService, public seoService: SeoService) {}

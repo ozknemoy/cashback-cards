@@ -17,6 +17,7 @@ import {loginModalButtonDirective} from "../modals/login-modal/login-modal.direc
 import {MapViewComponent} from "../directives/map-view.component";
 import {QrBarcodeButtonomponent} from "../modals/qr-barcode-button/qr-barcode-button.directive";
 import {QrBarcodeButtonModal} from "../modals/qr-barcode-button/qr-barcode-button.modal";
+import {NavHeaderComponent} from "../directives/nav-header/nav-header.component";
 
 
 export const vendorDirectiveModules = [
@@ -38,6 +39,7 @@ export const routelessComponents = [
   HrefDirective,
   MapViewComponent,
   QrBarcodeButtonomponent,
+  NavHeaderComponent,
   //FileUploaderComponent,
   //OzkNumberDirective,
   //ScrollDirective

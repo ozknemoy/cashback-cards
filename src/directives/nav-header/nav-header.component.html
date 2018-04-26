@@ -1,0 +1,48 @@
+
+
+<div [ngClass]="{'nav-open':isMobileMenuOpen}">
+  <div class="sidebar-collapse">
+    <div class="header header_nav navbar navbar-expand-lg">
+      <div id="bodyClick"
+           *ngIf="isMobileMenuOpen"
+           (click)="isMobileMenuOpen = false"></div>
+      <button class="navbar-toggler" type="button"
+              [ngClass]="{'toggled':isMobileMenuOpen}"
+              (click)="isMobileMenuOpen = !isMobileMenuOpen">
+        <span class="navbar-toggler-bar bar1"></span>
+        <span class="navbar-toggler-bar bar2"></span>
+        <span class="navbar-toggler-bar bar3"></span>
+      </button>
+
+      <div class="header_nav--container collapse navbar-collapse"
+           (click)="isMobileMenuOpen = false">
+        <div class="header_nav--col">
+          <a href="#section-1" target="_self" class="header_nav--link">Преимущества карты</a>
+          <a href="#section-4" target="_self" class="header_nav--link">Как оформить</a>
+          <a href="#section-5" target="_self" class="header_nav--link">Как накопить</a>
+        </div>
+        <div class="header_nav--col">
+          <a href="#section-6" target="_self" class="header_nav--link">Как потратить</a>
+          <a routerLink="/partners" class="header_nav--link">Где воспользоваться</a>
+
+          <div *ngIf="!authLocalStorage.auth.data.hash;then isNotLogIn else isLogIn"></div>
+          <ng-template #isNotLogIn>
+            <a routerLink="/login" class="btn btn-neutral btn-simple btn-sm">Войти</a>
+          </ng-template>
+          <ng-template #isLogIn>
+            <a routerLink="/profile/main" class="btn btn-neutral btn-simple btn-sm">Личный кабинет</a>
+          </ng-template>
+        </div>
+      </div>
+      <a routerLink="/" class="logo"></a>
+
+      <div *ngIf="!authLocalStorage.auth.data.hash;then _isNotLogIn else _isLogIn"></div>
+      <ng-template #_isNotLogIn>
+        <a routerLink="/login" class="btn btn-neutral btn-simple btn_mob btn-sm">Войти</a>
+      </ng-template>
+      <ng-template #_isLogIn>
+        <a routerLink="/profile/main" class="btn btn-neutral btn-simple btn_mob btn-sm">Личный кабинет</a>
+      </ng-template>
+    </div>
+  </div>
+</div>

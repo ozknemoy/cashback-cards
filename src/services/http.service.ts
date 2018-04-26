@@ -100,11 +100,14 @@ export class HttpService {
 
   getBonusLevels(card: Card) {
     return this.bonusLevels
-      .map(bonusLevels=> bonusLevels.sort((a, d)=> a.amount_to < d.amount_to? 1 : -1))
       .map(bonusLevels=> {
-        const [followed, level] = this.countLevelsInfo(bonusLevels, card);
+        bonusLevels.sort((a, d)=> a.amount_to - d.amount_to);
+        const bonusLevelsForSlider = JSON.parse(JSON.stringify(bonusLevels))
+          .sort((a, d)=> d.amount_to - a.amount_to);
+        const [followed, level] = this.countLevelsInfo(bonusLevelsForSlider, card);
         return {
           bonusLevels,
+          bonusLevelsForSlider,
           followed,
           level
         }
@@ -115,7 +118,7 @@ export class HttpService {
     // тут обратный сорт по убыванию // из-за верстки
     let level;
     let followed = card.bonus_amount*100/(bonusLevels[0].amount_from - bonusLevels[2].amount_from);
-    followed = Math.min(followed,100);
+    followed = Math.min(Math.round(followed),100);
     if(card.bonus_amount >= bonusLevels[1].amount_to) {
       level = 3
     } else if(card.bonus_amount < bonusLevels[1].amount_from) {

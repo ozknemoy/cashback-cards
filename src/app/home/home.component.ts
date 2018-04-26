@@ -12,7 +12,6 @@ import {SeoService} from "../../services/seo.service";
 export class HomeComponent implements OnInit {
   public message: string;
   public users: any;
-  public isMobileMenuOpen = false;
   public reklamaUrl = 'ya.ru';//window.location.host;
   public adminH1 = '«Арена» — это карта болельщика, которая дает возможность оказаться в центре спортивных событий на самых выгодных условиях! ';
 

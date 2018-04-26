@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {AuthLocalStorage} from "./auth-local-storage.service";
 import {HttpService} from "./http.service";
 import {Meta, Title} from "@angular/platform-browser";
+import {BASE_URL} from "../config/base_url";
 
 export interface SeoResponse {
   id: number;
@@ -16,9 +17,13 @@ export interface SeoResponse {
 
 @Injectable()
 export class SeoService {
-  private baseSeoUrl = 'handbooks/seo?path=';
-  private photoFolder = '/files/images/seo/';
-  private isServer = !this.authLocalStorage.isBrowser;
+  public readonly BASE_URL = BASE_URL;
+  private readonly baseSeoUrl = 'handbooks/seo?path=';
+  private readonly photoFolder = '/files/images/seo/';
+  private readonly isServer = !this.authLocalStorage.isBrowser;
+  // надо откинуть бекенд часть
+  public HOST = this.BASE_URL.split('.').slice(-2, -1)[0] + '.ru';
+
   constructor(public httpService: HttpService,
               private titleService: Title,
               public meta: Meta,
@@ -43,15 +48,14 @@ export class SeoService {
 
   handleSeoResponse(seo: SeoResponse) {
     const localUrl = this.authLocalStorage.nodeData.localUrl;
-    const host = this.authLocalStorage.nodeData.host;
-    console.log('--------SeoService--------',host + localUrl);
+    console.log('--------SeoService--------',this.HOST + localUrl);
     this.meta.addTags([
-      {property: 'og:image', content: host + this.photoFolder + seo.image},
+      {property: 'og:image', content: this.HOST + this.photoFolder + seo.image},
       {property: 'og:description', content: seo.description},
       {name: 'description', content: seo.description},
       {property: 'og:title', content: seo.title},
-      {property: 'og:url', content: host + localUrl},
-      {property: 'og:see_also', content: host + localUrl},
+      {property: 'og:url', content: this.HOST + localUrl},
+      {property: 'og:see_also', content: this.HOST + localUrl},
       {name: 'ROBOTS', content: seo.robots},
     ]);
     this.titleService.setTitle(seo.title);

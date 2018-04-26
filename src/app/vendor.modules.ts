@@ -15,7 +15,7 @@ import {TranslateModule} from '@ngx-translate/core';
 //import {GeoComponent} from "./geo/geo.module";
 import {AgmCoreModule} from "@agm/core";
 import {NgxBarcodeModule} from "ngx-barcode";
-import ret = require('../../config-ext/index.js');
+import * as ret from '../../config-ext/index.js';
 
 
 export const vendorModules = [
