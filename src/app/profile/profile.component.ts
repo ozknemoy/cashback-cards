@@ -31,6 +31,7 @@ import {AuthLocalStorage} from "../../services/auth-local-storage.service";
         </div>
       </div>
     </div>
+    <app-footer></app-footer>
   `
 })
 export class ProfileView {

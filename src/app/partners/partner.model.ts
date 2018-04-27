@@ -1,10 +1,10 @@
 
-export interface Category {
+export class Category {
   id: number;
   name: string;
 }
 
-export interface City {
+export class City {
   id: number;
   name: string;
   spx_id: number;
@@ -14,35 +14,37 @@ export interface City {
   lon: string;
 }
 
-export interface WTime {
+export class WTime {
   checked: number;
   from: string;
   to: string;
 }
 
-export interface WorkingTime {
-  ПН: WTime;
-  ВТ: WTime;
-  СР: WTime;
-  ЧТ: WTime;
-  ПТ: WTime;
-  СБ: WTime;
-  ВС: WTime;
+export class WorkingTime {
+  ПН = new WTime();
+  ВТ = new WTime();
+  СР = new WTime();
+  ЧТ = new WTime();
+  ПТ = new WTime();
+  СБ = new WTime();
+  ВС = new WTime();
 }
 
-export interface IPartner {
+export class IPartner {
   id: number;
   name: string;
-  category: Category;
-  city: City;
+  category = new Category();
+  city = new City();
   bonus_type: 0 | 1;
+  _bonus_type: boolean;
   address: string;
   metro: string;
   about: string;
-  working_time: WorkingTime;
+  working_time = new WorkingTime();
   lat: string;
   lon: string;
   phone: string;
   image: string;
-  payment_type: 0 | 1;
+  url: string;
+  payment_type: number;//  0 начисление, 1 списание, 2 списание и начисление
 }

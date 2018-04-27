@@ -153,7 +153,7 @@ function replaceTest({port, locale, api, style, map}) {
   && gulp.src("./src/app/vendor.modules.ts").pipe(replace({patterns: _map})).pipe(gulp.dest('src/app'))
 }
 
-gulp.task('css-before-build', function () {
+gulp.task('css-before-build-prod', function () {
   return gulp.src('src/assets/css/*.css')
     .pipe(postcss(processors))
     .pipe(cleanCSS({debug: true, specialComments: false}, function (details) {

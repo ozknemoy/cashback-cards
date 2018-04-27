@@ -2,8 +2,10 @@ import {Component} from '@angular/core';
 import {AutoUnsubscribe} from "../../decorators/auto-unsubscribe.decorator";
 import {HttpService} from "../../services/http.service";
 import {ActivatedRoute} from "@angular/router";
-import {IPartner} from "../partners/partners.component";
 import {SeoService} from "../../services/seo.service";
+import {IPartner} from "../partners/partner.model";
+import {BASE_URL_IMG} from "../../config/base_url";
+import {AuthLocalStorage} from "../../services/auth-local-storage.service";
 
 
 @Component({
@@ -12,21 +14,32 @@ import {SeoService} from "../../services/seo.service";
 })
 @AutoUnsubscribe()
 export class PartnerView {
-  public partner: IPartner;
+  public partner = new IPartner();
+  public daysKeys: string[] = [];
   private get$$;
+  public isBrowser: boolean;
   public id = this.route.snapshot.params.id;
-  constructor(private httpService: HttpService,
-              private seoService: SeoService,
-              private route: ActivatedRoute,) {
+  constructor(
+    private httpService: HttpService,
+    public authLocalStorage:AuthLocalStorage,
+    private seoService: SeoService,
+    private route: ActivatedRoute
+  ) {
+
 
 
   }
 
   ngOnInit() {
+    this.isBrowser = this.authLocalStorage.isBrowser;
     this.seoService.handleOne('main.shop.' + this.id);
     this.get$$ = this.httpService.get(`shops/get-shop?id=${this.id}`).subscribe((partner: IPartner) => {
-        this.partner = partner;
-      })
+      partner.lon = <any>parseFloat(partner.lon);
+      partner.lat = <any>parseFloat(partner.lat);
+      partner.image = BASE_URL_IMG + partner.image;
+      this.daysKeys = Object.keys(partner.working_time);
+      this.partner = partner;
+    })
   }
 
 

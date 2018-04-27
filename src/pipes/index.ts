@@ -7,11 +7,12 @@ import {SanitizePipe} from './sanitize.pipe'
 import {RangePipe} from "./range.pipe";
 import {FromDateToDatePipe} from "./from-date-to-date.pipe";
 import {CardPipe} from "./card";
+import {PhonePipe} from "./phone.pipe";
 
 
 export const pipes = [
   TrimPipe, ThousandPipe, FilterPipe, SanitizePipe, RangePipe,
-  FromDateToDatePipe, CardPipe,
+  FromDateToDatePipe, CardPipe, PhonePipe,
 ];
 
 @NgModule({

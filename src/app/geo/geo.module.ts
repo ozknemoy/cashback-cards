@@ -50,7 +50,7 @@ interface IFreegeoIp {
            (centerChange)="centerChange($event)"
            (boundsChange)="boundsChange($event)"
            (zoomChange)="zoomChange($event)">
-    <agm-marker [latitude]="lat" [longitude]="lng" [label]="'I'">
+    <agm-marker [latitude]="lat" [longitude]="lng" [label]="'Я'">
         <agm-info-window [disableAutoPan]="true">
            это <strong>ПИТЕР</strong>
         </agm-info-window>

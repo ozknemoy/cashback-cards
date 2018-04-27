@@ -18,6 +18,8 @@ import {MapViewComponent} from "../directives/map-view.component";
 import {QrBarcodeButtonomponent} from "../modals/qr-barcode-button/qr-barcode-button.directive";
 import {QrBarcodeButtonModal} from "../modals/qr-barcode-button/qr-barcode-button.modal";
 import {NavHeaderComponent} from "../directives/nav-header/nav-header.component";
+import {AppFooterComponent} from "../directives/app-footer/app-footer.component";
+import {AddClassAfterScrollDirective} from "../directives/add-class-after-scroll.directive";
 
 
 export const vendorDirectiveModules = [
@@ -40,6 +42,8 @@ export const routelessComponents = [
   MapViewComponent,
   QrBarcodeButtonomponent,
   NavHeaderComponent,
+  AppFooterComponent,
+  AddClassAfterScrollDirective,
   //FileUploaderComponent,
   //OzkNumberDirective,
   //ScrollDirective

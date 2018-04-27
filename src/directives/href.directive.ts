@@ -4,19 +4,16 @@
  */
 import {Directive, ElementRef, Input} from "@angular/core";
 @Directive({
-    selector : '[href]',
-    host : {
-        '(click)' : 'click($event)'
-    },
+    selector : '[hrefExt]'
 })
-export class HrefDirective {
-    @Input() href;
-  private target = this.el.nativeElement.getAttribute('target');
+export class HrefDirective{
+  @Input() hrefExt;
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef) {
 
-  click(event) {
-      console.log('***', this.href, this.target);
-      window.open(this.href, this.target)
+  }
+
+  ngAfterViewInit() {
+    this.el.nativeElement.setAttribute('href', this.hrefExt)
   }
 }

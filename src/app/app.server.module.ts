@@ -6,7 +6,7 @@ import {AppModule} from './app.module';
 import {AppComponent} from './app.component';
 import {AuthLocalStorage} from "../services/auth-local-storage.service";
 import { Request, Response } from 'express';
-import { REQUEST } from '@nguniversal/express-engine';
+import {REQUEST} from "@nguniversal/express-engine/typings/esm5/tokens";
 
 
 @NgModule({

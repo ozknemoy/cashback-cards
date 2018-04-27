@@ -4,7 +4,7 @@ import {LatLngBounds, LatLngLiteral} from '@agm/core';
 import {AutoUnsubscribe} from "../decorators/auto-unsubscribe.decorator";
 import {AuthLocalStorage} from "../services/auth-local-storage.service";
 import {debounceMethod} from "../decorators/debounce.decorator";
-import {IPartner} from "../app/partners/partners.component";
+import {IPartner} from "../app/partners/partner.model";
 
 
 interface IGeoPosition {
@@ -46,7 +46,7 @@ interface IFreegeoIp {
   <agm-map [zoom]="zoom" [latitude]="lat || _lat" [longitude]="lng || _lng"
            (boundsChange)="boundsChange($event)"
            (zoomChange)="zoomChange($event)">
-    <agm-marker [latitude]="lat" [longitude]="lng" [label]="'M'">
+    <agm-marker [latitude]="lat" [longitude]="lng" [label]="'Я'">
         <agm-info-window [disableAutoPan]="true">
            это Вы
         </agm-info-window>

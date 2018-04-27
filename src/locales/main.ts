@@ -21,6 +21,14 @@ export const locales = {
   'home.sectionOne': [
     '<h3 class="page-title h2">Двойная выгода</h3><p>Приобретая товары и услуги по выгодным ценам, получаешь баллы, которыми можно платить при следующих покупках</p>'
 
-    ]
+  ],
+
+
+  'footer.hrefVk': ['//vk.com', '//vk.com'],
+  'footer.hrefInstagram': ['//vk.com', '//vk.com'],
+  'footer.hrefGooglePlus': ['//vk.com', '//vk.com'],
+  'footer.hrefFacebook': ['//vk.com', '//vk.com'],
+  'footer.hrefTwitter': ['//vk.com', '//vk.com'],
+  'footer.hrefYoutube': ['//vk.com', '//vk.com'],
 };
 

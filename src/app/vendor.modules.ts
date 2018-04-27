@@ -5,6 +5,7 @@
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 //import {CollapseModule} from 'ngx-bootstrap/collapse';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import {ReCaptchaModule} from 'angular2-recaptcha';
 import {NgxPaginationModule} from 'ngx-pagination/dist/ngx-pagination';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
@@ -32,6 +33,6 @@ export const vendorModules = [
   //bootstrap Modules
   ModalModule.forRoot(),
   BsDatepickerModule.forRoot(),
-  //CollapseModule.forRoot(),
+  TooltipModule.forRoot(),
 ];
 

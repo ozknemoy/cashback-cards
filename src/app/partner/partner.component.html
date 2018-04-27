@@ -1,2 +1,87 @@
 
-магазин такой то
+<div class="wrap">
+  <nav-header></nav-header>
+
+  <div class="lk_promotions">
+    <div class="lk_promotions--wellcome">
+      <div class="lk_promotions--wellcome--wrap">
+        <h1 class="page-title">{{partner.name}}</h1>
+        <span class="lk_promotions--category">{{partner.category.name}}</span>
+
+        <span class="lk_promotions--type" *ngIf="partner.payment_type === 1 || partner.payment_type === 2">
+          <span class="icon ic-pay"></span>Потратить баллы
+        </span>
+        <span class="lk_promotions--type" *ngIf="partner.payment_type === 0 || partner.payment_type === 2">
+          <span class="icon ic-collect"></span>Получить баллы
+        </span>
+
+        <div class="form-group">
+          <a routerLink="/partners" class="btn btn-neutral btn-simple">К списку партнеров</a>
+        </div>
+      </div>
+    </div>
+    <div class="lk_promotions--view">
+      <div class="container">
+        <div class="card">
+          <div class="content">
+            <div class="row">
+              <div class="col-12 col-md-6 order-md-6">
+                <div class="row">
+                  <div class="col-12 col-md-5 order-md-7">
+                    <div class="mb-3">
+                      <div class="lk_promotions--logo">
+                        <img [src]="partner.image" alt="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-7 order-md-1">
+                    <div class="mb-3">
+                      <div class="lk_promotions--field" *ngIf="partner.phone">
+                        <a href="tel:+{{partner.phone}}">
+                          <i class="mdi mdi-phone"></i>
+                          {{partner.phone | phone}}
+                        </a>
+                      </div>
+
+                      <div class="lk_promotions--field">
+                        <i class="mdi mdi-map-marker"></i>
+                        {{partner.city.name}}, {{partner.address}}
+                      </div>
+
+                      <div class="lk_promotions--field" *ngIf="partner.url">
+                        <i class="mdi mdi-web"></i>
+                        <a [hrefExt]="partner.url" target="_blank">{{partner.url}}</a>
+                      </div>
+
+                      <div class="lk_promotions--field">
+
+                        <div class="dib"><i class="mdi mdi-clock"></i>Режим работы: </div>
+                        <div class="dib">
+                          <div *ngFor="let day of daysKeys">
+                            <span *ngIf="partner.working_time[day].checked">
+                              {{day}} {{partner.working_time[day].from}} - {{partner.working_time[day].to}}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <agm-map [latitude]="partner.lat" [longitude]="partner.lon" *ngIf="isBrowser"
+                         [style.width.percent]="100" [style.height.px]="200">
+                  <agm-marker  [latitude]="partner.lat" [longitude]="partner.lon" [label]="'I'"></agm-marker>
+                </agm-map>
+              </div>
+              <div class="col-12 col-md-6 order-md-1" [innerHtml]="partner.about"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
