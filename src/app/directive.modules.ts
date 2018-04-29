@@ -10,7 +10,7 @@ import {FormsModule} from '@angular/forms';
 import {CommonModule} from "@angular/common";
 import {vendorModules} from './vendor.modules';
 import {LoginModalComponent} from "../modals/login-modal/login-modal";
-import {HrefDirective} from "../directives/href.directive";
+import {HrefDirective, HrefExtDirective} from "../directives/href.directive";
 import {BlurFocusDirective} from "../directives/blur-focus.directive";
 import {OuterHref} from "../directives/outer-href.directive";
 import {loginModalButtonDirective} from "../modals/login-modal/login-modal.directive";
@@ -20,6 +20,7 @@ import {QrBarcodeButtonModal} from "../modals/qr-barcode-button/qr-barcode-butto
 import {NavHeaderComponent} from "../directives/nav-header/nav-header.component";
 import {AppFooterComponent} from "../directives/app-footer/app-footer.component";
 import {AddClassAfterScrollDirective} from "../directives/add-class-after-scroll.directive";
+import {ArenasportHomeComponent, CrimeaHomeComponent} from "./home/home.component";
 
 
 export const vendorDirectiveModules = [
@@ -39,11 +40,14 @@ export const routelessComponents = [
   BlurFocusDirective,
   loginModalButtonDirective,
   HrefDirective,
+  HrefExtDirective,
   MapViewComponent,
   QrBarcodeButtonomponent,
   NavHeaderComponent,
   AppFooterComponent,
   AddClassAfterScrollDirective,
+  ArenasportHomeComponent,
+  CrimeaHomeComponent,
   //FileUploaderComponent,
   //OzkNumberDirective,
   //ScrollDirective

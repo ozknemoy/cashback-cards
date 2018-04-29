@@ -39,7 +39,7 @@ export class PartnersView {
     metro: null,
     name: null,
     payment_type: '',
-    _bonus_type: false
+    bonus_type: null
   };
 
   constructor(public httpService: HttpService, public seoService: SeoService) {}
@@ -50,7 +50,7 @@ export class PartnersView {
     this.httpService.post('shops/find-shop', {ShopSearch: null})
       .subscribe((partners: IPartner[]) => {
         this.partners = partners.map(p=> {
-          p._bonus_type = p.bonus_type !== 0;
+          //p._bonus_type = p.bonus_type/* === 1? 1 : null*/;
           p.lon = <any>parseFloat(p.lon);
           p.lat = <any>parseFloat(p.lat);
           p.image = BASE_URL_IMG + p.image;

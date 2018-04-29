@@ -55,8 +55,8 @@
                   <div class="form-group">
                     <div class="checkbox text-white">
                       <input id="remember" type="checkbox"
-                             [checked]="1"
-                             [(ngModel)]="filter._bonus_type">
+                             [ngModel]="f"
+                             (ngModelChange)="filter.bonus_type = $event === true? 1 : null">
                       <label for="remember">Акция</label>
                     </div>
                   </div>
@@ -65,7 +65,10 @@
             </div>
 
             <div class="row">
-              <div class="col-12 col-md-6 col-lg-4 col-xl-2" *ngFor="let partner of partners | filter:filter:false">
+              <div class="col-12 col-md-6 col-lg-4 col-xl-2"
+                   *ngFor="let partner of partners
+                    | filter : filter : false
+                    | paginate: { itemsPerPage: 48, currentPage: currentPage}">
                 <a routerLink="/partner/{{partner.id}}" class="lk_promotions--item">
                   <span class="lk_promotions--img"><img src="{{partner.image}}" alt=""></span>
                   <span class="lk_promotions--footer">
@@ -90,6 +93,12 @@
                   </span>
                 </a>
               </div>
+
+              <pagination-controls class="pagination pagination-success col-12"
+                                   (pageChange)="currentPage=$event"
+                                   maxSize="9"
+                                   directionLinks="false"
+                                   autoHide="true"></pagination-controls>
             </div>
           </div>
         </ng-template>

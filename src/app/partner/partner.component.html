@@ -69,7 +69,7 @@
                 </div>
 
 
-                <agm-map [latitude]="partner.lat" [longitude]="partner.lon" *ngIf="isBrowser"
+                <agm-map [zoom]="14" [latitude]="partner.lat" [longitude]="partner.lon" *ngIf="isBrowser"
                          [style.width.percent]="100" [style.height.px]="200">
                   <agm-marker  [latitude]="partner.lat" [longitude]="partner.lon" [label]="'I'"></agm-marker>
                 </agm-map>

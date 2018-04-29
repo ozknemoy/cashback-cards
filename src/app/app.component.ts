@@ -1,6 +1,7 @@
-import {Component, ViewContainerRef} from '@angular/core';
+import {Component, ElementRef, ViewContainerRef} from '@angular/core';
 import {ToastsManager} from "ng2-toastr";
 import {AuthLocalStorage} from "../services/auth-local-storage.service";
+import {NavigationEnd, NavigationStart, Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,26 @@ import {AuthLocalStorage} from "../services/auth-local-storage.service";
 })
 export class AppComponent {
   constructor(
-      toast:ToastsManager,
-      vRef:ViewContainerRef,
-      authLocalStorage: AuthLocalStorage
+    private toast:ToastsManager,
+    private router: Router,
+    private vRef:ViewContainerRef,
+    private authLocalStorage: AuthLocalStorage
   ) {
-    // всегда надо инжектить в корневой компонент
-    if(authLocalStorage.isBrowser) toast.setRootViewContainerRef(vRef);
+    if(authLocalStorage.isBrowser) {
+      // всегда надо инжектить в корневой компонент
+      toast.setRootViewContainerRef(vRef);
+
+      this.router.events.subscribe((event) => {
+        //console.log('---', event);
+        if (event instanceof NavigationStart) {
+          // если в урле якоря нет
+          if(event.url.indexOf('#') === -1) {
+            document.body.scrollTop = document.documentElement.scrollTop = 0
+          }
+
+        }
+      });
+    }
   }
+
 }

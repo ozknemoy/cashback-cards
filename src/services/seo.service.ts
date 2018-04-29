@@ -22,7 +22,7 @@ export class SeoService {
   private readonly photoFolder = '/files/images/seo/';
   private readonly isServer = !this.authLocalStorage.isBrowser;
   // надо откинуть бекенд часть
-  public HOST = this.BASE_URL.split('.').slice(-2, -1)[0] + '.ru';
+  public HOST = '//' + this.BASE_URL.split('.').slice(-2, -1)[0] + '.ru';
 
   constructor(public httpService: HttpService,
               private titleService: Title,
