@@ -3,6 +3,7 @@
  */
 const gulp = require('gulp'),
   replace = require('gulp-replace-task'),
+  del = require('del'),
   runSequence = require('run-sequence'),
   browserSync = require('browser-sync').create(),
   historyApiFallback = require('connect-history-api-fallback'),
@@ -13,12 +14,6 @@ const postcss = require('gulp-postcss');
 const cleanCSS = require('gulp-clean-css');
 const autoprefixer = require('autoprefixer');
 const processors = [autoprefixer({browsers: ['last 5 version']})];
-
-// на случай если забуду поменять урлы
-const localeCrimea = '.use("crimea")';
-const localeCrimeaReg = /\.use\("crimea"\)/g;
-const localeArenasport = '.use("arenasport")';
-const localeArenasportReg = /\.use\("arenasport"\)/g;
 
 const portCrimeaTest = '4100';
 const portArenasportTest = '4200';
@@ -45,7 +40,6 @@ const gMapsCrimea = 'gMapsCrimea';
 gulp.task('replace-crimea-to-Prod', function () {
   return replaceProd({
     port:[portReg, portCrimeaProd],
-    locale: [localeCrimeaReg, localeCrimea],
     api: [apiCrimeaTestReg, apiCrimeaProd],
     style: [styleCrimeaReg, styleCrimea]
   })
@@ -54,19 +48,13 @@ gulp.task('replace-crimea-to-Prod', function () {
 gulp.task('replace-arenasport-to-Prod', function () {
   return replaceProd({
     port:[portReg, portArenasportProd],
-    locale: [localeArenasport, localeArenasport],
     api: [apiArenasportTestReg, apiArenasportProd],
     style: [styleArenasportReg, styleArenasport]
   })
 });
 
-function replaceProd({port, locale, api, style}) {
+function replaceProd({port, api, style}) {
   const common = [{
-    match: locale[0],
-    replacement: function () {
-      return locale[1]
-    }
-  },{
     match: api[0],
     replacement: function () {
       return api[1]
@@ -98,30 +86,24 @@ function replaceProd({port, locale, api, style}) {
 gulp.task('replace-test-arenasport-to-crimea', function () {
   return replaceTest({
     port:[portReg, portCrimeaTest],
-    locale: [localeArenasportReg, localeCrimea],
     api: [apiArenasportTestReg, apiCrimeaTest],
     style: [styleArenasportReg, styleCrimea],
-    map: [new RegExp(gMapsArenasport, 'g'), gMapsCrimea]
+    map: [new RegExp(gMapsArenasport, 'g'), gMapsCrimea],
+    isArenasport: false
   })
 });
 
 gulp.task('replace-test-crimea-to-arenasport', function () {
   return replaceTest({
     port:[portReg, portArenasportTest],
-    locale: [localeCrimeaReg, localeArenasport],
     api: [apiCrimeaTestReg, apiArenasportTest],
     style: [styleCrimeaReg, styleArenasport],
-    map: [new RegExp(gMapsCrimea, 'g'), gMapsArenasport]
+    map: [new RegExp(gMapsCrimea, 'g'), gMapsArenasport],
+    isArenasport: true
   })
 });
 
-function replaceTest({port, locale, api, style, map}) {
-  const _locale = [{
-    match: locale[0],
-    replacement: function () {
-      return locale[1]
-    }
-  }];
+function replaceTest({port,  api, style, map, isArenasport}) {
   const _api = [{
     match: api[0],
     replacement: function () {
@@ -146,11 +128,23 @@ function replaceTest({port, locale, api, style, map}) {
       return map[1]
     }
   }];
+  const _isArenasport = [{
+    match: new RegExp(!isArenasport, 'i'),
+    replacement: function () {
+      return isArenasport
+    }
+  }];
   return gulp.src("./server.ts").pipe(replace({patterns: _port})).pipe(gulp.dest(''))
-  && gulp.src("./src/app/app.module.ts").pipe(replace({patterns: _locale})).pipe(gulp.dest('./src/app'))
-  && gulp.src("./src/config/base_url.ts").pipe(replace({patterns: _api})).pipe(gulp.dest('src/config'))
-  && gulp.src("./src/index.html").pipe(replace({patterns: _style})).pipe(gulp.dest('src'))
-  && gulp.src("./src/app/vendor.modules.ts").pipe(replace({patterns: _map})).pipe(gulp.dest('src/app'))
+    && gulp.src("./src/config/is-arenasport.config.ts").pipe(replace({patterns: _isArenasport})).pipe(gulp.dest('./src/config'))
+    && gulp.src("./src/config/base_url.ts").pipe(replace({patterns: _api})).pipe(gulp.dest('src/config'))
+    && gulp.src("./src/index.html").pipe(replace({patterns: _style})).pipe(gulp.dest('src'))
+    && gulp.src("./src/app/vendor.modules.ts").pipe(replace({patterns: _map})).pipe(gulp.dest('src/app'))
+    && del(['src/assets/img', '!assets', '!src'], {force:true})
+      .then(function() {
+        setTimeout(function () {
+          gulp.src('./img-' + (isArenasport? 'arenasport' : 'crimea') + '/*.*').pipe(gulp.dest('./src/assets/img'))
+        }, 1000)
+      })
 }
 
 gulp.task('css-before-build-prod', function () {

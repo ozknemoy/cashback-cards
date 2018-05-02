@@ -12,7 +12,8 @@
               <!--<button (click)="resetStep=ResetStep.two">2</button>
               <button (click)="resetStep=ResetStep.one">1</button>-->
               Приветствуем Вас, уважаемый {{'user' | translate}}! Введите свой телефон и пароль для доступа в личный кабинет
-            <!--<a routerLink="/" class="btn btn-neutral btn-simple">Вернуться на главную</a>-->
+            </p>
+            <a routerLink="/" class="btn btn-neutral btn-simple">Вернуться на главную</a>
           </div>
           <div class="col-12 col-md-4 auth--wrap" [ngSwitch]="step">
             <div *ngSwitchCase="Step.login">
@@ -54,7 +55,7 @@
                           (click)="login(loginForm)"
                           [disabled]="loginForm.invalid">Далее
                   </button>
-                  <button (click)="step = Step.reset" class="btn btn-success btn-link">Забыли пароль?</button>
+                  <button type="button" (click)="step = Step.reset" class="btn btn-success btn-link">Забыли пароль?</button>
                 </div>
               </form>
               <div class="text-center">

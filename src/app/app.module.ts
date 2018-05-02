@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {LOCALE_ID, NgModule} from '@angular/core';
+import {Inject, LOCALE_ID, NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -26,6 +26,7 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ruLocale } from 'ngx-bootstrap/locale';
 import {MainInterceptor} from "../config/interceptor";
 import {SeoService} from "../services/seo.service";
+import {isArenasport} from "../config/is-arenasport.config";
 /*import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';*/
 
@@ -63,7 +64,7 @@ import localeRu from '@angular/common/locales/ru';*/
     {provide: 'phoneMask', useValue: '+7(000)000-0000'},
     {provide: 'phonePlaceholder', useValue: '7 123 456 7890'},
     {provide: 'cardMask', useValue: '0000 0000 0000 0000'},
-    {provide: 'isArenasport', useValue: true},
+    {provide: 'isArenasport', useValue: isArenasport},
     /*{ provide: LOCALE_ID, useValue: 'ru' }*/
   ],
   bootstrap: [AppComponent]
@@ -75,11 +76,12 @@ export class AppModule {
     bsDatepickerConfig: BsDatepickerConfig,
     bsDaterangepickerConfig: BsDaterangepickerConfig,
     localeService: BsLocaleService,
+    @Inject('isArenasport') isArenasport: boolean
   ) {
     translate.setDefaultLang('arenasport');
     translate.setTranslation('arenasport', arenasport);
     translate.setTranslation('crimea', crimea);
-    translate.use("arenasport");// тут специально такие ковычки!!!
+    translate.use(isArenasport? 'arenasport' : 'crimea');
 
     // datepicker
     defineLocale('ru', ruLocale);
