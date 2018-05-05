@@ -1,0 +1,176 @@
+.header_nav {
+    
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 2;
+    @media (min-width: 992px) {
+        background: #474747;    
+    }
+    // fixed header
+    .header-fixed & {
+        position: fixed;
+        background: $success-color;
+        min-height: 60px;
+        top: 0;
+        &:before {
+            background: url(../img/circle.png) no-repeat center 60%;
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            opacity: .2;
+        }
+        .logo {
+            // @include background-image('logo-min', $size: contain, $repeat: no-repeat);
+            // width: 135px;
+            // height: 44px;
+            // top: 6px;
+        }
+        .header_nav--col {
+            top: 12px;
+        }
+        .btn_mob {
+            top: 10px;
+        }
+    }
+    &--container {
+        margin: 0 auto;
+        position:relative;
+        @media screen and (min-width: 1200px) {
+            max-width: 1140px;
+        }
+
+
+        .header_nav--col {
+
+            .btn {
+                position: absolute;
+                right: 0;
+                top: 6px;
+                @media screen and (max-width: 991px) {
+                    display: none;
+                }
+            }
+            // position: absolute;
+            // top: -5px;
+            // &:first-child {
+            //     right: 50%;
+            //     @include transform-translate-x(-230px);
+            // }
+            // &:last-child {
+            //     left: 50%;
+            //     @include transform-translate-x(230px);
+            // }
+        }
+        @media screen and (max-width: 1400px){
+            // .header_nav--col {
+            //     position: absolute;
+            //     &:first-child {
+            //         right: auto;
+            //         left: 15px;
+            //         @include transform-translate-x(0px);
+            //     }
+            //     &:last-child {
+            //         left: auto;
+            //         right: 15px;
+            //         @include transform-translate-x(0px);
+            //     }
+            // }
+        }
+        @media screen and (max-width: 1110px){
+            .header_nav--col {
+                // position: relative !important;
+                // left: auto !important;
+                // right: auto !important;
+                // padding-left: 15px;
+                .header_nav--link {
+                    // display: block;
+                }
+                .btn {
+                    // display: none;
+                }
+            }
+        }
+    }
+
+    .btn_mob {
+        position: absolute;
+        right: 15px;
+        top: 0;
+        display: none;
+        @media screen and (min-width: 1110px){
+            // display: none;
+        }
+    }
+
+    &--link {
+        color: $white-color;
+        font-size: 14px;
+        display: inline-block;
+        vertical-align: top;
+        padding: 15px 14px;
+        margin: 0;
+        &:focus {
+            color: $white-color;
+        }
+        &:active {
+            color: $white-color;
+        }
+        &:hover {
+            background: $primary-color;
+            color: $white-color;
+            text-decoration: none;
+        }
+        @media screen and (max-width: 991px) {
+            display: block !important;
+        }
+    }
+    .btn {
+        vertical-align: top;
+    }
+    .logo {
+        // @include background-image('logo', $size: contain, $repeat: no-repeat);
+        // width: 137px;
+        // height: 120px;
+        // position: absolute;
+        // left: 50%;
+        // top: 0;
+        // @include transform-translate-x(-50%);
+        // @media screen and (max-width: 1110px){
+        //     width: 85px;
+        //     height: 74px;
+        // }
+    }
+}
+
+.lk {
+    .header {
+        background: $primary-color;
+        background: -webkit-linear-gradient(to right, lighten($primary-color, 10%), $primary-color);
+        background: linear-gradient(to right, lighten($primary-color, 10%), $primary-color);
+        padding: 10px 0;
+        position: relative;
+        z-index: 1;
+        .logo {
+            background-image: url(../img/logo.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 190px;
+            height: 50px;
+            display: block;
+            margin: 0 auto;
+        }
+        @media screen and (max-width: 767px){
+            .btn-logout {
+                position: absolute;
+                top: -50px;
+                right: 15px;
+            }
+        }
+    }
+}

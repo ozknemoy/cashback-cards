@@ -44,58 +44,22 @@
                 Сумма доступная к списанию в рублях <span>{{card.points | thousand}}
                 <i class="mdi mdi-currency-rub"></i></span>
               </div>
-              <!--<div class="lk_profile--ball">
-               Общий оборот по карте <span>{{card.self_points | thousand}}2 ₽</span>
-              </div>-->
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!--<div class="lk_promotions">
-      <div class="lk_title">Текущие акции для вас</div>
-      <div class="row">
-        <div class="col-12 col-xs-6 col-md-4">
-          <a class="lk_promotions&#45;&#45;item" routerLink="/action/1">
-            <span class="lk_promotions&#45;&#45;img"><img src="assets/img/gift.png" alt=""></span>
-            <span class="lk_promotions&#45;&#45;title">Название акции</span>
-            <span class="lk_promotions&#45;&#45;date">с 12.12.0001 по 12.12.3001</span>
-            <span class="lk_promotions&#45;&#45;town">Санкт-Петербург</span>
-          </a>
-        </div>
-      </div>
-      <div class="text-center">
-        <a routerLink="/partners" class="btn btn-success btn-simple">Все партнеры</a>
-      </div>
-    </div>-->
     <div class="lk_promotions">
       <div class="lk_title text-center">Магазины</div>
       <div class="row">
-        <div class="col-12 col-xs-6 col-md-4">
-          <a class="lk_promotions--item">
-            <span class="lk_promotions--img"><img src="assets/img/partner_logo-b--1.png" alt=""></span>
-            <span class="lk_promotions--title">Магазин 1</span>
-          </a>
-        </div>
-        <div class="col-12 col-xs-6 col-md-4">
-          <a class="lk_promotions--item">
-            <span class="lk_promotions--img"><img src="assets/img/partner_logo-b--2.png" alt=""></span>
-            <span class="lk_promotions--title">Магазин 1</span>
-          </a>
-        </div>
-        <div class="col-12 col-xs-6 col-md-4">
-          <a class="lk_promotions--item">
-            <span class="lk_promotions--img"><img src="assets/img/partner_logo-b--3.png" alt=""></span>
-            <span class="lk_promotions--title">Магазин 1</span>
-          </a>
+        <div class="col-12 col-sm-6 col-md-4" *ngFor="let _partner of partners">
+          <partner-card [partner]="_partner"></partner-card>
         </div>
       </div>
       <div class="text-center">
         <button routerLink="/partners" class="btn btn-neutral btn-simple">Все магазины</button>
       </div>
     </div>
-
-
   </div>
 </div>

@@ -1,0 +1,120 @@
+.lk_sidebar {
+    background-color: rgba(255,255,255,0.9);
+    @extend .card;
+    margin-top: 30px;
+    display: block;
+    padding: 0;
+    right: auto;
+    left: auto;
+    width: auto;
+    z-index: 3;
+    @media screen and (max-width: 767px){
+        background-color: transparent;
+        margin-top: 0;
+        position: absolute;
+        top: -52px;
+        box-shadow: none;
+        overflow: visible;
+    }
+    .content {
+        display: block;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        @media screen and (max-width: 767px){
+            position: fixed;
+            display: block;
+            top: 0;
+            height: 100% !important;
+            width: 300px;
+            color: $white-color;
+            left: 0;
+            z-index: 1032;
+            visibility: visible;
+            padding-top: 100px;
+            background-color: #999;
+            overflow-y: visible;
+            border-top: none;
+            text-align: left;
+
+            max-height: none !important;
+
+            @include transform-translate-x(-300px);
+            @include transition (0.50s, cubic-bezier(0.685, 0.0473, 0.346, 1));
+
+            &:before{
+                background: #566071; /* For browsers that do not support gradients */
+                background: -webkit-linear-gradient(#566071 0%, #000 80%); /* For Safari 5.1 to 6.0 */
+                background: -o-linear-gradient(#566071 0%, #000 80%); /* For Opera 11.1 to 12.0 */
+                background: -moz-linear-gradient(#566071 0%, #000 80%); /* For Firefox 3.6 to 15 */
+                background: linear-gradient(#566071 0%, #000 80%); /* Standard syntax (must be last) */
+                @include opacity(.76);
+
+                display: block;
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: -1;
+            }
+        }
+    }
+    .navbar-toggler {
+        display: none;
+        width: 62px;
+        height: 33px;
+        right: auto;
+        top: 0;
+        .navbar-toggler-bar {
+            background: $white-color !important;
+        }
+        @media screen and (max-width: 767px){
+            display: block;
+        }
+    }
+    &--nav {
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    &--link {
+    	background: $white-color !important;
+        display: block !important;
+        padding: 5px 15px !important;
+        margin: 0 -15px;
+        color: $dark-gray !important;
+        &.current {
+            background: $primary-color !important;
+            background: -webkit-linear-gradient(to right, lighten($primary-color, 10%), $primary-color) !important;
+            background: linear-gradient(to right, lighten($primary-color, 10%), $primary-color) !important;
+        	color: $white-color !important;
+            .mdi {
+                color: $white-color;
+            }
+        }
+        &:hover {
+        	background: $primary-color !important;
+            background: -webkit-linear-gradient(to right, lighten($primary-color, 10%), $primary-color) !important;
+            background: linear-gradient(to right, lighten($primary-color, 10%), $primary-color) !important;
+        	color: $white-color !important;
+        	text-decoration: none;
+            .mdi {
+                color: $white-color;
+            }
+        }
+        .mdi {
+        	font-size: 20px;
+        	vertical-align: middle;
+            margin-right: 10px;
+            color: $primary-color;
+        }
+    }
+    &--summary {
+        padding: 0 0 10px;
+        font-size: 16px;
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}

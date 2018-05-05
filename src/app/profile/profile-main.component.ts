@@ -3,6 +3,7 @@ import {AutoUnsubscribe} from "../../decorators/auto-unsubscribe.decorator";
 import {HttpService} from "../../services/http.service";
 import {HandleDataService} from "../../services/handle-data.service";
 import {BonusLevels, Card, User} from "./profile-settings.component";
+import {IPartner} from "../partners/partner.model";
 
 
 
@@ -13,6 +14,7 @@ import {BonusLevels, Card, User} from "./profile-settings.component";
 @AutoUnsubscribe()
 export class ProfileMainView {
   public semiFilledProfile = true;
+  public partners: IPartner[] = [];
   public isLoading = true;
   public user: User = new User;
   public card: Card = new Card;
@@ -38,6 +40,10 @@ export class ProfileMainView {
         this.level = level;
         this.isLoading = false;
       });
+      this.httpService.post('shops/find-shop', {ShopSearch: null})
+        .subscribe((partners: IPartner[]) => {
+          this.partners = partners.slice(0,3)
+        })
     })
   }
 

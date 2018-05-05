@@ -1,0 +1,84 @@
+.lk {
+	background-image: url(../img/bg11.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+	padding: 0 0 30px;
+	min-height: 100vh;
+	&:before {
+		background: rgba(0,0,0,0.5);
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 0;
+		content: '';
+		
+	}
+
+	&_content {
+		margin-top: 30px;
+	}
+	&_card {
+		background-color: rgba(255,255,255,0.9);
+		@extend .card;
+		&--image {
+			display: inline-block;
+			border-radius: 10px;
+			position: relative;
+			overflow: hidden;
+		}
+		&--title {
+			font-family: 'futurisxcregular';
+    		font-size: 24px;
+    		@media screen and (max-width: 767px){
+    			font-size: 18px;
+    		}
+		}
+
+	}
+	&_title {
+		font-family: 'futurisxcregular';
+		font-size: 2em;
+		margin-bottom: 10px;
+		color: $white-color;
+	}
+	
+}
+// card list
+.card_list {
+	background-color: rgba(255,255,255,0.9);
+	@extend .card;
+	&--item {
+
+		&:after {
+			content: '';
+			clear: both;
+			display: block;
+		}
+		.checkbox {
+			float: left;
+			margin-right: 15px;
+		}
+		label {
+			vertical-align: middle;
+		}
+		img {
+			max-width: 150px;
+		}
+	}
+	&--title {
+		font-family: 'futurisxcregular';
+		font-size: 24px;
+		@media screen and (max-width: 767px){
+			font-size: 18px;
+		}
+	}
+	&--num {
+		font-family: 'futurisxcregular';
+
+	}
+	&--score {
+
+	}
+}

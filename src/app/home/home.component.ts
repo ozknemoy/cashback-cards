@@ -8,12 +8,12 @@ import {HomeCommonComponent} from "./home-common.class";
 @Component({
   selector: 'app-home',
   template: `
-    <div class="wrap" [addClassAfterScroll]="50">
+    <div class="wrap"><!-- [addClassAfterScroll]="50"-->
       <nav-header></nav-header>
       <arenasport-home *ngIf="isArenasport; else isCrimea"></arenasport-home>
       <ng-template #isCrimea><crimea-home></crimea-home></ng-template>
+      <app-footer></app-footer>
     </div>
-    <app-footer></app-footer>
   `
 })
 export class HomeComponent {

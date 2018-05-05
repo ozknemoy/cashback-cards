@@ -1,0 +1,90 @@
+.auth {
+    min-height: 100vh;
+    position: relative;
+    
+    &--bg {
+        background-image: url(../img/bg11.jpg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        &:after {
+		    // background: -webkit-linear-gradient(150deg, #33ffae 15%, #05d5ff 70%, #a6ffcb 94%);
+		    // background: -o-linear-gradient(150deg, #33ffae 15%, #05d5ff 70%, #a6ffcb 94%);
+		    // background: linear-gradient(150deg, #33ffae 15%, #05d5ff 70%, #a6ffcb 94%);
+			content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            opacity: .5;
+        }
+    }
+    &--content {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 50%;
+		@include translate(0%, -50%);
+    }
+    &--heading {
+    	padding-top: 15px;
+    	padding-bottom: 15px;
+    	overflow: hidden;
+        &:after {
+        	background: linear-gradient(150deg, #385f4f, #000000);
+			content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            opacity: .8;
+        }
+        h1 {
+        	color: $white-color;
+        	position: relative;
+        	z-index: 1;
+        }
+        p {
+			border-top: 1px solid rgba(255, 255, 255, 0.5);
+			margin: 15px -15px 0;
+			padding: 15px 15px 0;
+			color: $white-color;
+			position: relative;
+        	z-index: 1;
+	    }
+	    a {
+	    	position: relative;
+        	z-index: 1;	
+	    }
+
+    }
+    &--wrap {
+    	background: rgba(255,255,255,.9);
+  		padding-top: 15px;
+  		padding-bottom: 15px;
+        position: relative;
+        &>.row {
+        	position: relative;
+        	z-index: 1;
+        }
+        p {
+	    	border-top: 1px solid $light-gray;
+	    	margin: 15px -15px 0;
+	    	padding: 15px 15px 0;
+	    }
+    }
+
+    h1 {
+		// color: $white-color;
+		font-weight: 100;
+		font-size: 2.5rem;
+    }
+    
+}

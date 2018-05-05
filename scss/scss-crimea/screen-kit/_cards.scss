@@ -1,0 +1,262 @@
+.card{
+    border: 0;
+    border-radius: $border-radius-small;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 20px;
+    box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
+
+    .card-body{
+        min-height: 190px;
+    }
+
+    &[data-background-color="orange"]{
+        background-color: $primary-color;
+    }
+
+    &[data-background-color="red"]{
+        background-color: $danger-color;
+    }
+
+    &[data-background-color="yellow"]{
+        background-color: $warning-color;
+    }
+
+    &[data-background-color="blue"]{
+        background-color: $info-color;
+    }
+
+    &[data-background-color="green"]{
+        background-color: $success-color;
+    }
+    .content {
+        padding: 15px;
+    }
+    .footer {
+        padding: 15px;
+    }
+    .card-icon {
+        background: $white-color;
+        width: 70px;
+        height: 70px;
+        padding: 15px;
+        display: inline-block;
+        border-radius: 50%;
+        svg {
+            width: 100%;
+            height: 100%;
+            path, circle {
+            fill: $brand-info;
+                // @include transition($fast-transition-time, $transition-linear);
+            }
+        }
+    }
+}
+
+.card-signup{
+    max-width: 350px;
+    margin: 0 auto;
+
+    .header{
+        margin-left: 20px;
+        margin-right: 20px;
+        padding: 30px 0;
+    }
+    .text-divider{
+        margin-top: 30px;
+        margin-bottom: 0px;
+        text-align: center;
+    }
+    .card-body{
+        padding-top: 0px;
+        padding-bottom: 0px;
+        min-height: auto;
+    }
+
+    .checkbox{
+        margin-top: 20px;
+
+        label{
+            margin-left: 17px;
+        }
+        .checkbox-material{
+            padding-right: 12px;
+        }
+    }
+
+    .social-line{
+        margin-top: 20px;
+        text-align: center;
+
+        .btn.btn-icon ,
+        .btn.btn-icon .btn-icon -mini{
+            margin-left: 5px;
+            margin-right: 5px;
+            box-shadow: 0px 5px 50px 0px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    .footer{
+        margin-bottom: 10px;
+        margin-top: 24px;
+    }
+}
+
+.card-plain{
+    background: transparent;
+    box-shadow: none;
+
+    .header{
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .content{
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.card-category {
+    background: transparent;
+    box-shadow: none;
+    // text-align: center;
+    // padding-top: 100%;
+    position: relative;
+    // top: -30px;
+    // box-shadow: none;
+    .content {
+        // position: absolute;
+        // top: 50%;
+        // @include transform-translate-y(-50%);
+        padding: 10px 15px 15px 50px;
+    }
+    .icon {
+        width: 35px;
+        height: 35px;
+        // margin: 0 auto 15px;
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        svg {
+            width: 100%;
+            height: 100%;
+            path, circle {
+                fill: $dark-gray;
+            }
+        }
+    }
+    .description {
+        line-height: 1.2;
+        // height: 40px;
+        position: relative;
+        overflow: hidden;
+    }
+}
+
+.card-flat {
+    box-shadow: none;
+    border: 1px solid $light-gray;
+}
+
+.card-wrap {
+    position: relative;
+    .card-info {
+        position: absolute;
+        top: 16px;
+        right: 0px;
+        bottom: 2px;
+        z-index: 1;
+        .btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            border-color: $light-gray;
+            border-radius: 0;
+            border-top: 0;
+            border-right: 0;
+            border-bottom: 0;
+        }
+    }
+    &:hover {
+        .card-button {
+            background-color: $primary-color;
+            color: $white-color;
+            svg {
+                path, circle {
+                    fill: $white-color;
+                }
+            }
+        }
+        .btn {
+            color: $white-color;
+        }
+    }
+    .card-button {
+        border: 1px solid $light-gray;
+        box-shadow: none;
+        position: relative;
+        color: $text-color;
+        margin: 20px 0 0;
+        @include transition($fast-transition-time, $transition-linear);
+        
+        .content {
+            display: block;
+            .icon {
+                width: 30px;
+                height: 30px;
+                float: left;
+            }
+            &:after {
+                content: '';
+                display: block;
+                clear: both;
+            }
+        }
+        img {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            width: 30px;
+        }
+        svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+            path, circle {
+                fill: $primary-color;
+                @include transition($fast-transition-time, $transition-linear);
+            }
+        }
+        .title {
+            font-weight: $font-weight-normal;
+            position: absolute;
+            left: 65px;
+            right: 70px;
+            top: 50%;
+            display: block;
+            @include transform-translate-y(-50%);
+            line-height: 1.1;
+            text-decoration: none;
+        }
+    }
+}
+
+
+
+.card-icon {
+    text-align: center;
+    // min-height: 170px;
+    img {
+        max-width: 20%;
+    }
+
+    .description {
+
+    }
+}
+

@@ -2681,8 +2681,10 @@ body {
   min-height: 100vh; }
 
 .wrap {
-  min-height: 100vh;
-  padding-bottom: 87px; }
+  min-height: 100vh; }
+  @media screen and (min-width: 601px) {
+    .wrap {
+      padding-bottom: 86px; } }
 
 /* Animations */
 .nav-pills .nav-link,
@@ -5015,10 +5017,65 @@ Created using IcoMoon - icomoon.io
   .modal .modal-header .close:hover, .modal .modal-header .close:focus {
     opacity: 1; }
 
-.modal-loader {
-  text-align: center; }
-  .modal-loader .progress_circle {
-    margin: 10px auto 0; }
+.prtModal {
+  background-image: url(../img/prt-bg.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; }
+  .prtModal .close {
+    position: fixed;
+    right: 50px;
+    top: 50px;
+    color: #FFFFFF;
+    text-shadow: none;
+    cursor: pointer;
+    z-index: 11; }
+    .prtModal .close .now-ui-icons {
+      font-weight: 700; }
+
+.modal-prt {
+  text-align: center;
+  color: #FFFFFF;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: calc(100% - (1.95rem * 2)); }
+  .modal-prt .title {
+    font-family: 'Proxima Nova Cn Bl';
+    font-size: 36px;
+    line-height: 1.1;
+    color: #008c46; }
+    @media screen and (max-width: 991px) {
+      .modal-prt .title {
+        margin-top: 60px; } }
+  .modal-prt p {
+    font-family: 'Proxima Nova Rg';
+    font-size: 18px;
+    margin: 30px 125px; }
+    @media screen and (max-width: 991px) {
+      .modal-prt p {
+        margin: 20px 0; } }
+  @media screen and (min-width: 992px) {
+    .modal-prt .form-group {
+      margin-left: 200px;
+      margin-right: 200px; } }
+  .modal-prt .form-group .form-control {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    border-radius: 0;
+    font-size: 18px; }
+  .modal-prt .modal-form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column; }
 
 .carousel-item-next,
 .carousel-item-prev,
@@ -5278,7 +5335,8 @@ Created using IcoMoon - icomoon.io
   padding: 0;
   right: auto;
   left: auto;
-  width: auto; }
+  width: auto;
+  z-index: 3; }
   @media screen and (max-width: 767px) {
     .lk_sidebar {
       background-color: transparent;
@@ -5391,11 +5449,11 @@ Created using IcoMoon - icomoon.io
   z-index: 2; }
   .header-fixed .header_nav {
     position: fixed;
-    background: #008c46;
-    min-height: 60px;
+    background: #3a3a3a;
+    min-height: 90px;
     top: 0; }
     .header-fixed .header_nav:before {
-      background: url(../img/circle.png) no-repeat center 60%;
+      background: url(../img/circle.png) no-repeat center 53%;
       content: '';
       display: block;
       position: absolute;
@@ -5408,14 +5466,16 @@ Created using IcoMoon - icomoon.io
       background-image: url(../img/logo-min.png);
       background-size: contain;
       background-repeat: no-repeat;
-      width: 135px;
-      height: 44px;
-      top: 6px; }
+      width: 118px;
+      height: 39px;
+      top: 25px; }
       @media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
         .header-fixed .header_nav .logo {
           background-image: url(../img/logo-min@2x.png); } }
     .header-fixed .header_nav .header_nav--col {
-      top: 12px; }
+      top: 28px; }
+    .header-fixed .header_nav .btn_mob {
+      top: 10px; }
   .header_nav--container .header_nav--col {
     position: absolute;
     top: -5px; }

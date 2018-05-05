@@ -21,6 +21,9 @@ import {NavHeaderComponent} from "../directives/nav-header/nav-header.component"
 import {AppFooterComponent} from "../directives/app-footer/app-footer.component";
 import {AddClassAfterScrollDirective} from "../directives/add-class-after-scroll.directive";
 import {ArenasportHomeComponent, CrimeaHomeComponent} from "./home/home.component";
+import {PartnerCardComponent} from "../directives/partner-card.component";
+import {ForPartnersButtonDirective} from "../modals/for-partners-button/for-partners-button.directive";
+import {ForPartnersButtonModal} from "../modals/for-partners-button/for-partners-button.modal";
 
 
 export const vendorDirectiveModules = [
@@ -28,10 +31,9 @@ export const vendorDirectiveModules = [
 ];
 
 const __modals__ = [
-  //BarcodeButtonModal,
   LoginModalComponent,
   QrBarcodeButtonModal,
-  //OuterHrefModalComponent
+  ForPartnersButtonModal,
 ];
 export const routelessComponents = [
   //OuterHrefModalComponent,
@@ -48,6 +50,8 @@ export const routelessComponents = [
   AddClassAfterScrollDirective,
   ArenasportHomeComponent,
   CrimeaHomeComponent,
+  PartnerCardComponent,
+  ForPartnersButtonDirective,
   //FileUploaderComponent,
   //OzkNumberDirective,
   //ScrollDirective

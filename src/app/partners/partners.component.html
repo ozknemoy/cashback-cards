@@ -30,10 +30,10 @@
               <div class="row align-items-center">
                 <div class="col-12 col-md-3">
                   <div class="form-group">
-                    <select class="form-control" [(ngModel)]="filter.payment_type">
+                    <select class="form-control" [(ngModel)]="filter._payment_type">
                       <option value="">Все операции</option>
-                      <option [value]="0">Получить баллы</option>
-                      <option [value]="1">Потратить баллы</option>
+                      <option value="0">Получить баллы</option>
+                      <option value="1">Потратить баллы</option>
                     </select>
                   </div>
                 </div>
@@ -66,32 +66,10 @@
 
             <div class="row">
               <div class="col-12 col-md-6 col-lg-4 col-xl-2"
-                   *ngFor="let partner of partners
+                   *ngFor="let _partner of partners
                     | filter : filter : false
                     | paginate: { itemsPerPage: 48, currentPage: currentPage}">
-                <a routerLink="/partner/{{partner.id}}" class="lk_promotions--item">
-                  <span class="lk_promotions--img"><img src="{{partner.image}}" alt=""></span>
-                  <span class="lk_promotions--footer">
-                    <span class="lk_promotions--title">
-                      {{partner.name}}
-                    </span>
-                    <span class="lk_promotions--category">{{partner.category.name}}</span>
-                    <span class="lk_promotions--address">
-                      <span class="icon ic-metro"></span>{{partner.metro}}
-                    </span>
-                    <span class="lk_promotions--ic">
-                      <span class="icon ic-pay"
-                            *ngIf="partner.payment_type === 1 || partner.payment_type === 2"
-                            tooltip="Потратить баллы">
-                      </span>
-                      <span class="icon ic-collect"
-                            *ngIf="partner.payment_type === 0 || partner.payment_type === 2"
-                            tooltip="Получить баллы">
-                      </span>
-                      <span class="badge badge-success" *ngIf="partner.bonus_type">акция</span>
-                    </span>
-                  </span>
-                </a>
+                <partner-card [partner]="_partner"></partner-card>
               </div>
 
               <pagination-controls class="pagination pagination-success col-12"

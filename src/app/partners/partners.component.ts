@@ -38,7 +38,7 @@ export class PartnersView {
     category: {id: ''},
     metro: null,
     name: null,
-    payment_type: '',
+    _payment_type: '',
     bonus_type: null
   };
 
@@ -50,10 +50,10 @@ export class PartnersView {
     this.httpService.post('shops/find-shop', {ShopSearch: null})
       .subscribe((partners: IPartner[]) => {
         this.partners = partners.map(p=> {
-          //p._bonus_type = p.bonus_type/* === 1? 1 : null*/;
           p.lon = <any>parseFloat(p.lon);
           p.lat = <any>parseFloat(p.lat);
-          p.image = BASE_URL_IMG + p.image;
+          // чтобы обрабатывать пересечения 0 или 1 типов с типом 3
+          p._payment_type = p.payment_type === 3? '01' : p.payment_type + '';
           return p
         });
         this._partners = partners

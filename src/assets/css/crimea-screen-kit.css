@@ -4822,10 +4822,73 @@ Created using IcoMoon - icomoon.io
   .modal .modal-header .close:hover, .modal .modal-header .close:focus {
     opacity: 1; }
 
-.modal-loader {
-  text-align: center; }
-  .modal-loader .progress_circle {
-    margin: 10px auto 0; }
+.modal-prt {
+  background-image: url(../img/prt-bg1.png);
+  background-color: #d8dadb;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-size: auto; }
+  @media screen and (max-width: 1440px) {
+    .modal-prt {
+      background-size: 88%; } }
+  @media screen and (max-width: 1000px) {
+    .modal-prt {
+      background-image: url(../img/prt-bg_mob.png);
+      background-position: left bottom;
+      background-repeat: no-repeat;
+      background-size: cover; } }
+  .modal-prt .close {
+    position: fixed;
+    right: 50px;
+    top: 50px;
+    color: #312783;
+    text-shadow: none;
+    cursor: pointer;
+    z-index: 11; }
+    .modal-prt .close .now-ui-icons {
+      font-weight: 700; }
+
+.modal-prt {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: calc(100% - (1.95rem * 2)); }
+  .modal-prt .title {
+    font-family: "futurisxcregular", sans-serif;
+    font-size: 36px;
+    color: #312783; }
+  .modal-prt p {
+    font-size: 18px;
+    margin: 20px 0;
+    color: #2c2c2c; }
+  .modal-prt .form-group {
+    margin-top: 10px; }
+    .modal-prt .form-group .form-control {
+      background-color: #FFFFFF;
+      border-color: #FFFFFF;
+      border-radius: 0;
+      font-size: 14px; }
+  .modal-prt .modal-form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column; }
+    @media screen and (min-width: 1000px) {
+      .modal-prt .modal-form {
+        -webkit-transform: translate3d(50%, 0, 0);
+        -moz-transform: translate3d(50%, 0, 0);
+        -o-transform: translate3d(50%, 0, 0);
+        -ms-transform: translate3d(50%, 0, 0);
+        transform: translate3d(50%, 0, 0); } }
+    @media screen and (max-width: 1000px) {
+      .modal-prt .modal-form {
+        margin: 0 10%; } }
 
 .carousel-item-next,
 .carousel-item-prev,
@@ -5219,16 +5282,6 @@ Created using IcoMoon - icomoon.io
       top: 0;
       bottom: 0;
       opacity: .2; }
-    .header-fixed .header_nav .logo {
-      background-image: url(../img/logo-min.png);
-      background-size: contain;
-      background-repeat: no-repeat;
-      width: 135px;
-      height: 44px;
-      top: 6px; }
-      @media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
-        .header-fixed .header_nav .logo {
-          background-image: url(../img/logo-min@2x.png); } }
     .header-fixed .header_nav .header_nav--col {
       top: 12px; }
     .header-fixed .header_nav .btn_mob {
@@ -5271,27 +5324,6 @@ Created using IcoMoon - icomoon.io
         display: block !important; } }
   .header_nav .btn {
     vertical-align: top; }
-  .header_nav .logo {
-    background-image: url(../img/logo.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 137px;
-    height: 120px;
-    position: absolute;
-    left: 50%;
-    top: 0;
-    -webkit-transform: translate3d(-50%, 0, 0);
-    -moz-transform: translate3d(-50%, 0, 0);
-    -o-transform: translate3d(-50%, 0, 0);
-    -ms-transform: translate3d(-50%, 0, 0);
-    transform: translate3d(-50%, 0, 0); }
-    @media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
-      .header_nav .logo {
-        background-image: url(../img/logo@2x.png); } }
-    @media screen and (max-width: 1110px) {
-      .header_nav .logo {
-        width: 85px;
-        height: 74px; } }
 
 .lk .header {
   background: #312783;

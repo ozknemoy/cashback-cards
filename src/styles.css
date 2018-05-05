@@ -43,3 +43,20 @@
 .z0 {
   z-index: 0;
 }
+
+.modal-prt.modal-dialog {
+  margin: 0;
+  height: 100vh;
+  max-width: 100vw;
+}
+
+.modal-prt .modal-content {
+  box-shadow: none;
+  background-color: transparent;
+  width: 100vw;
+}
+@media screen and (min-width: 1000px) {
+  .modal-prt .modal-form > *{
+    width: 500px;
+  }
+}

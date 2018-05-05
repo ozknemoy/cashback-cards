@@ -8,10 +8,10 @@
         <h1 class="page-title">{{partner.name}}</h1>
         <span class="lk_promotions--category">{{partner.category.name}}</span>
 
-        <span class="lk_promotions--type" *ngIf="partner.payment_type === 1 || partner.payment_type === 2">
+        <span class="lk_promotions--type" *ngIf="partner.payment_type === 1 || partner.payment_type === 3">
           <span class="icon ic-pay"></span>Потратить баллы
         </span>
-        <span class="lk_promotions--type" *ngIf="partner.payment_type === 0 || partner.payment_type === 2">
+        <span class="lk_promotions--type" *ngIf="partner.payment_type === 0 || partner.payment_type === 3">
           <span class="icon ic-collect"></span>Получить баллы
         </span>
 
