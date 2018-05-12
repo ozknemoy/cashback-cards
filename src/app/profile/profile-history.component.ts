@@ -28,7 +28,7 @@ export class ProfileHistoryView {
   public currentPage = 1;
   public hist;
   public filter = {
-    status: null
+    status: ''
   };
   public history: IHistory[] = [];
 

@@ -24,10 +24,10 @@ export const locales = {
   ],
 
 
-  'footer.hrefVk': ['//vk.com', '//vk.com'],
+  'footer.hrefVk': ['https://vk.com/arenasportcard', 'https://vk.com/cardcrimea'],
   'footer.hrefInstagram': ['//vk.com', '//vk.com'],
   'footer.hrefGooglePlus': ['//vk.com', '//vk.com'],
-  'footer.hrefFacebook': ['//vk.com', '//vk.com'],
+  'footer.hrefFacebook': ['https://www.facebook.com/arenasportcard', 'https://www.facebook.com/pg/Единая-туристическая-карта-Крыма-245951006148995'],
   'footer.hrefTwitter': ['//vk.com', '//vk.com'],
   'footer.hrefYoutube': ['//vk.com', '//vk.com'],
 };

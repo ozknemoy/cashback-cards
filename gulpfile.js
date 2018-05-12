@@ -19,7 +19,7 @@ const portCrimeaTest = '4100';
 const portArenasportTest = '4200';
 const portCrimeaProd = '5100';
 const portArenasportProd = '5200';
-const portReg = /(4100|4200|5100|5200)/i;
+const portReg = /(4100|4200|5100|5200)/g;
 
 const apiArenasportTest = 'service.card.prioriticlub.ru';
 const apiArenasportTestReg = /service\.card\.prioriticlub\.ru/g;

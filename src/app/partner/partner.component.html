@@ -25,6 +25,13 @@
         <div class="card">
           <div class="content">
             <div class="row">
+              <div class="col-12" *ngIf="partner.stock_card_percent && partner.stock_end_date">
+                АКЦИЯ!
+                Только до {{partner.stock_end_date | date}} ты получаешь кэш бек {{partner.stock_card_percent}}% вне зависимости от твоего статуса!
+                Успевай получать больше, а платить меньше!
+                (красным выделены переменные, остальное статика)
+                Поместить это на видном месте
+              </div>
               <div class="col-12 col-md-6 order-md-6">
                 <div class="row">
                   <div class="col-12 col-md-5 order-md-7">
@@ -82,6 +89,5 @@
       </div>
     </div>
   </div>
+  <app-footer></app-footer>
 </div>
-
-<app-footer></app-footer>

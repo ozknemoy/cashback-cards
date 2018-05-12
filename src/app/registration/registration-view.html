@@ -50,7 +50,7 @@
                   <span class="input-group-addon"
                         (mousedown)="showPass=true"
                         (mouseup)="showPass=false">
-                    <i class="mdi mdi-eye"></i>
+                    <i class="mdi mdi-key"></i>
                   </span>
                   <input type="{{showPass?'text': 'password'}}" name="password" class="form-control" required
                          pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{6,}$"
@@ -66,7 +66,7 @@
                   <span class="input-group-addon"
                         (mousedown)="showPass=true"
                         (mouseup)="showPass=false">
-                    <i class="mdi mdi-eye"></i>
+                    <i class="mdi mdi-key"></i>
                   </span>
                   <input type="{{showPass?'text': 'password'}}" name="passwordTwo" class="form-control" required
                          [(ngModel)]="stepOneModel.passwordTwo">

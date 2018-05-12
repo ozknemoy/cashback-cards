@@ -43,9 +43,9 @@
           </div>
           <div class="col-12 col-sm-5">
             <select class="form-control" [(ngModel)]="filter.status">
-              <option [value]="null">Все операции</option>
-              <option [value]="1">Начисления</option>
-              <option [value]="2">Списания</option>
+              <option [value]="''">Все операции</option>
+              <option [value]="1">Списания</option>
+              <option [value]="2">Начисления</option>
             </select>
           </div>
         </div>
@@ -73,7 +73,8 @@
               </div>
             </div>
             <div class="col-12 col-sm-2 text-right">
-              {{hist.amount}}
+              <span [ngClass]="{'text-danger':hist.status === 1,
+                                'text-success':hist.status === 2}">{{hist.amount}}</span>
             </div>
             <!--<div class="col-12 col-sm-2 text-right">
               <span class="text-success">{{hist.trans}}</span>

@@ -4822,22 +4822,22 @@ Created using IcoMoon - icomoon.io
   .modal .modal-header .close:hover, .modal .modal-header .close:focus {
     opacity: 1; }
 
-.modal-prt {
+#prtModal {
   background-image: url(../img/prt-bg1.png);
   background-color: #d8dadb;
   background-position: left bottom;
   background-repeat: no-repeat;
   background-size: auto; }
   @media screen and (max-width: 1440px) {
-    .modal-prt {
+    #prtModal {
       background-size: 88%; } }
   @media screen and (max-width: 1000px) {
-    .modal-prt {
+    #prtModal {
       background-image: url(../img/prt-bg_mob.png);
       background-position: left bottom;
       background-repeat: no-repeat;
       background-size: cover; } }
-  .modal-prt .close {
+  #prtModal .close {
     position: fixed;
     right: 50px;
     top: 50px;
@@ -4845,7 +4845,7 @@ Created using IcoMoon - icomoon.io
     text-shadow: none;
     cursor: pointer;
     z-index: 11; }
-    .modal-prt .close .now-ui-icons {
+    #prtModal .close .now-ui-icons {
       font-weight: 700; }
 
 .modal-prt {

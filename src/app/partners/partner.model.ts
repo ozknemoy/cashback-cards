@@ -48,4 +48,6 @@ export class IPartner {
   url: string;
   _payment_type: string;
   payment_type: number;//  0 начисление, 1 списание, 2 списание и начисление
+  stock_card_percent: string;
+  stock_end_date: string;
 }
