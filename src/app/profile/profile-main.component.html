@@ -1,28 +1,29 @@
 
 <div class="lk_content">
   <div class="lk_content--wrap" *ngIf="!isLoading">
-    <div class="lk_card">
-      <p *ngIf="semiFilledProfile;else filledProfile" class="alert alert-success">
-        Приветствуем Вас, Уважаемый {{'user' | translate}}! Представьтесь пожалуйста и получите 400 приветственных баллов
-        на свой счет. <a class="btn btn-info btn-sm" routerLink="/profile/settings">ПОЛУЧИТЬ БАЛЛЫ</a>
-      </p>
-      <ng-template #filledProfile>
-        <p class="alert alert-success">
-        <span *ngIf="level<3; else level3">
-          Ваш статус {{card.status.name}}, Вам доступен кэш бек {{card.status.percent}}%.
-          Покупайте больше! При сумме покупок более {{card.status.amount_to}} руб. Ваш кэш бек уже {{bonusLevels[level].percent}}%
-        </span>
-          <ng-template #level3>
+    <div class="alert" *ngIf="semiFilledProfile;else filledProfile"
+         [ngClass]="isArenasport? 'alert-success' : 'alert-primary'">
+      Приветствуем Вас, Уважаемый {{'user' | translate}}! Представьтесь пожалуйста и получите 400 приветственных баллов
+      на свой счет. <a class="btn btn-info btn-sm" routerLink="/profile/settings">ПОЛУЧИТЬ БАЛЛЫ</a>
+    </div>
+    <ng-template #filledProfile>
+      <div class="alert" [ngClass]="isArenasport? 'alert-success' : 'alert-primary'">
+          <span *ngIf="level<3; else level3">
+            Ваш статус {{card.status.name}}, Вам доступен кэш бек {{card.status.percent}}%.
+            Покупайте больше! При сумме покупок более {{card.status.amount_to}} руб. Ваш кэш бек уже {{bonusLevels[level].percent}}%
+          </span>
+        <ng-template #level3>
           <span>
             Поздравляем!
             Ваш статус {{card.status.name}}, Вам доступен кэш бек {{card.status.percent}}%.
             Пользуйтесь картой, для сохранения статуса. При отсутствии покупок в течение месяца, ваш статус будет снижен.
           </span>
-          </ng-template>
-        </p>
-      </ng-template>
+        </ng-template>
+      </div>
+    </ng-template>
 
 
+    <div class="lk_card">
       <div class="content">
         <div class="lk_card--title">Моя карта: {{card.number | card}}</div>
         <div class="lk_card--content">

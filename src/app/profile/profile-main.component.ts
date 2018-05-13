@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {AutoUnsubscribe} from "../../decorators/auto-unsubscribe.decorator";
 import {HttpService} from "../../services/http.service";
 import {HandleDataService} from "../../services/handle-data.service";
@@ -25,6 +25,7 @@ export class ProfileMainView {
 
   constructor(
     public httpService: HttpService,
+    @Inject('isArenasport') public isArenasport: boolean,
     public HandleDataService: HandleDataService
   ) {
   }

@@ -119,7 +119,7 @@ function replaceTest({port,  api, style, map, isArenasport}) {
   const _style = [{
     match: style[0],
     replacement: function () {
-      return style[1]
+      return style[1] + styleSuffix + Math.floor(Math.random() * 10000000)
     }
   }];
   const _map = [{

@@ -14,7 +14,7 @@ import {BASE_URL_IMG} from "../config/base_url";
       <span class="lk_promotions--footer">
         <span class="lk_promotions--title">{{partner.name}}</span>
         <span class="lk_promotions--category">{{partner.category.name}}</span>
-        <span class="lk_promotions--address">
+        <span class="lk_promotions--address" *ngIf="partner.metro">
           <span class="icon ic-metro"></span>{{partner.metro}}
         </span>
         <span class="lk_promotions--ic">

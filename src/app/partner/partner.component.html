@@ -25,19 +25,12 @@
         <div class="card">
           <div class="content">
             <div class="row">
-              <div class="col-12" *ngIf="partner.stock_card_percent && partner.stock_end_date">
-                АКЦИЯ!
-                Только до {{partner.stock_end_date | date}} ты получаешь кэш бек {{partner.stock_card_percent}}% вне зависимости от твоего статуса!
-                Успевай получать больше, а платить меньше!
-                (красным выделены переменные, остальное статика)
-                Поместить это на видном месте
-              </div>
               <div class="col-12 col-md-6 order-md-6">
                 <div class="row">
                   <div class="col-12 col-md-5 order-md-7">
                     <div class="mb-3">
                       <div class="lk_promotions--logo">
-                        <img [src]="partner.image" alt="">
+                        <img src="{{BASE_URL_IMG + partner.image}}" alt="">
                       </div>
                     </div>
                   </div>
@@ -61,7 +54,6 @@
                       </div>
 
                       <div class="lk_promotions--field">
-
                         <div class="dib"><i class="mdi mdi-clock"></i>Режим работы: </div>
                         <div class="dib">
                           <div *ngFor="let day of daysKeys">
@@ -75,13 +67,21 @@
                   </div>
                 </div>
 
-
                 <agm-map [zoom]="14" [latitude]="partner.lat" [longitude]="partner.lon" *ngIf="isBrowser"
                          [style.width.percent]="100" [style.height.px]="200">
                   <agm-marker  [latitude]="partner.lat" [longitude]="partner.lon" [label]="'I'"></agm-marker>
                 </agm-map>
               </div>
-              <div class="col-12 col-md-6 order-md-1" [innerHtml]="partner.about"></div>
+              <div class="col-12 col-md-6 order-md-1">
+                <div class="alert alert-with-icon"
+                     *ngIf="partner.stock_card_percent && partner.stock_end_date"
+                     [ngClass]="isArenasport? 'alert-success' : 'alert-primary'">
+                  <div class="alert-icon"><i class="mdi mdi-sale h1"></i></div>
+                  АКЦИЯ! Только до <strong>{{partner.stock_end_date | date: 'dd.MM.yyyy'}}</strong> ты получаешь кэш бек
+                  <strong>{{partner.stock_card_percent}}%</strong> вне зависимости от твоего статуса! Успевай получать больше, а платить меньше!
+                </div>
+                <div [innerHtml]="partner.about"></div>
+              </div>
             </div>
 
           </div>

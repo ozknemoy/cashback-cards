@@ -41,6 +41,7 @@ export class PartnersView {
     _payment_type: '',
     bonus_type: null
   };
+  public BASE_URL_IMG = BASE_URL_IMG;
 
   constructor(public httpService: HttpService, public seoService: SeoService) {}
 
