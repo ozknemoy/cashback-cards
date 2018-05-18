@@ -17,12 +17,12 @@
       <div class="header_nav--container collapse navbar-collapse"
            (click)="isMobileMenuOpen = false">
         <div class="header_nav--col">
-          <a href="#section-1" target="_self" class="header_nav--link">Преимущества карты</a>
-          <a href="#section-4" target="_self" class="header_nav--link">Как оформить</a>
-          <a href="#section-5" target="_self" class="header_nav--link">Как накопить</a>
+          <a [routerLink]="" ref="#section-1" scrollToIfExactRoute="#section-1" forState="" target="_self" class="header_nav--link">Преимущества карты</a>
+          <a [routerLink]="" ref="#section-4" scrollToIfExactRoute="#section-4" forState="" target="_self" class="header_nav--link">Как оформить</a>
+          <a [routerLink]="" ref="#section-5" scrollToIfExactRoute="#section-5" forState="" target="_self" class="header_nav--link">Как накопить</a>
         </div>
         <div class="header_nav--col">
-          <a href="#section-6" target="_self" class="header_nav--link">Как потратить</a>
+          <a [routerLink]="" ref="#section-6" scrollToIfExactRoute="#section-6" forState="" target="_self" class="header_nav--link">Как потратить</a>
           <a routerLink="/partners" class="header_nav--link">Где воспользоваться</a>
 
           <div *ngIf="!authLocalStorage.auth.data.hash;then isNotLogIn else isLogIn"></div>

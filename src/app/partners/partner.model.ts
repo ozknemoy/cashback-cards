@@ -36,7 +36,6 @@ export class IPartner {
   category = new Category();
   city = new City();
   bonus_type: 0 | 1;
-  _bonus_type: boolean;
   address: string;
   metro: string;
   about: string;

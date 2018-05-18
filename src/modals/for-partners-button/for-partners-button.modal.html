@@ -1,25 +1,30 @@
 
 <div class="close">
-  <i class="now-ui-icons ui-1_simple-remove" (click)="close()"></i>
+  <i class="now-ui-icons ui-1_simple-remove pointer" (click)="close()"></i>
 </div>
-<div class="modal-form">
+<form class="modal-form" #pForm="ngForm">
   <div class="title">Стать партнером</div>
-  <p>Мы открыты к взаимовыгодному сотрудничеству. </p>
   <p>Если вы хотите стать участником программы {{'cardName'|translate}}, пожалуйста, обращайтесь в отдел развития ООО {{'cardName'|translate}} по телефону: 8 911-123-4567, или заполните форму и мы с вами обязательно свяжемся</p>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Название организации">
+    <input type="text" class="form-control" name="ur_name" required
+           [(ngModel)]="newPartner.ur_name" placeholder="ООО Арена">
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Контактное лицо (Имя)">
+    <input type="text" class="form-control" name="contact_name" required
+           [(ngModel)]="newPartner.contact_name" placeholder="Иван Иванов">
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="E-mail">
+    <input type="text" class="form-control" name="email" required
+           [(ngModel)]="newPartner.email" placeholder="Info@arenasportcard.ru" email>
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Телефон">
+    <input type="text" class="form-control" name="phone" required
+           [(ngModel)]="newPartner.phone" placeholder="+79216787686">
   </div>
   <div class="form-group">
-    <button class="btn btn-default btn-simple">Отправить заявку</button>
+    <button type="button" class="btn btn-default btn-simple"
+            [disabled]="pForm.invalid" (click)="send(pForm)">
+      Отправить заявку
+    </button>
   </div>
-</div>
-
+</form>

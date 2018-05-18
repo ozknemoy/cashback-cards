@@ -21,12 +21,12 @@ const portCrimeaProd = '5100';
 const portArenasportProd = '5200';
 const portReg = /(4100|4200|5100|5200)/g;
 
-const apiArenasportTest = 'service.card.prioriticlub.ru';
-const apiArenasportTestReg = /service\.card\.prioriticlub\.ru/g;
-const apiArenasportProd = 'back.arenasportcard.ru';
-const apiCrimeaProd = 'back.crimeacard.ru';
-const apiCrimeaTest = 'service.crim.prioriticlub.ru';
-const apiCrimeaTestReg = /service\.crim\.prioriticlub\.ru/g;
+const apiArenasportTest = 'http://service.card.prioriticlub.ru';
+const apiArenasportTestReg = /http:\/\/service\.card\.prioriticlub\.ru/g;
+const apiCrimeaTest = 'http://service.crim.prioriticlub.ru';
+const apiCrimeaTestReg = /http:\/\/service\.crim\.prioriticlub\.ru/g;
+const apiArenasportProd = 'https://service.arenasportcard.ru';
+const apiCrimeaProd = 'https://service.crimeacard.ru';
 
 const styleSuffix = '?v=1.1.';
 const styleCrimea = 'crimea-screen-kit.css';

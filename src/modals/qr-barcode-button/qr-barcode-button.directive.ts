@@ -11,7 +11,7 @@ import {QrBarcodeButtonModal} from "./qr-barcode-button.modal";
 
 @Component({
   selector: 'qr-barcode-button',
-  template: '<button class="btn btn-info btn-sm" *ngIf="isMobile">Штрих/QR-код</button>',
+  template: '<button class="btn btn-info btn-sm"  >Штрих/QR-код</button>',
   host: {
     '(click)': 'open()'
   }

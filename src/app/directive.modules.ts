@@ -24,6 +24,7 @@ import {ArenasportHomeComponent, CrimeaHomeComponent} from "./home/home.componen
 import {PartnerCardComponent} from "../directives/partner-card.component";
 import {ForPartnersButtonDirective} from "../modals/for-partners-button/for-partners-button.directive";
 import {ForPartnersButtonModal} from "../modals/for-partners-button/for-partners-button.modal";
+import {ScrollToIfExactRouteDirective} from "../directives/scroll-to-if-exact-route.directive";
 
 
 export const vendorDirectiveModules = [
@@ -52,6 +53,7 @@ export const routelessComponents = [
   CrimeaHomeComponent,
   PartnerCardComponent,
   ForPartnersButtonDirective,
+  ScrollToIfExactRouteDirective,
   //FileUploaderComponent,
   //OzkNumberDirective,
   //ScrollDirective

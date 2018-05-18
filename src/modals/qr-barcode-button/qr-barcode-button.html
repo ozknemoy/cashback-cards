@@ -12,15 +12,12 @@
                  [bc-format]="'CODE128'"
                  [bc-element-type]="'img'"
                  padding="150"
-                 [bc-display-value]="true"></ngx-barcode>
-    <!--скрываю оcновной компонент чтобы показать обычный img растянутый на весь экран-->
-    <!--<img id="dummi-img" width="100%" [src]="this.imgUrl">-->
+                 [bc-display-value]="false"></ngx-barcode>
   </div>
   <div *ngSwitchCase="Type.qrcode">
     <ngx-qrcode [qrc-value]="code"></ngx-qrcode>
   </div>
-</div>
-<div>
+  <h6 class="text-center font-weight-bold">{{code}}</h6>
 </div>
 
 <div class="text-center">

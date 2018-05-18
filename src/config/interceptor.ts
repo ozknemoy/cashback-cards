@@ -24,7 +24,7 @@ export class MainInterceptor implements HttpInterceptor {
       .catch((err: HttpErrorResponse, caught:Observable<any>) => {
         if (err.status === 401 || err.status === 0) {
           console.log('********',err);
-          this.injector.get(AuthLocalStorage).logout('Авторизация устарела', 10e3)
+          this.injector.get(AuthLocalStorage).logout('Необходимо авторизоваться', 10e3)
         }
         return Observable.throw(err);
       });

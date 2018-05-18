@@ -5330,6 +5330,11 @@ Created using IcoMoon - icomoon.io
     height: 50px;
     display: block;
     margin: 0 auto; }
+    @media screen and (max-width: 500px) {
+      .lk .header .logo {
+        width: 100px;
+        height: 36px;
+        margin-top: 10px; } }
   @media screen and (max-width: 767px) {
     .lk .header .btn-logout {
       position: absolute;

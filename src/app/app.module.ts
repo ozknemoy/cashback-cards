@@ -65,6 +65,7 @@ import localeRu from '@angular/common/locales/ru';*/
     {provide: 'phonePlaceholder', useValue: '7 123 456 7890'},
     {provide: 'cardMask', useValue: '0000 0000 0000 0000'},
     {provide: 'isArenasport', useValue: isArenasport},
+    {provide: 'scrollToFactory', useFactory: scrollToFactory},
     /*{ provide: LOCALE_ID, useValue: 'ru' }*/
   ],
   bootstrap: [AppComponent]

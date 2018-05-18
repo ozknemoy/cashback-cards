@@ -5052,6 +5052,10 @@ Created using IcoMoon - icomoon.io
     @media screen and (max-width: 991px) {
       .modal-prt .title {
         margin-top: 60px; } }
+    @media screen and (max-width: 767px) {
+      .modal-prt .title {
+        margin-top: 3px;
+        font-size: 26px; } }
   .modal-prt p {
     font-family: 'Proxima Nova Rg';
     font-size: 18px;
@@ -5059,12 +5063,22 @@ Created using IcoMoon - icomoon.io
     @media screen and (max-width: 991px) {
       .modal-prt p {
         margin: 20px 0; } }
+    @media screen and (max-width: 767px) {
+      .modal-prt p {
+        font-size: 16px;
+        margin: 10px 0;
+        line-height: 1.1; } }
   .modal-prt .form-group .form-control {
     background-color: rgba(255, 255, 255, 0.5);
     border-color: rgba(255, 255, 255, 0.5);
     text-align: center;
     border-radius: 0;
     font-size: 18px; }
+    @media screen and (max-width: 767px) {
+      .modal-prt .form-group .form-control {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-size: 14px; } }
   .modal-prt .modal-form {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -5457,6 +5471,19 @@ Created using IcoMoon - icomoon.io
     background: #3a3a3a;
     min-height: 90px;
     top: 0; }
+    @media screen and (max-width: 767px) {
+      .header-fixed .header_nav {
+        min-height: 70px; }
+        .header-fixed .header_nav .navbar-toggler {
+          position: absolute;
+          width: auto;
+          height: auto;
+          top: 50%;
+          -webkit-transform: translate3d(0, -50%, 0);
+          -moz-transform: translate3d(0, -50%, 0);
+          -o-transform: translate3d(0, -50%, 0);
+          -ms-transform: translate3d(0, -50%, 0);
+          transform: translate3d(0, -50%, 0); } }
     .header-fixed .header_nav:before {
       background: url(../img/circle.png) no-repeat center 53%;
       content: '';
@@ -5477,10 +5504,29 @@ Created using IcoMoon - icomoon.io
       @media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
         .header-fixed .header_nav .logo {
           background-image: url(../img/logo-min@2x.png); } }
+      @media screen and (max-width: 767px) {
+        .header-fixed .header_nav .logo {
+          top: 50%;
+          -moz-transform: translate(-50%, -50%);
+          -o-transform: translate(-50%, -50%);
+          -ms-transform: translate(-50%, -50%);
+          -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%); } }
     .header-fixed .header_nav .header_nav--col {
       top: 28px; }
+      @media screen and (max-width: 767px) {
+        .header-fixed .header_nav .header_nav--col {
+          top: 0; } }
     .header-fixed .header_nav .btn_mob {
       top: 28px; }
+      @media screen and (max-width: 767px) {
+        .header-fixed .header_nav .btn_mob {
+          top: 50%;
+          -webkit-transform: translate3d(0, -50%, 0);
+          -moz-transform: translate3d(0, -50%, 0);
+          -o-transform: translate3d(0, -50%, 0);
+          -ms-transform: translate3d(0, -50%, 0);
+          transform: translate3d(0, -50%, 0); } }
   .header_nav--container .header_nav--col {
     position: absolute;
     top: -5px; }
@@ -5560,7 +5606,8 @@ Created using IcoMoon - icomoon.io
     .header_nav--link:hover {
       color: #FFFFFF; }
   .header_nav .btn {
-    vertical-align: top; }
+    vertical-align: top;
+    margin: 2px 0 0 0; }
   .header_nav .logo {
     background-image: url(../img/logo.png);
     background-size: contain;
@@ -7133,6 +7180,15 @@ Created using IcoMoon - icomoon.io
     -ms-transform: translate(0%, -50%);
     -webkit-transform: translate(0%, -50%);
     transform: translate(0%, -50%); }
+    @media screen and (max-width: 767px) {
+      .auth--content {
+        position: relative;
+        top: 0;
+        -moz-transform: translate(0%, 0%);
+        -o-transform: translate(0%, 0%);
+        -ms-transform: translate(0%, 0%);
+        -webkit-transform: translate(0%, 0%);
+        transform: translate(0%, 0%); } }
   .auth--heading {
     padding-top: 15px;
     padding-bottom: 15px;
@@ -7175,6 +7231,10 @@ Created using IcoMoon - icomoon.io
   .auth h1 {
     font-weight: 100;
     font-size: 2.5rem; }
+    @media screen and (max-width: 991px) {
+      .auth h1 {
+        font-size: 24px;
+        margin: 0; } }
 
 .lk {
   background-image: url(../img/bg-13.jpg);

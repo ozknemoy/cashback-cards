@@ -23,6 +23,7 @@ export class AppComponent {
         if (event instanceof NavigationStart) {
           // если в урле якоря нет
           if(event.url.indexOf('#') === -1) {
+            //console.log('----onTop----');
             document.body.scrollTop = document.documentElement.scrollTop = 0
           }
 
