@@ -30,18 +30,15 @@
                 <label>Номер телефона</label>
                 <label class="input-group">
                   <span class="input-group-addon"><i class="mdi mdi-phone"></i></span>
+                  <select class="input-group-addon second-addon" name="phoneCountry"
+                          [(ngModel)]="phoneCountry">
+                    <option value="7">+7</option>
+                    <option value="100">+100</option>
+                  </select>
                   <input type="text" name="phone" class="form-control" required
-                         *ngIf="!isAndroid"
-                         [minlength]="11"
+                         pattern="\d{10,10}"
                          [placeholder]="phonePlaceholder"
-                         [mask]='phoneMask'
-                         [(ngModel)]="stepOneModel.phone">
-                  <input type="text" name="phone" class="form-control" required
-                         *ngIf="isAndroid"
-                         [minlength]="11"
-                         [maxlength]="11"
-                         [placeholder]="phonePlaceholder"
-                         [(ngModel)]="stepOneModel.phone">
+                         [(ngModel)]="phoneChunk">
                 </label>
               </div>
               <div class="form-group">

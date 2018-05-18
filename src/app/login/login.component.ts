@@ -39,6 +39,8 @@ export class LoginView {
     passwordTwo: null,
     code: null,
   };
+  private phoneChunk = null;
+  private phoneCountry = '7';
   public Step = Step;
   public step:Step = Step.login;
   public ResetStep = ResetStep;
@@ -68,7 +70,7 @@ export class LoginView {
     this.pend = true;
     this.httpService.login({
       password: form.value.password,
-      phone: form.value.phone
+      phone: this.phoneCountry + form.value.phone
     }).subscribe(
       d => {},
       e=> {},
@@ -78,7 +80,9 @@ export class LoginView {
 
   restore(reset: IReset) {
     this.pend = true;
-    this.httpService.preRestorePassword({...reset, ...{phone: this.phone}}).subscribe(
+    this.httpService.preRestorePassword(
+      {...reset, ...{phone: this.phoneCountry + this.phone}}
+      ).subscribe(
       d=> {
         this.step = Step.login;
         this.resetStep = ResetStep.one;
@@ -95,7 +99,7 @@ export class LoginView {
   toResetStepTwo(resetForm: NgForm) {
     if(resetForm.invalid) return;
     this.pend = true;
-    this.httpService.getSms(this.phone).subscribe(
+    this.httpService.getSms(this.phoneCountry + this.phone).subscribe(
       d => {this.resetStep = ResetStep.two},
       err => {},
       ()=> {this.pend = false}

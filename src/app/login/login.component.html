@@ -22,18 +22,14 @@
                   <label>Номер телефона</label>
                   <label class="input-group">
                     <span class="input-group-addon"><i class="mdi mdi-phone"></i></span>
+                    <select class="input-group-addon second-addon" name="phoneCountry"
+                            [(ngModel)]="phoneCountry">
+                      <option value="7">+7</option>
+                      <option value="100">+100</option>
+                    </select>
                     <input type="text" name="phone" class="form-control" required
-                           *ngIf="!isAndroid"
-                           [minlength]="11"
-                           placeholder="{{phoneMask}}"
-                           mask='{{phoneMask}}'
-                           (keyup.enter)="login(loginForm)"
-                           [(ngModel)]="phone">
-                    <input type="text" name="phone" class="form-control" required
-                           *ngIf="isAndroid"
-                           [minlength]="11"
-                           [maxlength]="11"
-                           [placeholder]="phoneMask"
+                           pattern="\d{10,10}"
+                           [placeholder]="phonePlaceholder"
                            (keyup.enter)="login(loginForm)"
                            [(ngModel)]="phone">
                   </label>
@@ -70,17 +66,13 @@
                     <label>Номер телефона</label>
                     <label class="input-group">
                       <span class="input-group-addon"><i class="mdi mdi-phone"></i></span>
+                      <select class="input-group-addon second-addon" name="phoneCountry"
+                              [(ngModel)]="phoneCountry">
+                        <option value="7">+7</option>
+                        <option value="1">+1</option>
+                      </select>
                       <input type="text" name="phone" class="form-control" required
-                             *ngIf="!isAndroid"
-                             [minlength]="11"
-                             [placeholder]="phonePlaceholder"
-                             mask='{{phoneMask}}'
-                             (keyup.enter)="toResetStepTwo(resetForm)"
-                             [(ngModel)]="phone">
-                      <input type="text" name="phone" class="form-control" required
-                             *ngIf="isAndroid"
-                             [minlength]="11"
-                             [maxlength]="11"
+                             pattern="\d{10,10}"
                              [placeholder]="phonePlaceholder"
                              (keyup.enter)="toResetStepTwo(resetForm)"
                              [(ngModel)]="phone">

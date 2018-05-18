@@ -3,7 +3,6 @@ import {AutoUnsubscribe} from "../../decorators/auto-unsubscribe.decorator";
 import {Meta,Title} from "@angular/platform-browser";
 import {TITLE} from '../../config/small.configs'
 import {HttpService} from "../../services/http.service";
-import {Toast, ToastsManager} from "ng2-toastr";
 import {UAService} from "../../services/user-agent.service";
 import {AuthLocalStorage} from "../../services/auth-local-storage.service";
 import {SeoService} from "../../services/seo.service";
@@ -27,6 +26,8 @@ export class RegistrationView {
     code: null,
     card_number: null,
   };
+  private phoneChunk = null;
+  private phoneCountry = '7';
   private login$$;
   public step:'one' | 'two' | 'three' = 'one';
   public showPass = false;
@@ -35,9 +36,8 @@ export class RegistrationView {
 
   constructor(
     public httpService:HttpService,
-    private metaService: Meta,
-    private toast: ToastsManager,
-    private titleService: Title,
+    public metaService: Meta,
+    public titleService: Title,
     public uAService: UAService,
     public authLocalStorage: AuthLocalStorage,
     @Inject('phoneMask') public phoneMask: string,
@@ -55,10 +55,12 @@ export class RegistrationView {
   }
 
   isEqualValidPassword(stepOneForm):boolean {
+    console.log(stepOneForm);
     return isEqualValidPassword(stepOneForm.controls)
   }
 
   toStepTwo() {
+    this.stepOneModel.phone = this.phoneCountry + this.phoneChunk;
     this.httpService.get('users/check-phone?phone=' + this.stepOneModel.phone).subscribe(
       d => {
         this.httpService.getSms(this.stepOneModel.phone).subscribe(

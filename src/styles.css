@@ -44,3 +44,6 @@
   z-index: 0;
 }
 
+.input-group-addon.second-addon {
+  padding: 10px 9px 9px 6px;
+}
