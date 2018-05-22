@@ -27,7 +27,7 @@ export const vendorModules = [
   NgxQRCodeModule,
   NgxMaskModule.forRoot(),
   TranslateModule.forRoot(),
-  AgmCoreModule.forRoot({apiKey: ret.gMapsCrimea}),
+  AgmCoreModule.forRoot({apiKey: ret.gMapsArenasport}),
   NgxBarcodeModule,
 
   //bootstrap Modules

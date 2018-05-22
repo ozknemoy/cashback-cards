@@ -156,7 +156,22 @@ gulp.task('css-before-build-prod', function () {
     .pipe(gulp.dest('src/assets/css'))
 });
 
-gulp.task('styles-dev', function () {
+gulp.task('css-build-prod', function () {
+  return gulp.src('dist/browser/assets/css/*.css')
+    .pipe(postcss(processors))
+    .pipe(cleanCSS({debug: true, specialComments: false}, function (details) {
+      console.log(`${details.name} :  ${details.stats.minifiedSize},       saved ${Math.floor(100 * (details.stats.originalSize - details.stats.minifiedSize) / details.stats.originalSize)}%`);
+    }))
+    .pipe(gulp.dest('dist/browser/assets/css'))
+  && gulp.src('dist/server/assets/css/*.css')
+      .pipe(postcss(processors))
+      .pipe(cleanCSS({debug: true, specialComments: false}, function (details) {
+        console.log(`${details.name} :  ${details.stats.minifiedSize},       saved ${Math.floor(100 * (details.stats.originalSize - details.stats.minifiedSize) / details.stats.originalSize)}%`);
+      }))
+      .pipe(gulp.dest('dist/server/assets/css'))
+});
+
+gulp.task('styles-dev-scss', function () {
   return gulp.src('./src/assets/scss/screen-kit.scss')
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
@@ -165,7 +180,7 @@ gulp.task('styles-dev', function () {
     .pipe(browserSync.stream());
 });
 
-gulp.task('styles-build-scss', function () {
+gulp.task('styles-prod-scss', function () {
   return gulp.src('./src/assets/scss/screen-kit.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss(processors))
@@ -189,9 +204,9 @@ gulp.task('_watch-bs', function () {
   // бексервер не участвует поэтому 10-12sec refresh
   gulp.watch('./dist/client.js').on("change", browserSync.reload);
 
-  gulp.watch('./src/assets/scss/screen-kit/**/*.scss', ['styles-dev']);
+  gulp.watch('./src/assets/scss/screen-kit/**/*.scss', ['styles-dev-scss']);
 });
-gulp.task('watch', ['styles-dev', 'browser-sync', '_watch-bs']);
+gulp.task('watch', ['styles-dev-scss', 'browser-sync', '_watch-bs']);
 
 gulp.task('moveAssets', function () {
   return gulp.src([

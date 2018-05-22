@@ -25,19 +25,18 @@ export class RegistrationView {
     passwordTwo: null,
     code: null,
     card_number: null,
+    phone_code: 7
   };
   private phoneChunk = null;
-  private phoneCountry = '7';
   private login$$;
   public step:'one' | 'two' | 'three' = 'one';
   public showPass = false;
   public isAndroid = false;
   public isBrowser = this.authLocalStorage.isBrowser;
+  public phoneCodes;
 
   constructor(
     public httpService:HttpService,
-    public metaService: Meta,
-    public titleService: Title,
     public uAService: UAService,
     public authLocalStorage: AuthLocalStorage,
     @Inject('phoneMask') public phoneMask: string,
@@ -50,23 +49,19 @@ export class RegistrationView {
     if(this.isBrowser) {
       this.seoService.handleOne('main');
       this.isAndroid = this.uAService.is().android;
+      this.httpService.phoneCodes.subscribe(codes=>this.phoneCodes = codes)
     }
 
   }
 
   isEqualValidPassword(stepOneForm):boolean {
-    console.log(stepOneForm);
     return isEqualValidPassword(stepOneForm.controls)
   }
 
   toStepTwo() {
-    this.stepOneModel.phone = this.phoneCountry + this.phoneChunk;
+    this.stepOneModel.phone = this.stepOneModel.phone_code + this.phoneChunk;
     this.httpService.get('users/check-phone?phone=' + this.stepOneModel.phone).subscribe(
-      d => {
-        this.httpService.getSms(this.stepOneModel.phone).subscribe(
-          d => this.step = 'two'
-        )
-      }
+      d => this.getSms().subscribe(d => this.step = 'two')
     )
 
   }
@@ -101,12 +96,8 @@ export class RegistrationView {
   }
 
   getSms() {
-    this.httpService.getSms(this.stepOneModel.phone)
+    return this.httpService.getSms(this.stepOneModel.phone, this.stepOneModel.phone_code)
   }
 
-  ngOnDestroy() {
-    this.metaService.removeTag("name='og:title'");
-    this.metaService.removeTag("name='twitter:title'");
-    this.titleService.setTitle(TITLE);
-  }
+  ngOnDestroy() {}
 }

@@ -40,7 +40,7 @@ export class LoginView {
     code: null,
   };
   private phoneChunk = null;
-  private phoneCountry = '7';
+  private phoneCountry = 7;
   public Step = Step;
   public step:Step = Step.login;
   public ResetStep = ResetStep;
@@ -48,6 +48,7 @@ export class LoginView {
   public showPass = false;
   public isAndroid = false;
   public isBrowser = this.authLocalStorage.isBrowser;
+  public phoneCodes;
 
   constructor(
     public httpService:HttpService,
@@ -62,6 +63,7 @@ export class LoginView {
   ngOnInit() {
     if(this.isBrowser) {
       this.isAndroid = this.uAService.is().android;
+      this.httpService.phoneCodes.subscribe(codes=>this.phoneCodes = codes)
     }
   }
 
@@ -99,7 +101,7 @@ export class LoginView {
   toResetStepTwo(resetForm: NgForm) {
     if(resetForm.invalid) return;
     this.pend = true;
-    this.httpService.getSms(this.phoneCountry + this.phone).subscribe(
+    this.httpService.getSms(this.phoneCountry + this.phone, this.phoneCountry).subscribe(
       d => {this.resetStep = ResetStep.two},
       err => {},
       ()=> {this.pend = false}

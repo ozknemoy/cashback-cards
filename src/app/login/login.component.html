@@ -24,8 +24,7 @@
                     <span class="input-group-addon"><i class="mdi mdi-phone"></i></span>
                     <select class="input-group-addon second-addon" name="phoneCountry"
                             [(ngModel)]="phoneCountry">
-                      <option value="7">+7</option>
-                      <option value="100">+100</option>
+                      <option *ngFor="let code of phoneCodes" [value]="code.code">+{{code.code}}</option>
                     </select>
                     <input type="text" name="phone" class="form-control" required
                            pattern="\d{10,10}"
@@ -68,8 +67,7 @@
                       <span class="input-group-addon"><i class="mdi mdi-phone"></i></span>
                       <select class="input-group-addon second-addon" name="phoneCountry"
                               [(ngModel)]="phoneCountry">
-                        <option value="7">+7</option>
-                        <option value="1">+1</option>
+                        <option *ngFor="let code of phoneCodes" [value]="code.code">+{{code.code}}</option>
                       </select>
                       <input type="text" name="phone" class="form-control" required
                              pattern="\d{10,10}"

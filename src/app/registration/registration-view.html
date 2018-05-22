@@ -31,15 +31,17 @@
                 <label class="input-group">
                   <span class="input-group-addon"><i class="mdi mdi-phone"></i></span>
                   <select class="input-group-addon second-addon" name="phoneCountry"
-                          [(ngModel)]="phoneCountry">
-                    <option value="7">+7</option>
-                    <option value="100">+100</option>
+                          [(ngModel)]="stepOneModel.phone_code">
+                    <option *ngFor="let code of phoneCodes" [value]="code.code">+{{code.code}}</option>
                   </select>
                   <input type="text" name="phone" class="form-control" required
                          pattern="\d{10,10}"
                          [placeholder]="phonePlaceholder"
                          [(ngModel)]="phoneChunk">
                 </label>
+                <div class="input-description">
+                  Выбери код страны и введи 10 цифр номера телефона без пробелов. Например, 9215566765
+                </div>
               </div>
               <div class="form-group">
                 <label>Придумайте пароль</label>

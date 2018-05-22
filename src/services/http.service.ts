@@ -114,6 +114,8 @@ export class HttpService {
       });
   }
 
+  public phoneCodes = this.get('handbooks/phone-codes', true).share();
+
   countLevelsInfo(bonusLevels:BonusLevels[], card: Card) {
     // тут обратный сорт по убыванию // из-за верстки
     let level;
@@ -218,10 +220,10 @@ export class HttpService {
     return this.post(url, _d, text, toastLife)
   }
 
-  getSms(phone) {
+  getSms(phone: string, phone_code: string | number) {
     if(this.isSmsObsolete(phone)) {
       return this.getWithToast(
-        `users/get-confirm-code?phone=${phone}`,
+        `users/get-confirm-code?phone=${phone}&phone_code=${phone_code}`,
         'Вам отправлена смс на указанный номер',
         5e3,
         true

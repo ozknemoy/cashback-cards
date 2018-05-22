@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {AuthLocalStorage} from "./auth-local-storage.service";
 import {HttpService} from "./http.service";
 import {Meta, Title} from "@angular/platform-browser";
-import {BASE_URL} from "../config/base_url";
+import {FRONT_ARENASPORT_URL, FRONT_CRIMEA_URL} from "../config/base_url";
 
 export interface SeoResponse {
   id: number;
@@ -17,16 +17,16 @@ export interface SeoResponse {
 
 @Injectable()
 export class SeoService {
-  public readonly BASE_URL = BASE_URL;
   private readonly baseSeoUrl = 'handbooks/seo?path=';
   private readonly photoFolder = '/files/images/seo/';
   private readonly isServer = !this.authLocalStorage.isBrowser;
   // надо откинуть бекенд часть
-  public HOST = '//' + this.BASE_URL.split('.').slice(-2, -1)[0] + '.ru';
+  public HOST = this.isArenasport? FRONT_ARENASPORT_URL : FRONT_CRIMEA_URL;
 
   constructor(public httpService: HttpService,
               private titleService: Title,
               public meta: Meta,
+              @Inject('isArenasport') public isArenasport: boolean,
               public authLocalStorage: AuthLocalStorage) {
 
   }
@@ -42,7 +42,8 @@ export class SeoService {
     if(this.isServer) {// todo сделать наоборот
       this.httpService.get(this.baseSeoUrl + chunkUrl).subscribe((seo: SeoResponse[])=> {
         if(seo && seo.length) this.handleSeoResponse(seo[i? i : seo.length-1]);
-      })
+        else this.meta.addTag({property: 'seoerror', content: 'empty seo data'})
+      }, err=> this.meta.addTag({property: 'seoerror', content: err}))
     }
   }
 
