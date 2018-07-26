@@ -73,6 +73,15 @@
               </div>
 
               <div class="text-center">
+                <div class="checkbox input-description">
+                  <input type="checkbox" name="check" id="check" required
+                         [(ngModel)]="checkOferta">
+                  <label for="check">
+                    Нажимая кнапку "Далее", вы соглашаетесь с условиями
+                    <a [hrefExt]="ofertaRef" download target="_blank">оферты</a>
+                  </label>
+
+                </div>
                 <button class="btn btn-success"
                         (click)="toStepTwo()"
                         [disabled]="stepOneForm.invalid || !isEqualValidPassword(stepOneForm)">Далее

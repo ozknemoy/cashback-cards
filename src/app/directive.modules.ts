@@ -25,6 +25,8 @@ import {PartnerCardComponent} from "../directives/partner-card.component";
 import {ForPartnersButtonDirective} from "../modals/for-partners-button/for-partners-button.directive";
 import {ForPartnersButtonModal} from "../modals/for-partners-button/for-partners-button.modal";
 import {ScrollToIfExactRouteDirective} from "../directives/scroll-to-if-exact-route.directive";
+import {FeedbackButtonModal} from "../modals/feedback-button/feedback-button.modal";
+import {FeedbackButtonDirective} from "../modals/feedback-button/feedback-button.directive";
 
 
 export const vendorDirectiveModules = [
@@ -35,6 +37,7 @@ const __modals__ = [
   LoginModalComponent,
   QrBarcodeButtonModal,
   ForPartnersButtonModal,
+  FeedbackButtonModal,
 ];
 export const routelessComponents = [
   //OuterHrefModalComponent,
@@ -54,6 +57,7 @@ export const routelessComponents = [
   PartnerCardComponent,
   ForPartnersButtonDirective,
   ScrollToIfExactRouteDirective,
+  FeedbackButtonDirective,
   //FileUploaderComponent,
   //OzkNumberDirective,
   //ScrollDirective

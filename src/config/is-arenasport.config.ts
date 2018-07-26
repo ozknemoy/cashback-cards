@@ -1,2 +1,2 @@
 
-export const isArenasport = true;// gulp replace
+export const isArenasport = false;// gulp replace

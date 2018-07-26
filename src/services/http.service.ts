@@ -39,7 +39,7 @@ export class HttpService {
   get(url, withoutHash = false) {
     const headers = this.doWitAuth('', withoutHash);
     return this.http.get(this.BASE_URL + url, {headers})
-      .catch(e=> this.handleError(e, '_getWithToast'))
+      .catch(e=> this.handleError(e, '__get method'))
   }
 
   getWithToast(url:string, text:string, toastLife?:number, withoutHash = false) {

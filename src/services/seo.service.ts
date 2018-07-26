@@ -43,13 +43,12 @@ export class SeoService {
       this.httpService.get(this.baseSeoUrl + chunkUrl).subscribe((seo: SeoResponse[])=> {
         if(seo && seo.length) this.handleSeoResponse(seo[i? i : seo.length-1]);
         else this.meta.addTag({property: 'seoerror', content: 'empty seo data'})
-      }, err=> this.meta.addTag({property: 'seoerror', content: err}))
+      }, err=> this.meta.addTag({property: 'seoerror', content: JSON.stringify(err)}))
     }
   }
 
   handleSeoResponse(seo: SeoResponse) {
     const localUrl = this.authLocalStorage.nodeData.localUrl;
-    console.log('--------SeoService--------',this.HOST + localUrl);
     this.meta.addTags([
       {property: 'og:image', content: this.HOST + this.photoFolder + seo.image},
       {property: 'og:description', content: seo.description},

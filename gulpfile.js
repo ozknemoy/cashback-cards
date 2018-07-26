@@ -25,7 +25,7 @@ const apiArenasportTest = 'http://service.card.prioriticlub.ru';
 const apiArenasportTestReg = /http:\/\/service\.card\.prioriticlub\.ru/g;
 const apiCrimeaTest = 'http://service.crim.prioriticlub.ru';
 const apiCrimeaTestReg = /http:\/\/service\.crim\.prioriticlub\.ru/g;
-const apiArenasportProd = 'https://service.arenasportcard.ru';
+const apiArenasportProd = 'https://service.arenasportcard.ru:443';
 const apiCrimeaProd = 'https://service.crimeacard.ru';
 
 const styleSuffix = '?v=1.1.';

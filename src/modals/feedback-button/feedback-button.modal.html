@@ -1,0 +1,29 @@
+
+<div class="close">
+  <i class="now-ui-icons ui-1_simple-remove pointer" (click)="close()"></i>
+</div>
+
+<form class="modal-form" #pForm="ngForm">
+  <div class="title">Связаться с компанией</div>
+
+  <div class="form-group">
+    <label>Выберите тему обращения</label>
+    <select class="form-control" name="category_id" required size
+            [(ngModel)]="model.category_id">
+      <option *ngFor="let key of catKeys" [value]="key">{{categories[key]}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Введите сообщение</label>
+    <textarea rows="4" class="form-control" name="text" required
+              [(ngModel)]="model.text" placeholder=""></textarea>
+    <p class="m-0">Запрещены символы < и ></p>
+  </div>
+
+
+  <div class="form-group">
+    <button class="btn btn-neutral btn-simple" type="button"
+            [disabled]="pForm.invalid" (click)="send(pForm.value)">Отправить</button>
+  </div>
+
+</form>

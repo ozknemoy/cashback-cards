@@ -1,9 +1,6 @@
 
 import {Injectable, Injector} from '@angular/core';
-import {
-  HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse,
-  HttpResponse
-} from '@angular/common/http';
+import {HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse} from '@angular/common/http';
 import {Observable} from "rxjs/Observable";
 import {AuthLocalStorage} from "../services/auth-local-storage.service";
 
@@ -14,6 +11,7 @@ export class MainInterceptor implements HttpInterceptor {
   constructor(private injector: Injector) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    //console.log('--------intercept------start',req);
     return next.handle(req)
       /*.map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
@@ -22,9 +20,13 @@ export class MainInterceptor implements HttpInterceptor {
         return event;
       })*/
       .catch((err: HttpErrorResponse, caught:Observable<any>) => {
+        console.log('--------intercept------catch',err);
         if (err.status === 401 || err.status === 0) {
-          console.log('********',err);
-          this.injector.get(AuthLocalStorage).logout('Необходимо авторизоваться', 10e3)
+          console.log('401 или 0 статус',err);
+          if(this.injector.get(AuthLocalStorage).isBrowser) {
+            this.injector.get(AuthLocalStorage).logout('Необходимо авторизоваться', 10e3)
+          }
+
         }
         return Observable.throw(err);
       });

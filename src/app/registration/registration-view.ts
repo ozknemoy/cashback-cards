@@ -34,12 +34,15 @@ export class RegistrationView {
   public isAndroid = false;
   public isBrowser = this.authLocalStorage.isBrowser;
   public phoneCodes;
+  public checkOferta = true;
+  public ofertaRef = `assets/files/oferta-for-users-${this.isArenasport?'arena':'crimea'}.pdf`;
 
   constructor(
     public httpService:HttpService,
     public uAService: UAService,
     public authLocalStorage: AuthLocalStorage,
     @Inject('phoneMask') public phoneMask: string,
+    @Inject('isArenasport') public isArenasport: boolean,
     @Inject('cardMask') public cardMask: string,
     @Inject('phonePlaceholder') public phonePlaceholder: string,
     public seoService: SeoService
@@ -47,10 +50,10 @@ export class RegistrationView {
 
   ngOnInit() {
     if(this.isBrowser) {
-      this.seoService.handleOne('main');
       this.isAndroid = this.uAService.is().android;
       this.httpService.phoneCodes.subscribe(codes=>this.phoneCodes = codes)
     }
+    this.seoService.handleOne('main');
 
   }
 

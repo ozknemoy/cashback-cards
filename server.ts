@@ -11,12 +11,13 @@ declare const require;
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 // Express server
 const app = express();
 
-const PORT = process.env.PORT || 4200;
+const PORT = process.env.PORT || 4100;
 const DIST_FOLDER = join(process.cwd(), 'dist');
-
 // Our index.html we'll use as our template
 const template = readFileSync(join(DIST_FOLDER, 'browser', 'index.html')).toString();
 

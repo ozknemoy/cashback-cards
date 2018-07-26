@@ -23,7 +23,7 @@
         </div>
         <div class="header_nav--col">
           <a [routerLink]="" ref="#section-6" scrollToIfExactRoute="#section-6" forState="" target="_self" class="header_nav--link">Как потратить</a>
-          <a routerLink="/partners" class="header_nav--link">Где воспользоваться</a>
+          <!--<a routerLink="/partners" class="header_nav&#45;&#45;link">Где воспользоваться</a>-->
 
           <div *ngIf="!authLocalStorage.auth.data.hash;then isNotLogIn else isLogIn"></div>
           <ng-template #isNotLogIn>

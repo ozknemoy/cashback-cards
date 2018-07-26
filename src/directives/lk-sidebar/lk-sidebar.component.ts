@@ -2,7 +2,7 @@
  * Created by ozknemoy on 15.03.2018.
  * при focus на элемент применяется класс focus
  */
-import {Component} from "@angular/core";
+import {Component, Inject} from "@angular/core";
 import {AuthLocalStorage} from "../../services/auth-local-storage.service";
 import {HttpService} from "../../services/http.service";
 import {HandleDataService} from "../../services/handle-data.service";
@@ -24,6 +24,7 @@ export class LkSidebarComponent {
   getProfile$$;
 
   constructor(public httpService: HttpService,
+              @Inject('isArenasport') public isArenasport: boolean,
               public HandleDataService: HandleDataService,
               public authLocalStorage: AuthLocalStorage) {
   }
