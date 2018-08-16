@@ -8,7 +8,7 @@ const gulp = require('gulp'),
   browserSync = require('browser-sync').create(),
   historyApiFallback = require('connect-history-api-fallback'),
   rename = require('gulp-rename'),
-  sass = require('gulp-sass'),
+  //sass = require('gulp-sass'),
   sourcemaps = require('gulp-sourcemaps');
 const postcss = require('gulp-postcss');
 const cleanCSS = require('gulp-clean-css');
@@ -29,6 +29,7 @@ const apiArenasportProd = 'https://service.arenasportcard.ru:443';
 const apiCrimeaProd = 'https://service.crimeacard.ru';
 
 const styleSuffix = '?v=1.1.';
+const styleSuffixRegexp = /\?v=1\.1\.\d{7}/;
 const styleCrimea = 'crimea-screen-kit.css';
 const styleCrimeaReg = /crimea-screen-kit\.css/g;
 const styleArenasport = 'arenasport-screen-kit.css';
@@ -68,7 +69,7 @@ function replaceProd({port, api, style}) {
   }];
 
   const _styles = [{
-    match: style[0],
+    match: new RegExp(style[0].source + styleSuffixRegexp.source),
     replacement: function () {
       return style[1] + styleSuffix + Math.floor(Math.random() * 10000000)
     }
@@ -117,7 +118,7 @@ function replaceTest({port,  api, style, map, isArenasport}) {
     }
   }];
   const _style = [{
-    match: style[0],
+    match: new RegExp(style[0].source + styleSuffixRegexp.source),
     replacement: function () {
       return style[1] + styleSuffix + Math.floor(Math.random() * 10000000)
     }

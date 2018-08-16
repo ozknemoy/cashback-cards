@@ -1,7 +1,7 @@
 /**
  * Created by ozknemoy on 15.05.2017.
  */
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {BsModalRef} from "ngx-bootstrap/modal/bs-modal-ref.service";
 import {HttpService} from "../../services/http.service";
 import {NgForm} from "@angular/forms";
@@ -19,7 +19,9 @@ class NewPartner {
 })
 export class ForPartnersButtonModal {
   public newPartner = new NewPartner();
-  constructor(public bsModalRef: BsModalRef, private httpService: HttpService) {}
+  constructor(public bsModalRef: BsModalRef,
+              private httpService: HttpService,
+              @Inject('isArenasport') public isArenasport: boolean) {}
 
   close() {
     this.bsModalRef.hide()

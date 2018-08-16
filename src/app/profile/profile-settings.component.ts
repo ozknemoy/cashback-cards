@@ -32,9 +32,7 @@ export class BonusLevels {
 }
 
 export class Card {
-  // Сумма доступная к списанию  == баланс карты /греков
-  // Сумма доступная к списанию в рублях  == баллы на вывод /антон
-  points: number = null;
+  points: number = null;//Баланс баллов
   self_points: number = null;// сумма покупок по карте
   status: BonusLevels = new BonusLevels();
   number: number = null;// номер карты

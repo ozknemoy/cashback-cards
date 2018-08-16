@@ -1,18 +1,19 @@
 
 <div class="lk_content">
   <div class="lk_content--wrap" *ngIf="!isLoading">
-    <div class="alert" *ngIf="semiFilledProfile;else filledProfile"
+    <div class="alert"
+         *ngIf="semiFilledProfile;else filledProfile"
          [ngClass]="isArenasport? 'alert-success' : 'alert-primary'">
       Приветствуем Вас, Уважаемый {{'user' | translate}}! Представьтесь пожалуйста и получите 400 приветственных баллов
       на свой счет. <a class="btn btn-info btn-sm" routerLink="/profile/settings">ПОЛУЧИТЬ БАЛЛЫ</a>
     </div>
     <ng-template #filledProfile>
       <div class="alert" [ngClass]="isArenasport? 'alert-success' : 'alert-primary'">
-          <span *ngIf="level<3; else level3">
-            Ваш статус {{card.status.name}}, Вам доступен кэш бек {{card.status.percent}}%.
-            Покупайте больше! При сумме покупок более {{card.status.amount_to}} руб. Ваш кэш бек уже {{bonusLevels[level].percent}}%
-          </span>
-        <ng-template #level3>
+        <span *ngIf="level < bonusLevels.length; else lastLevel">
+          Ваш статус {{card.status.name}}, Вам доступен кэш бек {{card.status.percent}}%.
+          Покупайте больше! При сумме покупок более {{card.status.amount_to}} руб. Ваш кэш бек уже {{bonusLevels[level].percent}}%
+        </span>
+        <ng-template #lastLevel>
           <span>
             Поздравляем!
             Ваш статус {{card.status.name}}, Вам доступен кэш бек {{card.status.percent}}%.
@@ -22,7 +23,6 @@
       </div>
     </ng-template>
 
-
     <div class="lk_card">
       <div class="content">
         <div class="lk_card--title">Моя карта: {{card.number | card}}</div>
@@ -30,7 +30,7 @@
           <div class="row">
             <div class="col-12 col-md-6">
               <div class="lk_card--image">
-                <img src="assets/img/card-level-{{level}}.png" alt="">
+                <img src="assets/img/card-level-{{level>=3? 3 : level}}.png" alt="{{level}}">
               </div>
             </div>
             <div class="col-12 col-md-6">

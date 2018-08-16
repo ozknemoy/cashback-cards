@@ -36,13 +36,18 @@
     </div>
     <div class="lk_status">
       <div class="lk_status--title">
-        Ваш статус  <span class="lk_status--label label-2">{{card.status.name}}</span>
+        Ваша скидка: <span class="lk_status--label">{{card.status.percent}}%</span>
       </div>
+
       <div class="lk_status--wrap">
-        <div class="lk_status--item" *ngFor="let level of bonusLevelsForSlider; let $index = index">
+        <div class="lk_status--item"
+             *ngFor="let lvl of bonusLevelsForSlider; let $index = index"
+             [ngClass]="{'current': level > $index,
+                         'lk_status--item': $index > 0,
+                         'lk_status--item__stat': $index === 0}">
           <div class="lk_status--item--icon"></div>
-          <div class="lk_status--item--title">{{level.percent}}%</div>
-          <div class="lk_status--item--sum">{{level.amount_from}} <i class="mdi mdi-currency-rub"></i></div>
+          <div class="lk_status--item--title">{{lvl.percent}}%</div>
+          <div class="lk_status--item--sum">{{lvl.amount_from}}<i class="mdi mdi-currency-rub"></i></div>
         </div>
         <div class="lk_status--progress" [style.left]="(0 || followed) + '%'">
           <span>{{card.bonus_amount | thousand}} <i class="mdi mdi-currency-rub"></i></span>
@@ -50,7 +55,7 @@
       </div>
     </div>
     <qr-barcode-button code="{{card.number}}"></qr-barcode-button>
-    <div class="lk_sidebar--footer" *ngIf="isArenasport">
+    <div class="lk_sidebar--footer">
       <a href="javascript:" target="_self" feedbackButton>
         <i class="mdi mdi-email-outline"></i> Написать в компанию
       </a>

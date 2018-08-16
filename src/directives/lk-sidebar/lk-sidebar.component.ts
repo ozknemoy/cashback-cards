@@ -25,7 +25,6 @@ export class LkSidebarComponent {
 
   constructor(public httpService: HttpService,
               @Inject('isArenasport') public isArenasport: boolean,
-              public HandleDataService: HandleDataService,
               public authLocalStorage: AuthLocalStorage) {
   }
 

@@ -99,11 +99,36 @@ export class HttpService {
   public bonusLevels = this.get('handbooks/bonus-levels', true).share();
 
   getBonusLevels(card: Card) {
-    return this.bonusLevels
-      .map(bonusLevels=> {
+    return this.bonusLevels.map(bonusLevels=> {
+      /*const bonusLevels = [
+        {
+          "id": 2,
+          "name": "продвинутый",
+          "amount_from": 1001,
+          "amount_to": 2000,
+          "percent": 2
+        }, {
+          "id": 3,
+          "name": "like a boss",
+          "amount_from": 2001,
+          "amount_to": 3000,
+          "percent": 3
+        }, {
+          "id": 4,
+          "name": "like a boss",
+          "amount_from": 3001,
+          "amount_to": 4000,
+          "percent": 4
+        }, {
+          "id": 1,
+          "name": "Новичок",
+          "amount_from": 0,
+          "amount_to": 1000,
+          "percent": 1
+        }
+      ];*/
         bonusLevels.sort((a, d)=> a.amount_to - d.amount_to);
-        const bonusLevelsForSlider = JSON.parse(JSON.stringify(bonusLevels))
-          .sort((a, d)=> d.amount_to - a.amount_to);
+        const bonusLevelsForSlider = JSON.parse(JSON.stringify(bonusLevels));
         const [followed, level] = this.countLevelsInfo(bonusLevelsForSlider, card);
         return {
           bonusLevels,
@@ -117,16 +142,18 @@ export class HttpService {
   public phoneCodes = this.get('handbooks/phone-codes', true).share();
 
   countLevelsInfo(bonusLevels:BonusLevels[], card: Card) {
-    // тут обратный сорт по убыванию // из-за верстки
     let level;
-    let followed = card.bonus_amount*100/(bonusLevels[0].amount_from - bonusLevels[2].amount_from);
+    const money = card.bonus_amount;
+    // ползунок / не выше 100
+    let followed = money*100/(bonusLevels[bonusLevels.length - 1].amount_from - bonusLevels[0].amount_from);
     followed = Math.min(Math.round(followed),100);
-    if(card.bonus_amount >= bonusLevels[1].amount_to) {
-      level = 3
-    } else if(card.bonus_amount < bonusLevels[1].amount_from) {
-      level = 1
-    } else {
-      level = 2
+    for (let i = 0; i < bonusLevels.length; i++) {
+      // последняя итерация
+      if(i === bonusLevels.length - 1) level = bonusLevels.length;
+      else if(money >= bonusLevels[i].amount_from && money < bonusLevels[i].amount_to + 1) {
+        level = i + 1;
+        break;
+      }
     }
     return [followed, level]
   }
