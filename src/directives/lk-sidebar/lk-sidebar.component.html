@@ -38,19 +38,23 @@
       <div class="lk_status--title">
         Ваша скидка: <span class="lk_status--label">{{card.status.percent}}%</span>
       </div>
-
-      <div class="lk_status--wrap">
-        <div class="lk_status--item"
-             *ngFor="let lvl of bonusLevelsForSlider; let $index = index"
-             [ngClass]="{'current': level > $index,
-                         'lk_status--item': $index > 0,
-                         'lk_status--item__stat': $index === 0}">
+      <div class="lk_status--wrapper">
+        <div class="lk_status--item__stat" *ngFor="let lvl of bonusLevelsForSlider | slice : 0 : 1; let $index = index">
           <div class="lk_status--item--icon"></div>
           <div class="lk_status--item--title">{{lvl.percent}}%</div>
           <div class="lk_status--item--sum">{{lvl.amount_from}}<i class="mdi mdi-currency-rub"></i></div>
         </div>
-        <div class="lk_status--progress" [style.left]="(0 || followed) + '%'">
-          <span>{{card.bonus_amount | thousand}} <i class="mdi mdi-currency-rub"></i></span>
+        <div class="lk_status--wrap">
+          <div class="lk_status--item"
+               *ngFor="let lvl of bonusLevelsForSlider | slice : 1; let $index = index"
+               [ngClass]="{'current': level > $index + 1}">
+            <div class="lk_status--item--icon"></div>
+            <div class="lk_status--item--title">{{lvl.percent}}%</div>
+            <div class="lk_status--item--sum">{{lvl.amount_from}}<i class="mdi mdi-currency-rub"></i></div>
+          </div>
+          <div class="lk_status--progress" [style.left]="(0 || followed) + '%'">
+            <span>{{card.bonus_amount | thousand}} <i class="mdi mdi-currency-rub"></i></span>
+          </div>
         </div>
       </div>
     </div>

@@ -5,8 +5,9 @@
 import {Component, Inject} from "@angular/core";
 import {AuthLocalStorage} from "../../services/auth-local-storage.service";
 import {HttpService} from "../../services/http.service";
-import {HandleDataService} from "../../services/handle-data.service";
 import {BonusLevels, Card, User} from "../../app/profile/profile-settings.component";
+
+
 
 @Component({
   selector: 'lk-sidebar',
@@ -29,7 +30,6 @@ export class LkSidebarComponent {
   }
 
   ngOnInit() {
-
     this.getProfile$$ = this.httpService.getRemoteProfile().subscribe((profile: any) => {
       this.isLoading = false;
       this.user = profile[0].User;

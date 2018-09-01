@@ -143,10 +143,8 @@ export class HttpService {
 
   countLevelsInfo(bonusLevels:BonusLevels[], card: Card) {
     let level;
+    //card.bonus_amount = 95888;
     const money = card.bonus_amount;
-    // ползунок / не выше 100
-    let followed = money*100/(bonusLevels[bonusLevels.length - 1].amount_from - bonusLevels[0].amount_from);
-    followed = Math.min(Math.round(followed),100);
     for (let i = 0; i < bonusLevels.length; i++) {
       // последняя итерация
       if(i === bonusLevels.length - 1) level = bonusLevels.length;
@@ -155,6 +153,15 @@ export class HttpService {
         break;
       }
     }
+    // пройденые уровни
+    const levelsFolowed = level - 1;
+    // полностью заполненые уровни в %
+    const fullFillLevels = levelsFolowed * 100/(bonusLevels.length - 1);
+    const partiallyFillLevel =
+      (money - bonusLevels[levelsFolowed].amount_from) * 100 / (bonusLevels[levelsFolowed].amount_to - bonusLevels[levelsFolowed].amount_from)/(bonusLevels.length - 1);
+      // ползунок / не выше 100
+    let followed = Math.min(Math.round(fullFillLevels + partiallyFillLevel),100);
+    //console.log('lvl', fullFillLevels, partiallyFillLevel,followed);
     return [followed, level]
   }
 

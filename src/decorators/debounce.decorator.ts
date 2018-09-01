@@ -56,19 +56,3 @@ export function debounceMethod(ms: number, applyAfterDebounceDelay = true) {
         }*/
     }
 }
-// это оригинал и он не переделан// и тоже вызывает функцию раз в 3 секунды
-export function debounceAccessor (ms: number) {
-
-    let timeoutId;
-
-    return function (target: Object, propName: string, descriptor: TypedPropertyDescriptor<any>) {
-        let originalSetter = descriptor.set;
-        descriptor.set = function (...args: any[]) {
-            if (timeoutId) return;
-            timeoutId = window.setTimeout(() => {
-                timeoutId = null;
-            }, ms);
-            return originalSetter.apply(this, args);
-        }
-    }
-}
