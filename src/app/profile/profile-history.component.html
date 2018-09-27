@@ -63,7 +63,7 @@
           <div class="row align-items-center">
             <div class="col-12 col-sm-2">
               <div class="lk_history--date">
-                <span class="lk_history--day">{{hist.created_at | date: 'dd.MM.yy HH:mm'}}</span>
+                <span class="lk_history--day">{{hist.created_at}}</span>
               </div>
             </div>
             <div class="col-12 col-sm-8">
@@ -76,9 +76,6 @@
               <span [ngClass]="{'text-danger':hist.type === 2,
                                 'text-success':hist.type === 1}">{{hist.amount}}</span>
             </div>
-            <!--<div class="col-12 col-sm-2 text-right">
-              <span class="text-success">{{hist.trans}}</span>
-            </div>-->
           </div>
         </div>
         <pagination-controls (pageChange)="currentPage=$event"
