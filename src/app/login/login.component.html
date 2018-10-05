@@ -20,7 +20,7 @@
               <form #loginForm="ngForm">
                 <div class="form-group">
                   <label>Номер телефона</label>
-                  <label class="input-group">
+                  <div class="input-group">
                     <span class="input-group-addon"><i class="mdi mdi-phone"></i></span>
                     <select class="input-group-addon second-addon" name="phoneCountry"
                             [(ngModel)]="phoneCountry">
@@ -31,7 +31,7 @@
                            [placeholder]="phonePlaceholder"
                            (keyup.enter)="login(loginForm)"
                            [(ngModel)]="phone">
-                  </label>
+                  </div>
                 </div>
                 <div class="form-group">
                   <label>Пароль</label>
